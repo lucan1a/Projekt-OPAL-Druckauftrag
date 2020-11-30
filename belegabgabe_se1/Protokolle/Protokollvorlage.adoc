@@ -1,0 +1,49 @@
+|=======
+|Name|Funktion|Anwesend| Bemerkung
+|Kevin Bunge|Projektleitung
+|Anton Koch|
+|Falk Rubel|
+|Leon Matthes|
+|Kay Effenberger|
+|Andreas Hasselberg|
+|Ngoc Huy Le|
+|Thanh Binh Nguyen|
+|Luca Lösch|
+|Gunther Naumann|
+|Gast|
+|Gast|
+|=======
+
+== Agenda
+|=======
+|Zeit|Dauer|Thema| Verantwortlich| Verantwortlich
+|
+|
+|
+|
+|
+|=======
+
+== Protokoll
+|=======
+|Inhalt:| Was sind die wesentlichen inhaltlichen Punkte, die besprochen werden?
+|Thema 1|
+|Thema 2|
+|Thema 3|
+|Thema 4|
+|Thema 5|
+
+|Prozess| Wie ist der Gesprächsverlauf bzw. Problemlösungsfluss?
+|
+|
+|=======
+
+== Aktionen
+|=======
+|Thema|Aktion|Bis wann?| Wer?
+|
+|
+|
+|
+|
+|=======
