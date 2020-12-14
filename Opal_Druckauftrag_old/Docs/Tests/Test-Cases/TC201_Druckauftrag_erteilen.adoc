@@ -1,0 +1,124 @@
+[%header]
+
+
+== TC201 - Druckauftrag erteilen
+
+
+=== Beschreibung:
+Studenten der HTW-Dresden sollen in der Lage sein, den Druck von PDF-Dateien über OPAL in Auftrag zu geben und am nächsten Tag in der UNIDruckerei abholen zu können.
+Um einen Druckauftrag auszulösen, muss der Student im Opal neben einer solchen Datei die Schaltfläche zum Drucken auswählen und anschließend über das Drop-down-Menü die Anzahl der Seiten bestimmen, die auf eine gedruckte Seite passen sollen. Wählt der Student beispielsweise die Option "4 Seiten", so landen 4 Seiten seiner ausgewählten Datei auf einem gedruckten Blatt. Dieser Test soll die Schnittstelle zwischen der Plattform Opal und dem System zum verarbeiten der Aufträge auf Funktionalität überprüfen. Die Druckaufträge werden über eine Mail-Schnittstelle vom Opal-Server auf einem Mail-Server übertragen. Der Server zum Verarbeiten der Dokumente besitzt den Zugriff auf das Mail-Postfach und kann somit die Informationen und Dateien erhalten. Damit der Nutzer über den eingegangenen Druckauftrag informiert ist, wird ihm eine E-Mail zugesendet. Dieser Test ist ein Positivtest und prüft somit das System bei korrekter Nutzung. Dieser Test bezieht sich auf den Use-Case UC1.
+
+=== Vorbedingungen:
+- Desktop-Ansicht im Browser ausgewählt
+- Als Benutzer im Opal angemeldet
+- zu druckendes Dokument ausgewählt
+- Mail-Postfach aktiv
+- System zum Erfassen der Aufträge Aktiv
+- studierender darf nicht als gesperrter Nutzer registriert sein
+
+=== benötigte Daten: 
+- Systemstatus Opal
+- Systemstatus Opal-Druckservice (-> aktiver E-Mail input)
+- Verfügbarkeit E-Mail-Postfach
+
+=== Handlungen
+
+Das Test Script beschreibt den detaillierten Ablauf des Tests. 
+
+- Schritt 1: in Opal anmelden
+- Schritt 2: beliebiges Verzeichnis mit PDF-Datei auswählen
+- Schritt 3: Schaltfläche "Drucken" neben einer PDF-Datei wählen
+- Schritt 4: Seitenzahl auswählen: 1
+- Schritt 5: Schaltfläche "Druckauftrag abschickel" wählen
+- Schritt 6: Schaltfläche "Drucken" neben einer PDF-Datei wählen
+- Schritt 7: Seitenzahl auswählen: 2
+- Schritt 8: Schaltfläche "Druckauftrag abschickel" wählen
+- Schritt 9: Schaltfläche "Drucken" neben einer PDF-Datei wählen
+- Schritt 10: Seitenzahl auswählen: 4
+- Schritt 11: Schaltfläche "Druckauftrag abschicken" wählen
+- Schritt 12: Überprüfen, ob alle drei Dateien im Verzeichnis des Opal-Druckservers abgelegt wurden (mit jeweiliger Seitenanzahl)
+- Schritt 13: Überprüfen, ob die Verknüpfung von einem Benutzer zu den drei Dateinamen der Dateien über einen Eintrag in der Datenbankrelation "Druckauftrag" erstellt wurde
+- Schritt 14: Konsole auf mögliche Warnungen oder Fehlermeldungen durchsuchen und ggf. notieren
+- Schritt 15: Überprüfen, ob Benutzer E-Mail zur Bestätigung des eingegangenen Auftrags erhalten hat
+- Schritt 16: überprüfen, ob Nutzer in Datenbank registriert wurde (sofern noch nicht vorher geschehen)
+
+
+=== erwartete Reaktionen
+- Das System speichert die Dateien im Verzeichnis raw auf der virtuellen Maschine
+- Das System erzeugt einen Tabelleneintrag in der Relation Benutzer für den Kunden
+- Das System speichert verknüpft in der Relation Druckauftrag die Aufträge mit den Nutzern und den Dateien
+- Das System schickt dem Nutzer eine E-Mail und informiert diesen über den Eingang des Auftrages
+
+=== Nachbedingungen:
+- Datei wurde in Dateisystem des Servers mit enstprechendem Namen (Verknüpfung mit Datenbank) abgespeichert
+- Verknüpfung von Benutzer und Datei wurde in der Relation "Druckauftrag erzeugt"
+- E-Mail wurde dem Nutzer, der Druck in Auftrag gegeben hat, zugesendet
+- es können weitere Druckaufträge in Empfang genommen werden
+
+
+=== Test Log
+
+Durchführung 1, Datum: 08.06.2020, 14:00
+
+kommentare zu den einzelnen Schritten:
+
+- Schritt 1-11: erfolgreich
+
+- Schritt 12: Seitenanzahl wurde nicht korrekt ermittelt (in Relation Druckauftrag)
+
+- Schritt 13: erfolgreich
+
+- Schritt 14: keine Fehlermeldungen
+
+- Schritt 15: es wurde keine E-Mail empfangen
+
+- Schritt 16: erfolgreich
+
+notwendige Verbesserungen:
+- Senden einer E-Mail an den Nutzer
+- Seitenanzahl in der Datenbank korrekt abspeichern (für Berechnung des Preises relevant)
+
+Durchführung 2, Datum: 27.06.2020, 09:00
+
+kommentare zu den einzelnen Schritten:
+
+- Schritt 1-13: erfolgreich
+
+- Schritt 14: keine Fehlermeldungen
+
+- Schritt 15: es wurde keine E-Mail empfangen
+
+- Schritt 16: erfolgreich
+
+notwendige Verbesserungen:
+- Senden einer E-Mail an den Nutzer
+
+Durchführung 3, Datum: 02.07.2020, 23:00
+
+kommentare zu den einzelnen Schritten:
+
+- Schritt 1-13: erfolgreich
+
+- Schritt 14: keine Fehlermeldungen
+
+- Schritt 15: E-Mail wurde an eine Test-Mail-Adresse gesendet und nicht an die des Nutzers
+
+- Schritt 16: erfolgreich
+
+notwendige Verbesserungen:
+- Senden einer E-Mail an den Nutzer
+
+Durchführung 4, Datum: 20.07.2020, 23:00
+
+kommentare zu den einzelnen Schritten:
+
+- Schritt 1-13: erfolgreich
+
+- Schritt 14: keine Fehlermeldungen
+
+- Schritt 15-16: erfolgreich
+
+notwendige Verbesserungen:
+- /
+
+Der Test wird als erfolgreich durchgeführt angesehen

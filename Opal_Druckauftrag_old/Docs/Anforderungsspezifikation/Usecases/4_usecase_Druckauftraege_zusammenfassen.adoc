@@ -1,0 +1,61 @@
+== Use-Case: Druckaufträge zusammenfassen
+===	Kurzbeschreibung
+Die einzelnen Druckaufträge eines Studierenden werden mit einem Deckblatt inklusive Barcode versehen und zu einem Druckjob gebündelt.
+
+===	Kurzbeschreibung der Akteure
+==== Timer 
+Der Akteur Timer ist ein zeitlicher Trigger im System, welcher täglich 5 Uhr morgens auslöst.
+
+=== Vorbedingungen
+* Mindestens ein Druckauftrag mit den dazugehörigen Druckeinstellungen liegt vor.
+* Je Druckauftrag liegen im Datenspeicher entsprechende Einträge vor.
+* Alle Druckaufträge enthalten keinen Passwortschutz.
+* Alle Druckaufträge wurden in Graustufen umgewandelt und die Seitenkonvertierung entsprechend der Druckeinstellungen durchgeführt.
+* Alle umgewandelten Datei sind im System abgelegt und für die weitere Zusammenfassung bereit.
+* Die Vorverarbeitung der eingehenden Aufträge ist ausgesetzt.
+
+=== Standardablauf (Basic Flow)
+. Der Use Case beginnt, wenn der Timer auslöst. 
+. Das System generiert auf Grundlage der vorhandenen Druckaufträge einen Druckjob pro Bibliotheksnummer.
+. *For Each* Druck-Job wird der Unterablauf *Nachverarbeitung* gestartet.
+. Das System löscht die verarbeiteten Druckaufträge.
+. Das System leert den Ordner mit den vorverarbeiteten Dokumenten.
+. Der Use Case ist abgeschlossen.
+
+=== Alternative Abläufe
+==== Fehler bei der Nachverarbeitung
+Wenn das System im Schritt 3 des Standardsablaufes feststellt, dass die ordungsgemäße Zusammenstellung des Druckjobs nicht möglich ist.
+
+    .. Das System gibt eine Fehlermeldung auf der Konsole aus.
+    .. Das System setzt aus dem Benutzernamen die E-Mail Adresse zusammen und schickt eine Fehlermail an den Studierenden.
+    .. Das System bricht die Nachverarbeitung für den jeweiligen Druckjob ab.
+    .. Das System löscht den fehlgeschlagenen Druckjob. 
+    .. *If* Vorverarbeitung für alle Druckjobs nun abgeschlossen.
+        ... Fortsetzung des Standardablaufes im Schritt 4
+    .. *Else*
+        ... Fortsetzung des Standardablaufes im Schritt 3
+
+=== Unterabläufe (subflows)
+
+==== Nachverarbeitung
+. Das System sucht nach passenden Dokumenten der jeweiligen Bibliotheksnummer im Ordner der Vorverarbeitung.
+. Das System berechnet auf Grundlage der Seitenzahlen den Gesamtpreis und erstellt einen Barcode.
+. Das System erstellt auf Grundlage der Druckauftragsdaten und unter Verwendung des Barcodes ein Deckblatt mit Datei- und Seitenzahl.
+. Das System fügt das Deckblatt und alle PDF-Dokumente der Bibliotheksnummer nacheinander zusammen.
+. Das System verschieb den fertigen Druckjob in den Ordner der fertigen Jobs.
+
+=== Wesentliche Szenarios
+==== Erfolgreiche Zusammenfassung der Druckaufträge
+SC1: Fünf Druckaufträge eines Studenten A befinden sich im Ordner der Vorverarbeitung. Ein Deckblatt wird generiert und mit den Druckaufträgen entsprechend zu einem Druckjob zusammengefasst. Der Druckjob wird vom System im Ordner der fertigen Jobs gespeichert.
+
+SC2: Drei Druckaufträge des Studenten B und zwei Druckaufträge des Studenten C befinden sich im Ordner der Vorverarbeitung. Für Student B wird ein Deckblatt erzeugt. Die drei Druckaufträge  des Studenten B inklusive Deckblatt werden zu einem Druckjob 1 zusammengefasst. Der Druckjob 2 wird vom System im Ordner der fertigen Jobs gespeichert. Für Student B wird ein Deckblatt erzeugt. Das Deckblatt und die zwei Dokumente des Studenten C werden zum Druckjob 2 zusammengefasst. Der Druckjob 2 wird vom System im Ordner der fertigen Jobs gespeichert.
+
+==== Druckjob kann nicht zusammengefasst werden
+SC3: Vier Druckaufträge eines Studenten D liegen im Ordner der Vorverarbeitung. Das Dokument des vierten Druckauftrages kann nicht verarbeitet werden. Zunächst wird das Deckblatt ordungsgemäß erstellt und mit den ersten drei Dokumenten zusammengefasst. Beim Zusammenfügen mit dem vierten Dokument tritt ein Fehler auf. Der Student D wird mittels einer E-Mail über den Abbruch des Druckjobs informiert. Das fehlerhafte Dokument wird am Ende der gesamten Verarbeitung gelöscht.
+
+=== Nachbedingungen
+* Die vollständigen Druckjobs sind im System gespeichert und im Datenspeicher hinterlegt.
+* Die Vorverarbeitung wird wieder angestoßen.
+
+
+

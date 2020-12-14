@@ -1,0 +1,27 @@
+
+== Use-Case: Druckübersicht öffnen
+===	Kurzbeschreibung
+Die Unidruckerei hat die Möglichkeit, sich Daten zu den Druckjobs anzeigen zu lassen. 
+
+===	Kurzbeschreibung der Akteure
+
+==== Unidruckerei
+Die Unidruckerei ist der Akteur, welcher das System aktiv benutzt. Sie sollen in der Lage sein, sich eine Übersicht über aktuelle Aufträge zu verschaffen. 
+
+=== Vorbedingungen
+* Mitarbeiter der Druckerei ist in der WebApp eingeloggt 
+* Druckjobs sind bereits fertig verarbeitet
+* Die entsprechenden Dokumente der Druckjobs wurden bereits von der Druckerrei heruntergeladen und sind demnach zur Abholung bereit 
+
+=== Standardablauf (Basic Flow)
+. der UseCase beginnt mit dem öffnen der Webapplikation 
+. in der Webanwendung sind alle zur Abholung bereiten Druckjobs detailliert zu sehen (ID, Auftraggeber, Seitenzahl, Preis, Auftragsdatum)
+. der UseCase ist beendet  
+
+=== Wesentliche Szenarios
+==== Druckübersicht kann erfolgreich aufgerufen werden
+Sc1: Die Angestellten der Unidruckerei sind in der Lage, sich eine Übersicht über die Druckjobs zu verschaffen.
+
+=== Nachbedingungen
+* Die Webanwendung ist weiterhin nutzbar
+

@@ -1,0 +1,51 @@
+#!/bin/bash
+
+#Aufruf: $ combine [sNr] [pdf1] [pdf2] 
+#Ruegabe: /home/druckauftrag/Dateien/preprocessed/combined_$sNr.pdf
+
+#Aufruf: $ combine [sNr] [pdf1] [leeres pdf] ["empty_pdf"]
+#Ruegabe: pdf1 + leeres pdf unter Pfad und Name von pdf1
+
+#Zusammensetzung Dateiname aus combined_sNr
+sNr="$1"
+output="/home/druckauftrag/Dateien/preprocessed/precombined_$sNr.pdf"
+
+
+#Anz. übergebener Paramter pruefen
+if [ $# -lt 2 -o $# -gt 4 ] ; then
+    echo "false number of arguments"
+    exit 1
+fi
+
+
+#Ausführung Skript zur Zusammenfassung
+# '-' = alle Seiten zusammenfügen
+pdfjam "$2" '-' "$3" '-' --outfile "$output"
+
+#Fehlerbehandlung: Ausführung nicht korrekt (Rückgabe nicht 0)
+if [ $? != 0 ] ; then
+    echo "PDF files could not combined!"
+	rm $output
+	exit 2
+	
+	else
+		echo "PDF files successfully combined!"
+fi
+
+#Auswahl weißes PDF anfuegen (4. Argument vorhanden)
+if [ $4 == "empty_pdf" ]  ; then
+	echo "4.Argument"
+	mv "$output" "$2"
+	exit 0
+fi
+
+#bei korrekter Verarbeitung Inputdateien löschen und finale Benennung Output
+rm "$2" "$3"
+mv "$output" "/home/druckauftrag/Dateien/preprocessed/combined_$sNr.pdf"
+
+exit 0
+
+
+
+
+

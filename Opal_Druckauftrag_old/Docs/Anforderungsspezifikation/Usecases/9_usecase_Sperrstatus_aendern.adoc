@@ -1,0 +1,42 @@
+== Use-Case: Sperrstatus ändern
+===	Kurzbeschreibung
+Die Unidruckerei hat die Möglichkeit einzelne Studierende für die Erteilung weiterer Druckaufträge zu sperren.
+
+===	Kurzbeschreibung der Akteure
+==== Mitarbeiter der Unidruckerei
+
+Die Unidruckerei will Studierende für das Erteilen weiterer Druckaufträge manuell sperren bzw. entsperren.
+
+=== Vorbedingungen
+* Der Studierende ist als Benutzer im System gespeichert und hat nicht abgeholte zeitkritische Druckjobs offen.
+
+=== Standardablauf (Basic Flow)
+. Der Use Case beginnt, wenn die Unidruckerei die zeitkritischen Druckjobs aufruft.
+. In dieser Oberfläche sieht der Mitarbeiter alle Druckjobs, welche älter als 7 Tage sind 
+. Der Mitarbeiter kann nun den entsprechende Druckjobs auswählen 
+. Wenn der Mitarbeiter die Makierung bestätigt, werden für alle ausgewählten Druckjobs die zugehörigen Nutzer im System gesperrt
+. Gesperrte Nutzer werden per eMail über die Sperrung informiert. 
+. Der Use Case ist abgeschlossen.
+
+=== Alternative Abläufe
+==== Keine Änderung vornehmen
+Wenn Der Mitarbeiter im Schritt 4 das Fenster schließt, ohne eine Änderung vorgenommen zu haben, dann ist der usecase vorzeitig beendet.
+
+=== Wesentliche Szenarios
+==== Erfolgreiches Sperren/Entsperren des Studierenden
+Sc1: Der Mitarbeiter X ändert den den Sperrstatus von Student A auf gesperrt. Das System speichert den Sperrvermerk von Student A als gesperrt. Das System schickt an Student A eine E-mail bezüglich seiner Sperrung.
+
+Sc2: Entsperrung des Nutzers 
+
+. Der Mitarbeiter X ruft die gesperrten Nutzer auf
+. Der Mitarbeiter X makiert den zu Entsperrenden Nutzer 
+. Wenn anschließend die Makierung betätigt wird, wird der Nutzer wieder entsperrt
+. Der Nutzer wird über die Entsperrung per eMail benachrichtigt
+
+
+==== Keine Änderung des Sperrstatus
+Sc3: Der Mitarbeiter Y betätigt ohne eine einzige Makierung gesetzt zu haben. Demnach wird auch nirgends ein Sperrvermerk geändert.
+
+===	Nachbedingungen
+* Das System speichert den neuen Sperrvermerk.
+* Das System hat die E-Mail mit der Information über die Änderung des Sperrstatus erfolgreich abgeschickt.

@@ -1,0 +1,8 @@
+Anzahl der gesammelten Druckjobs (Angabe unten) = Angabe der ausgeführten Druckjobs
+(seit 28.01.2019: gesammelte Erstellung von Druckjobs - täglich nur bzw. max. 1 Job je Nutzer)
+
+-------------------------------------------- Jahr 2019 --------------------------------------------
+
+Anzahl der Druckjobs: 4115 
+
+Stand: 20.12.2019  5:04:48,58 

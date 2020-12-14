@@ -1,0 +1,35 @@
+= Design Webanwendung
+
+Dieses Dokument beschreibt das Design der Webanwendung.
+
+== Funktionalität
+
+* Anzeigen aller noch nicht abgeholter Druckjobs (ID, Seitenzahl, Preis, Datum, Bibliotheksnummer)
+* Bereitstellen aller noch nicht heruntergeladenen Dokumente (per Download eines mit Zip komprimierten Verzeichnisses)
+* Suchen nach Druckjobs zu einer Bibliotheksnummer
+* Anzeigen aller Benutzer, die einen offenen Betrag bei der Unidruckerei haben 
+* Möglichkeit Benutzer mit offenem Betrag zu sperren
+* Anzeigen aller gesperrten  Benutzer und Möglichkeit zur Entsperrung
+
+== Seitenübersicht
+
+. Loginseite oder Pop-Up (wenn Ip-Whitelist nicht einsetzbar ist wird ein Login zwingend benötigt)
+. Übersichtsseite offene Druckjobs (Tabelle) mit Downloadbutton
+	* Button um Abholung zu bestätigen und Pop-Up mit Nachfrage
+	* Suchfeld um nach Bibliotheksnummer zu filtern
+. Übersichtsseite Benutzer mit offenen Beträgen (Tabelle)
+	* Checkbox, um zu sperrende Benutzer zu kennzeichnen
+	* Button, um Sperrung zu bestätigen und Pop-Up mit Nachfrage
+. Übersichtsseite gesperrten Benutzer (Tabelle)
+	* Checkbox, um zu entsperrende Benutzer zu kennzeichnen
+	* Button, um Entsperrung zu bestätigen und Pop-Up mit Nachfrage
+
+'''
+* Alle Seiten sollen über einen Navigationsbereich verfügen, über den die anderen Seiten erreichbar sind.
+* Alle Seiten sollen über einen Header verfügen, der den Titel und ggf. ein Logo trägt.
+	
+== Technologien
+
+* HTML und Thymeleaf zum erzeugen der Seiteninhalte
+* CSS zum Gestalten der Seiten
+* Spring zum Beantworten der HTTP-Requests, zur DB-Abfrage, ...

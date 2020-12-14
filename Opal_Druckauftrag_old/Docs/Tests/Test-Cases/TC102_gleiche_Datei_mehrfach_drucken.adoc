@@ -1,0 +1,82 @@
+== TC102 - gleiche Datei mehrfach drucken
+
+
+=== Beschreibung:
+Nach Absprache mit der UNIdruckerei ergab sich, dass wenn ein Student eine Datei mehr als ein mal zum Druck freigibt angenommen wird, dass dies ein Versehen ist. Folglich soll das System nur ein Druckauftrag verarbeiten und in die Zusammenfassung zu einem Druckjob aufnehmen. Zusätzlich soll der Kunde nur für diesen einen Druckauftrag bezahlen. Dieser Test soll ermitteln, ob das System das Abschicken gleicher Druckaufträge erkennt und mit dieser Situation korrekt umgeht. Dieser Test bezieht sich auf die nichtfunktionale Anforderung NFAF-3.
+
+=== Vorbedingungen:
+- Ein Nutzer ist in Opal angemeldet
+- Die Webanwendung ist aktiv (Normalbetrieb)
+- Die Skripte zur automatischen Verarbeitung der Aufträge sind aktiv (Normalbetrieb)
+
+=== benötigte Daten: 
+- Anmeldedaten Opal
+
+
+=== Handlungen
+- Schritt 1: Datei x (beliebige PDF-Datei) zum Druck freigeben
+
+- Schritt 2: In der Datenbank überprüfen, ob der Druckauftrag eingegangen ist
+
+- Schritt 3: Datei x erneut zum Druck freigeben
+
+- Schritt 4: in der Datenbank überprüfen, ob immernoch nur der zuerst aufgegebene Druckauftrag registriert wurde
+
+- Schritt 5: überprüfen, ob die zum Druck freigegebene Datei nur ein mal im Verzeichnis "preprocessed" abgelegt wurde
+
+- Schritt 6: auf die Verarbeitung der Druckaufträge warten
+
+- Schritt 7: überprüfen, ob auf dem Deckblatt des Druckjobs nur der Preis für den einen Druckjob berechnet wurde.
+
+- Schritt 8: überprüfen, ob beide Dateien verarbeitet und im Druckjob vorhanden sind
+
+=== erwartete Reaktionen
+- Das System registriert den ersten Druckauftrag erfolgreich
+- Das System erkennt die zweite identische Datei und sorgt dafür, dass der zweite Datenbankeintrag bezüglich Datei x und die Datei gelöscht wird
+
+=== Nachbedingungen:
+- Druckjob enthält nur eine der zwei abgeschickten Dokumente
+- Der Preis wird nur für den einen Druckauftrag berechnet
+
+
+=== Test Log
+
+Durchführung 1, Datum: 08.07.2020, 16:30 Uhr
+
+kommentare zu den einzelnen Schritten:
+
+- Schritt 1-3: erfolgreich
+
+- Schritt 4: es existieren zwei Datenbankeinträge für die gleiche Datei
+
+- Schritt 5: die abgeschickte Datei existiert zwei mal im Verzeichnis "preprocessed"
+
+- Schritt 6: erfolgreich
+
+- Schritt 7: Der Preis beläuft sich auf beide Druckjobs
+
+- Schritt 8: Es wurde nur eine Datei verarbeitet
+
+notwendige Verbesserungen:
+
+- Preis darf nur dem Druck einer Datei entsprechen
+- Relation Druckauftrag darf nur einen Datensatz mit Verweis auf die zu druckende Datei besitzen
+- Die Datei darf nur ein mal im Verzeichnis für vorverarbeitete Dateien (preprocessed) existieren
+
+Der Test gilt als nicht erfolgreich durchgeführt. 
+
+Durchführung 2, Datum: 22.07.2020, 11:15 Uhr
+
+kommentare zu den einzelnen Schritten:
+
+- Schritt 1-8: erfolgreich
+
+notwendige Verbesserungen:
+
+- /
+
+Der Test gilt als erfolgreich durchgeführt. 
+
+
+
+

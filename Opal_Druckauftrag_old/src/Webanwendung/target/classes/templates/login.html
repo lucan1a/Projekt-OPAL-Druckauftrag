@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"></meta>
+    <title>Druckjobs</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+
+</head>
+
+<header>
+    <nav class="navbar navbar-expand-lg bg-dark navbar-dark" >
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">Opal-Druckservice</a>
+            </div>
+            <ul class="nav navbar-nav">
+
+            </ul>
+        </div>
+    </nav>
+</header>
+
+<body>
+
+<div class="container-fluid">
+    <form name="f" th:action="@{/login}" method="post">
+        <fieldset>
+            <legend>Please Login</legend>
+            <div th:if="${param.error}" class="alert alert-error">
+                Invalid username and password.
+            </div>
+            <div th:if="${param.logout}" class="alert alert-success">
+                You have been logged out.
+            </div>
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" class="form-control"/>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" class="form-control"/>
+            </div>
+            <button type="submit" class="btn btn-success btn-lg">Login</button>
+
+        </fieldset>
+    </form>
+</div>
+</body>
+</html>

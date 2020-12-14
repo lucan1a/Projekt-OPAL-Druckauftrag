@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry excluding="Webanwendung/.mvn/wrapper/|Mail/|Webanwendung/src/main/java/|DB/src/|Webanwendung/src/test/java/|DB/jdbc/|DB/JavaJDBC/src/|ObserverPattern/" kind="src" path=""/>
+	<classpathentry kind="src" path="DB/JavaJDBC/src"/>
+	<classpathentry kind="src" path="DB/jdbc"/>
+	<classpathentry kind="src" path="DB/src"/>
+	<classpathentry kind="src" path="Mail"/>
+	<classpathentry kind="src" path="ObserverPattern"/>
+	<classpathentry kind="src" path="Webanwendung/.mvn/wrapper"/>
+	<classpathentry kind="src" path="Webanwendung/src/main/java"/>
+	<classpathentry kind="src" path="Webanwendung/src/test/java"/>
+	<classpathentry kind="output" path="DB/JavaJDBC/bin"/>
+</classpath>

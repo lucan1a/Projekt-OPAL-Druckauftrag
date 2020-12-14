@@ -1,0 +1,223 @@
+[%header]
+
+== TC203 - Druckauftrag zusammenfassen
+
+
+=== Beschreibung:
+Täglich 5:00 Uhr werden die über 24 Stunden eingetroffenen Druckaufträge der jeweiligen Studierenden zusammengefasst. Während der 24 Stunden kann ein Student mehrere Dateien zum Drucken in Auftrag gegeben haben. Mittels einer Verknüpfung in der Datenbank zwischen Benutzer und Datei, können die verschiedenen eingegangenen PDF-Dateien einer Person zu einer kombinierten Datei gebündelt werden. Dieses Dokument stellt anschließend einen Druckjob dar.
+Um die Aufträge den jeweiligen Kunden zuordnen zu können, wird ein Deckblatt mit dem Namen, dem Datum, der Anzahl der Seiten, Informationen zu den in Auftrag gegebenen Dateien und dem Preis angefertigt.
+Besonders das Erstellen des Deckblatts ist aufgrund der benötigten Informationen stark anfällig für Fehler und muss ausgiebig getestet werden. Da während der Entwicklung das Erstellen des Barcodes ebenso zu Fehlermeldungen und einem falsch erzeugten Barcode führte, wird auf diesen ebenfalls besonders geachtet.
+Nachdem das Deckblatt erstellt wurde, werden die zu druckenden Dateien an dieses angehängt. Die Erteilung einiger Druckaufträge kann während der Entwicklung ausschließlich simuliert werden. Hierfür wurde ein das Skript "bulkinsert_Da_Be.sh" im Ordner Bulkinsert auf der Virtuellen Maschine abgelegt. 
+Bei diesem Test wird der Timer zum starten des Prozesses auf wenige Minuten nach Beginn des Tests gesetzt, um die Arbeitsweise sinnvoll zu gestalten. In einem späteren Test, welcher das ganze System auf Funktionalität überprüfen soll, wird der Timer auf 5 Uhr gesetzt. Dieser Test ist ein Positivtest und prüft somit das System bei korrekter Nutzung. Dieser Test bezieht sich auf den Use-Case UC4.
+
+=== Vorbedingungen:
+- Das Skript zur künstlichen Erzeugung von Druckaufträgen ist verfügbar und ausführbar
+- Alle Informationen für das Deckblatt sind verfügbar
+- Alle tools (gs, pdftk, pdfjam, barcode) sind auf dem System installiert
+- Das System kann eine Verbindung zur Datenbank kann hergestellt werden
+
+
+=== benötigte Daten: 
+- Datum
+- Dateinamen    (zu druckenden Dateien)
+- Dateigrößen   (zu druckenden Dateien)
+- Kundenname
+- Preis für Kunde
+- Anzahl der Seiten
+- Zugangsdaten zur Datenbank
+- Einträge in der Relation Druckauftrag
+- Einträge in der Relation Benutzer
+- zugehörige Dateien zu Druckaufträgen im Verzeichnis preprcessed auf der virtuellen Maschine
+
+
+=== Handlungen
+
+Das Test Script beschreibt den detaillierten Ablauf des Tests. Da dieser Test eine Teilkomponente testet und aufgrund des Projektvortschritts eine automatische Erfüllung der Vorbedingungen nicht möglich ist, werden die Vorbedingungen manuell und unabhänig erfüllt. Die Vorbedingungen beschreiben den Endzustand eines erteilten Druckauftrags. Dieser Zustand kann mithilfe eines Shell-Skripts künstlich erzeugt werden. Sobald die Komponente zur Erteilung des Druckauftrags über die in der Produktiven Phase genutzten Methode zur Verfügung steht, wird der Test erneut über diesen Weg durchgeführt. Dem Skript wird die Anzahl an zu erzeugenden Druckaufträgen als Parameter übergeben.
+
+Das Skript enthält Komponenten in folgender Reihenfolge:
+
+- löscht alle Dateien im verzeichnis für zusammenfassungsvereite Dateien
+- löscht alle Einträge in der Relation Benutzer
+- löscht alle Einträge in der Relation Druckauftrag
+- erzeugt zufallsbasierte PDF-Dateien und legt sie im Ordner für zusammenfassungsbereite Dateien
+- erzeugt Einträge in der Relation Benutzer
+- erzeugt Einträge in der Relation Druckauftrag, welche die Dateien und die Benutzer in ein Verhältnis setzt
+
+include::../testrelevante_Dateien/bulkinsert_Da_Be_Datei.sh[leveloffset=+1]
+
+- Schritt 1: Auf der virtuellen Maschine zum Verzeichnis für das oben genannte Skript wechseln (/Bulkinsert_DB_Speichertest)
+
+- Schritt 2: Skript ausführen und Anzahl der zu generierenden Dateien übergeben (./bulkinsert_Da_Be_Datei.sh 30) und das Passwort für die Datenbank eingeben
+
+- Schritt 3: überprüfen, ob die Anzahl der Datensätze in der Relation Druckauftrag dem Übergabeparameter des Skripts entspricht
+
+- Schritt 4: überprüfen ob in der Relation Benutzer angelegt wurden, die Druckaufträgen über eine Fremdschlüsselbeziehung zugeordnet werden können
+
+- Schritt 5: überprüfen, ob Die Anzahl der Dateien im Verzeichnis Dateien/proprocessed der Anzahl an Druckaufträgen entspricht
+
+- Schritt 6: überprüfen, ob jedem Eintrag in Druckauftrag eine Datei (mittels s-Nummer und DruckID) zugeordnet werden kann
+
+- Schritt 7: die Zeit zum Verarbeiten in der Datei DailyTask.java im Verzeichnis src/process/src1 auf wenige Minuten in der Zukunft ändern
+
+- Schritt 8: Starten des Skripts manuell über die Kommandozeile zum Zusammenfassen des Auftrags (run_test im Verzeichnis src/process)
+
+- Schritt 9: warten bis die eingestellte Zeit erreicht ist und anschließend das Verarbeiten abwarten
+
+- Schritt 10 Deckblatt eines Druckjobs auf Schlüssigkeit überprüfen (besonders den Barcode und Informationen über die zu druckende Datei)
+
+- Schritt 11: überprüfen ob die zusammengefügten Dateien im Dateiverzeichnis "preprocessed " gelöscht wurden
+
+- Schritt 12: überprüfen, ob alle Tupel in der Relaton Druckauftrag gelöscht wurden
+
+- Schritt 13: überprüfen, ob in der Relation Druckjobs die gleiche Anzahl an Tupel wie zuvor Anzahl der unterschiedlichen Nutzer in der Relation Druckauftrag hinzugefügt wurden
+
+- Schritt 14: überprüfen, ob im Verzeichnis "jobs" die Anzahl an neuen PDF-Dateien der Anzahl an zuvor unterschiedlichen Nutzern in der Relation Druckauftrag entspricht 
+
+- Schritt 15: Erstellter Druckjob (PDF-Datei) auf Plausibilität und Anforderungen an diesen überprüfen
+
+- Schritt 16: Kommandozeilenausgabe nach Fehlermeldungen und Warnungen durchsuchen und ggf. notieren
+
+
+=== erwartete Reaktionen
+- Der Server erstellt das Deckblatt mit dem entsprechenden Barcode
+- Der Server fügt alle Dateien und das Deckblatt zu einem Druckjob zusammen und legt ihn im Verzeichnis "jobs" ab
+- Der server fügt Tupel in der Relation Druckjob hinzu und löscht Tupel in der Relation Druckauftrag
+
+
+=== Nachbedingungen:
+- Deckblatt mit korrekten Information wurde erstellt
+- zusammengefasste PDF-Datei beinhaltet das Deckblatt und alle Dateien, die der auf dem Deckblatt identifizierbaren Person gehören
+- Die Verknüpfung von Person und eingesendeten Datein wird in der Datenbank gelöscht (Druckauftrag)
+- Die Verknüpfung zwischen Person und fertigen zu druckenden Dokument (Druckjob) wird in der Datenbank erstellt
+- Der Barcode lässt auf den Preis für den Druck verlangten Preis schließen
+
+=== Test Log
+
+Durchführung 1, Datum: 16.05.2020, 10:55 Uhr
+
+kommentare zu den einzelnen Schritten:
+
+- Schritt 2: Skript erfolgreich ausgeführt
+
+- Schritt 3-6: erfolgreich
+
+- Schritt 7: Zeit zum Verarbeiten auf 11:04 gesetzt (aktuell 11:01)
+
+- Schritt 8: Skript gestartet, keine Fehlermeldungen, wartet auf angegebene Zeit
+
+- Schritt 9: 11:04 erreicht, Verarbeitung wurde gestartet und abgeschlossen
+
+- Schritt 10: Preis unter Barcode entwas zu weit rechts, Informationen zu gedruckten Dateien fehlen (Dateinamen, Größe, Anzahl Seiten), Preis entspricht nicht der Anzahl der  
+ Seiten des Druckjobs * 5 Cent
+
+- Schritt 11-14: erfolgreich
+
+- Schritt 15: Als Druckeinstellungen wurde die Option "2 Seiten" ausgewählt, was bedeutet, dass zwei Seiten der Originaldatei auf eine zu druckende Seite übertragen werden. Bei zwei Seiten pro zu druckende Seite sollen diese jedoch für eine effzientere Platznutzung waagerecht übertragen werden
+
+- Schritt 16: keine Warnungen, jedoch keine aufschlussreichen Informationen über Vorgang der Verarbeitung
+
+
+notwendige Verbesserungen:
+
+- Preis unter Barcode entwas zu weit rechts 
+
+- Preis entspricht nicht der Anzahl der Seiten des Druckjobs * 5 Cent
+
+- Informationen zu gedruckten Dateien fehlen (Dateinamen, Größe, Anzahl Seiten)
+
+- in Druckjob-PDF sind zwei Seiten senkrecht untereinander anstatt waagerecht (bei der Option "2 Seiten")
+
+- keine aufschlussreichen Informationen über Vorgang der Verarbeitung
+
+Der Test gilt als nicht erfolgreich, da wichtige Funktionalitäten der Koponente als nicht erfüllt gelten. Die notwendigen Verbesserungen werden dem Team zeitnah mitgeteilt. Der Test wird nach behebung dieser Probleme erneut durchgeführt
+
+
+Durchführung 2, Datum: 12.06.2020, 18:00 Uhr
+
+kommentare zu den einzelnen Schritten:
+
+- Schritt 2: Skript erfolgreich ausgeführt
+
+- Schritt 3-6: erfolgreich
+
+- Schritt 7: Zeit zum Verarbeiten auf 18:06 gesetzt (aktuell 18:02)
+
+- Schritt 8: Skript gestartet, keine Fehlermeldungen, wartet auf angegebene Zeit
+
+- Schritt 9: 18:06 erreicht, Verarbeitung wurde gestartet und abgeschlossen
+
+- Schritt 10: Preis unter Barcode entwas zu weit links
+
+- Schritt 11-15: erfolgreich
+
+- Schritt 16: keine Warnungen, jedoch keine aufschlussreichen Informationen über Vorgang der Verarbeitung
+
+
+notwendige Verbesserungen:
+
+- Preis unter Barcode entwas zu weit links 
+
+- Informationen zu gedruckten Dateien fehlen (Dateinamen, Größe, Anzahl Seiten)
+
+- keine aufschlussreichen Informationen über Vorgang der Verarbeitung
+
+Der Test gilt als nicht erfolgreich, da wichtige Funktionalitäten der Koponente als nicht erfüllt gelten. Die notwendigen Verbesserungen werden dem Team zeitnah mitgeteilt. Der Test wird nach behebung dieser Probleme erneut durchgeführt.
+
+Durchführung 3, Datum: 30.06.2020, 12:00 Uhr
+
+kommentare zu den einzelnen Schritten:
+
+- Schritt 2: Skript erfolgreich ausgeführt
+
+- Schritt 3-6: erfolgreich
+
+- Schritt 7: Zeit zum Verarbeiten auf 12:03 gesetzt (aktuell 12:02)
+
+- Schritt 8: Skript gestartet, keine Fehlermeldungen, wartet auf angegebene Zeit
+
+- Schritt 9: 12:03 erreicht, Verarbeitung wurde gestartet und abgeschlossen
+
+- Schritt 10-15: erfolgreich
+
+- Schritt 16: keine Warnungen, jedoch keine aufschlussreichen Informationen über Vorgang der Verarbeitung
+
+
+notwendige Verbesserungen:
+
+- Informationen zu gedruckten Dateien fehlen (Dateinamen, Größe, Anzahl Seiten)
+
+- keine aufschlussreichen Informationen über Vorgang der Verarbeitung
+
+Der Test gilt als nicht erfolgreich, da wichtige Funktionalitäten der Koponente als nicht erfüllt gelten. Die notwendigen Verbesserungen werden dem Team zeitnah mitgeteilt. Der Test wird nach behebung dieser Probleme erneut durchgeführt.
+
+Durchführung 4, Datum: 19.07.2020, 19:20 Uhr
+
+kommentare zu den einzelnen Schritten:
+
+- Schritt 2: Skript erfolgreich ausgeführt
+
+- Schritt 3-6: erfolgreich
+
+- Schritt 7: Zeit zum Verarbeiten auf 19:30 gesetzt (aktuell 19:27)
+
+- Schritt 8: Skript gestartet, keine Fehlermeldungen, wartet auf angegebene Zeit
+
+- Schritt 9: 12:03 erreicht, Verarbeitung wurde gestartet und abgeschlossen
+
+- Schritt 10-15: erfolgreich
+
+- Schritt 16: keine Warnungen und aufschlussreichen Informationen über Vorgang der Verarbeitung
+
+notwendige Verbesserungen:
+
+- / 
+
+Der Test wird als erfolgreich ausgeführt betitelt. Nach Absprache mit dem Auftraggeber ist eine Auflistung der Informationen über eine Datei auf dem Deckblatt nicht nötig.
+
+
+
+
+
+
+
+

@@ -1,0 +1,90 @@
+[%header]
+
+== TC301 - Funktionalität & Design der UI (Benutzeroberfläche)
+
+
+=== Beschreibung:
+Die Webanwendung ist eine zentrale Komponente im Opal-Druckservice-System und bietet der Unidruckerei verschiedene Funktionen, wie beispielsweise das Anzeigen von Benutzern und Druckjobs. Zusätzlich soll der Kunde über die Webanwendung in der Lage sein, Kunden zu Sperren und Druckjobs als abgeholt zu markieren. Dieser Test überprüft, ob eine Software aus der Sicht des endgültigen Benutzers wie beabsichtigt funktioniert. Der Test soll zeigen, ob der Benutzer die gewünschten Funktionen über die Webbasierte Anwendungen zur Verfügung gemacht werden konnte. Dieser Test Case bezieht sich auf den Use Case UC2, UC6 und UC7. Zusätzlich kann der Benutzer im Nachhinein kosmetische Wünsche bezüglich der Anwendung äußern. Um den Test durchführen zu können muss sich die Webanwendung aus Sicht der Entwickler in einem finalen Zustand befinden und auf deren dessen Funktionalität getestet worden sein. Dies bedeutet, dass alle Anforderungen aus Sicht der Entwickler durch die Webanwendung umgesetzt wurden und diese somit für den Realbetrieb bereit wäre.
+
+=== Vorbedingungen:
+- Finale Entwicklungsstufe der Webanwendung
+- Webanwendung kann von einem externen Rechner außerhalb der HTW über einen beliebigen Browser aufgerufen werden
+- Webanwendung kann mit der in der HTW laufenden Datenbank kommunizieren
+
+
+=== benötigte Daten: 
+- Zeit der Durchführung (Kundengespräch)
+- Kommunikationsweg mit Kunde (situationsbedingt virtuell)
+
+
+=== Handlungen
+
+Das Test Script beschreibt den detaillierten Ablauf des Tests.
+
+- Schritt 1: am vereinbarten Datum Kommunikation mit dem Kunden aufbauen
+
+- Schritt 2: Dem Kunde Zugang zur Webanwendung gewähren (Übergabe von IP-Adresse der Webanwendung, Passwort)
+
+- Schritt 3: kurze Erklärung der Webanwendung durch die Entwickler
+
+- Schritt 4: Dem Kunden beliebig viel Zeit gewähren, damit er selbstständig und nach eigenem Vorgehen die Software auf Funktionalität und Design überprüfen kann (ggf. Fragen beantworten)
+
+- Schritt 5: Abschlussgespräch mit dem Kunden führen
+
+- Schritt 6: Resonanz des Kunden detailliert aufschreiben (inklusive Anmerkungen die nicht die Entwicklung beeinflussen)
+
+
+=== erwartete Reaktionen
+- Kunde betrachtet Funktionalität und Design aus seiner Sicht
+- keine Fehler während der Durchführung
+- Kunde gibt Feedback über den aktuellen Stand der Webanwendung
+
+
+=== Nachbedingungen:
+- Webanwendung befindet sich in einem lauffähigen Zustand
+- Dokument über die Resonanz wurde erstellt und dem kompletten Team zur Verfügung gestellt
+
+
+=== Test Log
+
+Durchführung 1, Datum: 19.05.2020 13:30
+
+Das Telefonat mit Bert Buschmann (Mitarbeiter der Unidruckerei) fand über Skype statt und stellte technisch keine Herrausforderung dar.
+
+kommentare zu den einzelnen Schritten:
+
+- Schritt 1: erfolgreich
+
+- Schritt 2: Der Kunde hielt dies nicht für nötig und so wurde die Webanwendung von einem Entwickler bedient und per Bildschirmübertragung geteilt. Da die Anmeldefläche der Webanwendung öffentlich zugängig ist, kann ein Problem bei der Nutzung durch die Unidruckerei aus der Sicht des Engineering-Teams ausgeschlossen werden.
+
+- Schritt 3-4: erfolgreich 
+
+- Schritt 5: Der Kunde war von der Funktionalität und dem Design der Webanwendung sehr angetan und hatte keinerlei Verbesserungsvorschläge 
+
+notwendige Verbesserungen:
+
+- /
+
+Der Test wird als erfolgreich abgeschlossen angesehen
+
+Durchführung 2, Datum: 14.07.2020 11:00
+
+Herr Ryplewitz (Projektmanager) hat sich persönlich mit Herr Buschmann (Mitarbeiter der UNIDruckerei) getroffen und den Test mit ihm durchgeführt
+
+kommentare zu den einzelnen Schritten:
+
+- Schritt 1: erfolgreich
+
+- Schritt 2: Dem Kunden wurden die Zugangsdaten mitgeteilt und dieser nutzte die Webanwendung über seinen eigenen Arbeitsrechner
+
+- Schritt 3-4: erfolgreich 
+
+- Schritt 5: Der Kunde war von der Funktionalität und dem Design der Webanwendung sehr angetan und hatte keinerlei Verbesserungsvorschläge 
+
+notwendige Verbesserungen:
+
+- /
+
+Der Test wird als erfolgreich abgeschlossen angesehen
+
+

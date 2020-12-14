@@ -1,0 +1,32 @@
+== Use-Case: Druck bestätigen
+===	Kurzbeschreibung
+Der Use-Case beschreibt die Bestätigung des Druckes durch einen Mitarbeiter der Unidruckerei im System.
+
+===	Kurzbeschreibung der Akteure
+==== Mitarbeiter der Unidruckerei
+Die Unidruckerei will im System bestätigen, dass ein Druckjob gedruckt wurde und jetzt abholbereit ist.
+
+=== Vorbedingungen
+* Der Mitarbeiter der Unidruckerei ist in der Webapp angemeldet und der Ausdruck der Druckjobs erfolgte.
+
+=== Standardablauf (Basic Flow)
+. Der Use Case beginnt, wenn die Übersicht aller aktuellen Druckjobs geöffnet ist.
+. Das System zeigt alle Druckjobs mit dem Status zu drucken an.
+
+. *For Each* Druck-Job
+    .. Der Mitarbeiter der Unidruckerei bestätigt den erfolgreichen Druck. 
+    .. Das System ändert den Druck-Status auf abholbereit.
+
+. Der Use Case ist abgeschlossen.
+
+
+=== Wesentliche Szenarios
+==== Erfolgreiche Bestätigung des Druckes
+Sc1: Der Mitarbeiter X hat den Druckjob des Studenten A gedruckt. Der Mitarbeiter X vermerkt den Druckjob des Studenten im System als gedruckt.
+
+
+===	Nachbedingungen
+* Das System hat den neuen Druck-Status des Druckjobs gespeichert.
+
+
+

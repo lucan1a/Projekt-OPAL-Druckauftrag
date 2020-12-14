@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# source https://stackoverflow.com/questions/11529715/how-do-i-find-the-orientation-of-a-pdf-using-php-or-a-linux-script
+
+pdfinfo -f 1 -l 1000 "$1" \
+| grep "Page * 1 size:" \
+| while read Page _pageno size _width x _height rest; do 
+		[ "$(echo "${_width} / 1"|bc)" -gt "$(echo "${_height} / 1"|bc)" ] \
+	   	&& exit 0 \
+	   	|| exit 1; \
+done
+

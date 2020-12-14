@@ -1,0 +1,35 @@
+Vereinfachter Ablauf der Server Anwendung
+Unterteilung in die PDF Verarbeitung und die Zusammenstellung der Druckjobs
+
+new file in .../raw/
+
+Run.java
+    new Benutzer()
+    new Druckauftrag()
+
+    Benutzer.exists()? -> Benutzer.insert()
+
+    Druckauftrag.insert()
+    Druckauftrag.setID()
+
+    int einstellungen = Druckauftrag.Druckeinstellungen
+
+    ----- PDF Verarbeitung -----
+
+    new ProcessHandler()
+    String[] parameter
+
+    processHandler.runScript(checkPassword)
+        input.pdf -> 0 kein pw, 1 hat pw
+
+    processHandler.runScript(convertGrey)
+        input.pdf -> grey_input.pdf
+
+    processHandler.runScript(convertPages, einstellungen)
+        input.pdf -> .../preprocessed/snr_ID_input.pdf
+        .../raw/ leer oder Fehlerdateien
+
+    ----- 5:00 Uhr -----
+
+    DailyTask.java
+        ...

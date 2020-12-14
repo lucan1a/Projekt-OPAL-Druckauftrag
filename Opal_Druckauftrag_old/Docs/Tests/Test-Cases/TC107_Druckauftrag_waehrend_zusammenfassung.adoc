@@ -1,0 +1,95 @@
+[%header]
+
+
+== TC107 - Druckauftrag_während_zusammenfassung
+=== Beschreibung:
+Jeden Morgen (5:00 Uhr) werden alle Aufträge, welche die vergangenen 24 Stunden auf dem Server zur Bearbeitung der Dateien eingetroffen sind, zusammengefasst.
+Da dieser Prozess und das anschließende Übermitteln an die Unidruckerei bei einer großen Anzahl von Aufträgen einige Minuten in Anspruch nehmen könnte, ist die Reaktion des Systems auf weitere Druckaträge während dieser Zeit für dessen Stabilität relevant.
+Um das Verhalten des Servers während dieser Zeitspanne zu testen wird ein Druckauftrag unmittelbar nach Beginn des Zusammenfassens der Dateien gesendet. Dieser Test ist ein Positivtest und prüft somit das System bei korrekter Nutzung.
+
+=== Vorbedingungen:
+- Kunden gaben eine hohe Anzahl von Dokumenten (500) zum Drucken in Auftrag
+- Dem Kunden können seine Dateien zugeordnet werden
+- Alle Informationen für das Deckblatt sind verfügbar
+- Eine Verbindung zur Datenbank kann hergestellt werden
+
+=== benötigte Daten: 
+- Uhrzeit
+- Status des Servers (Gesamtsystem)
+- Status des Zusammenfassens (laufend, abgeschlossen)
+- Anzahl der zu verarbeitenden Druckaufträge
+- Opal Status (eingeloggt, Drucken verfügbar)
+
+
+=== Handlungen
+
+Das Test-Script beschreibt den detaillierten Ablauf des Tests.
+
+- Schritt 1: in Opal mit einem HTW-Dresden-Account anmelden
+- Schritt 2: Anpassen des Timers zum Zusammenfassen der Druckaufträge auf eine Zeit in wenigen Minuten setzen
+- Schritt 3: Starten der Anwendung für das Zusammenfassen
+- Schritt 4: warten bis zum Zeitpunkt des Timers
+- Schritt 5: Status des Zusammenfassens aufrufen
+- Schritt 6: In Opal einen Druckauftrag (Beliebige Seiteneinstellungen) abschicken
+- Schritt 7: Status des Zusammenfassens abrufen (sollte dieser abgeschlossen sein, dann den Test mit einer höheren Anzahl von vorher abgeschickten Druckaufträgen wiederholen (Vorbedingung))
+- Schritt 8: Überprüfen was mit dem Druckauftrag während des Zusammenfassens passierte (in Verarbeitung eingeflossen, als Druckauftrag registriert, vom System abgewehrt, etc.)
+- Schritt 9: Überprüfen, ob Ablauf des Zusammenfassens ordnungsgemäß funktionierte (siehe TC203: Druckauftrag zusammenfassen)
+- Schritt 10: überprüfen, ob währenddessen erteilter Druckauftrag anschließend eingegangen ist
+- Schritt 11: Kommandozeilenausgabe nach Fehlermeldungen und Warnungen durchsuchen und ggf. notieren
+
+=== erwartete Reaktionen
+- Das System hat den während der Zusammenfassung eingehenden Druckauftrag nicht in die Zusammenfassung aufgenommen
+- neuer Druckauftrag wird erst nach der Zusammenfassung im System registriert
+- Verarbeitung der restlichen Druckaufträge verläuft Problemlos (Graustufen, Seitenumwandlung, Deckblatterstellung, Zusammenfügen der Dateien)
+
+=== Nachbedingungen:
+- Das System ist weiterhin lauffähig
+- Die vorher erteilten Druckaufträge ist für das Zusammenfassen am nächsten Tag registriert
+
+
+=== Test Log
+
+Durchführung 1, Datum: 26.06.2020, 13:00
+
+kommentare zu den einzelnen Schritten:
+
+- Schritt 1-6: erfolgreich
+
+- Schritt 7: Zusammenfassen wurde abgebrochen, sobald der neue Druckauftrag einging
+
+- Schritt 8: Druckauftrag wurde registriert (Eintrag in Relation Druckauftrag, Datei in Verzeichnis preprocessed
+
+- Schritt 9: negativ, da Abbruch der Zusammenfassens. nur einige Druckjobs wurden erzeugt
+
+- Schritt 10: während Zusammenfassung eingegangen
+
+- Schritt 11: Abbruch der Zusammenfassung durch Fehlermeldungen erkennbar
+
+notwendige Verbesserungen:
+- Druckauftrag darf erst nach Beenden der Zusammenfassung im System registriert werden
+
+Durchführung 3, Datum: 08.07.2020, 11:00
+
+kommentare zu den einzelnen Schritten:
+
+- Schritt 1-9: erfolgreich
+
+- Schritt 10: neuer Druckauftrag wird nicht im System registriert, da Anbindung über Opal-Schnittstelle fehlerhaft
+
+- Schritt 11: keine Fehlermeldungen
+
+notwendige Verbesserungen:
+- nach der Zusammenfassung muss übermittlung des Druckauftrags stattfinden
+
+Durchführung 2, Datum: 24.07.2020, 11:00
+
+kommentare zu den einzelnen Schritten:
+
+- Schritt 1-10: erfolgreich
+
+- Schritt 11: keine Fehlermeldungen
+
+notwendige Verbesserungen:
+- /
+
+Der Test gilt als erfolgreich durchgeführt

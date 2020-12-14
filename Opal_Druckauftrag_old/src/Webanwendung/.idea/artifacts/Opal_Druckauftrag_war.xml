@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="Opal-Druckauftrag:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>Opal-Druckauftrag</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="Opal-Druckauftrag-0.0.1-SNAPSHOT.war">
+      <element id="artifact" artifact-name="Opal-Druckauftrag:war exploded" />
+    </root>
+  </artifact>
+</component>

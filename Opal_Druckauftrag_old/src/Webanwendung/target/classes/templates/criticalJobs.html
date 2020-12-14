@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"></meta>
+    <title>Druckjobs</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+</head>
+
+<script type="text/javascript" src="/link.js"> </script>
+
+<header>
+    <div th:replace="navbar :: navbar"/>
+</header>
+
+<body style="background-color: #CDCDCD">
+
+<div class="form-group" STYLE="margin-left: 50px; margin-top: 25px">
+    <div class="col-xs-3">
+        <button id="btn_block" type="submit" form="form2" value="Submit" class="btn btn-success">Nutzer Sperren</button>
+    </div>
+
+</div>
+
+<div>
+    <form  th:action="@{/critical/block}"  method="post" id="form2">
+
+        <p class="text-center font-weight-bold">Zeitkritische Druckjobs noch nicht gesperrter Nutzer:</p>
+        <table class="table table-hover table-bordered" style="width: 90%; margin-right: auto; margin-left:50px;">
+            <thead class="thead-dark">
+            <tr>
+                <th> </th>
+                <th>Druckjob-ID</th>
+                <th>Auftraggeber</th>
+                <th>Seitenzahl</th>
+                <th>Preis</th>
+                <th>Auftragsdatum</th>
+
+            </tr>
+            <tr th:each="job: ${jobs_not_blocked}">
+                <td><input type="checkbox" name="Matrikel" th:value="${job.getAuftraggeber_Bibliotheksnummer()}"></td>
+                <td> <span th:text="${job.getId()}" /></td>
+                <td> <span th:text="${job.getAuftraggeber_Bibliotheksnummer()}" /></td>
+                <td> <span th:text="${job.getSeitenzahl()}" /></td>
+                <td> <span th:text="${job.getPreis()}" /> </td>
+                <td> <span th:text="${#dates.format(job.getAuftragsdatum(), 'dd. MM. yyyy')}" /> </td>
+
+            </tr>
+
+            </thead>
+
+        </table>
+    </form>
+
+    <p class="text-center font-weight-bold">Zeitkritische Druckjobs bereits gesperrter Nutzer:</p>
+
+    <table class="table table-hover table-bordered" style="width: 90%; margin-right: auto; margin-left:50px;">
+        <thead class="thead-dark">
+        <tr>
+            <th> </th>
+            <th>Druckjob-ID</th>
+            <th>Auftraggeber</th>
+            <th>Seitenzahl</th>
+            <th>Preis</th>
+            <th>Auftragsdatum</th>
+
+        </tr>
+    <tr th:each="job: ${jobs_blocked}">
+        <td> <input type="checkbox" disabled="disabled" checked="checked"></td>
+        <td> <span th:text="${job.getId()}" /></td>
+        <td> <span th:text="${job.getAuftraggeber_Bibliotheksnummer()}" /></td>
+        <td> <span th:text="${job.getSeitenzahl()}" /></td>
+        <td> <span th:text="${job.getPreis()}" /> </td>
+        <td> <span th:text="${#dates.format(job.getAuftragsdatum(), 'dd. MM. yyyy')}" /> </td>
+
+    </tr>
+    </table>
+</div>
+
+</body>
+</html>

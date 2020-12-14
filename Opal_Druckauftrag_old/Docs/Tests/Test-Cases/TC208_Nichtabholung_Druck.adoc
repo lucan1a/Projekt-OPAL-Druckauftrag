@@ -1,0 +1,53 @@
+== TC208 - Nichtabholung Druck
+
+
+=== Beschreibung:
+Ein Student hat die Möglichkeit, seine zum Druck in Auftrag gegebene Dateien nicht abzuholen. In diesem Fall werden in der Webanwendung Druckjobs, welche seit sieben Tagen nicht abgeholt wurden, mit einem Vermerkt ausgestattet. Zudem werden die Druckjobs gesondert dargestellt und der Benutzer der Webanwendung hat die Möglichkeit, den Nutzer zu sperren. Das Sperren wird in einem anderen Test getestet. Dieser Test soll ausschließlich testen, ob Druckjobs, welche bereits sieben Tage bei der Unidruckei verweilen, als zeitkritische Druckjobs angezeigt werden und somit den Nutzer der Webanwendung auf den Zustand aufmerksam macht.
+
+=== Vorbedingungen:
+- Ein Nutzer ist in Opal angemeldet
+- Die Webanwendung ist aktiv (normalbetrieb)
+- Die Skripte zur automatischen Verarbeitung der Aufträge sind aktiv (normalbetrieb)
+
+=== benötigte Daten: 
+- aktuelles Datum
+- Anmeldedaten Opal
+
+
+=== Handlungen
+- Schritt 1: Auslösen eines Druckauftrags über Opal (Seiteneinstellungen irrelevant)
+
+- Schritt 2: bis mindestens 6 Uhr am Folgetag warten
+
+- Schritt 3: überprüfen, ob der Druckauftrag erfolgreich verarbeitet wurde und in der Webanwendung als Druckjob auftaucht
+
+- Schritt 4: mindestens sieben Tage warten
+
+- Schritt 5: überprüfen, ob Druckjob nun in der Webanwendung als zeitkritische Druckjob angezeigt wird
+
+- Schritt 6: überprüfen, ob Sperrung des Nutzers, welcher den Druckauftrag ausgelöst hat, möglich ist
+
+=== erwartete Reaktionen
+- Das System verarbeitet den Druckauftrag erfolgreich
+- Daten bezüglich des Druckjobs werden der Unidruckerei über die Webanwendung zugänglich gemacht
+- nach sieben Tagen wird der Status des Druckjobs auf "zeitkrtisch" gesetzt
+
+=== Nachbedingungen:
+- Status des Druckjobs wird in der Webanwendung als "zeitkrtisch" angezeigt
+
+=== Test Log
+
+Durchführung 1, Datum: 14.07.2020, 17:00 Uhr
+
+kommentare zu den einzelnen Schritten:
+
+- Schritt 1-3: erfolgreich
+
+- Schritt 4: aktueller Zeitpunkt 23.07.2020 12:45 Uhr
+
+- Schritt 5-6: erfolgreich
+
+notwendige Verbesserungen:
+
+- /
+

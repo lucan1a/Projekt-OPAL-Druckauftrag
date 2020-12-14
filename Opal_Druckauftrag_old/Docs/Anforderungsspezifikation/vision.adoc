@@ -1,0 +1,162 @@
+= Vision: Opal-Druckservice 
+Kai Löning s77721@htw-dresden.de; Tom Jandke s77831@htw-dresden.de  
+:toc: 
+:toc-title: Inhaltsverzeichnis
+:sectnums:
+
+== Einführung
+Der Zweck dieses Dokuments ist es, die wesentlichen Bedarfe und Funktionalitäten des Opal-Druckservice zu sammeln, zu analysieren und zu definieren. Der Fokus liegt auf den Fähigkeiten, die von Stakeholdern und adressierten Nutzern benötigt werden, und der Begründung dieser Bedarfe. Die  Details, wie das Opal Druckauftrag-System diese Bedarfe erfüllt, werden in der Use-Case und Supplementary Specification beschrieben.
+
+=== Zweck
+Der Zweck dieses Dokuments ist es, die wesentlichen Anforderungen an das System aus Sicht und mit den Begriffen der künftigen Anwender zu beschreiben.
+
+=== Gültigkeitsbereich (Scope)
+Dieses Visions-Dokument bezieht sich auf den Opal-Druckservice, das von Projektteam 11 entwickelt wird. Das System wird es den Studierenden erlauben, PDF-Dokumente, welche auf der Plattform Opal vom Dozent zur Verfügung gestellt werden, über die Unidruckerei auszudrucken. Dadurch wird für die Studierenden ein schneller und unkomplizierter Druck der Vorlesungsunterlagen ermöglicht, ohne dass diese einen eigenen Drucker besitzen müssen. Die zu Druckenden Dateien werden vom System formatiert.
+Des Weiteren soll die Unidruckerei mit Hilfe des Opal-Druckservice mit dem Studierenden interagieren (z.B. Informationen über Druckstatus weitergeben) und gleichzeitig die Ausgabe der Druck-Jobs verwalten können.
+
+=== Definitionen, Akronyme und Abkürzungen
+siehe <<glossary.adoc#,Glossar>>
+
+== Positionierung
+=== Fachliche Motivation
+Das Ausgangsprojekt ist hinter der Prämisse entstanden, den Studierenden eine Möglichkeit zu geben, ihre Lehrunterlagen direkt über Opal ausdrucken zu können. Damit ist die HTW Dresden die einzige Hochschule/Universität in Sachsen, die ein solches System für ihre Studierenden anbietet. Allerdings ist das bisherige System nicht in der Lage, die Anforderungen bei erhöhtem Bedarf zu erfüllen. Zum einen soll die Organisationsstruktur, durch den Anschluss eines externen Partners geändert werden, welcher künftig auch für den Bezahlvorgang zuständig sein soll. Momentan verursacht der kostenlose Druckservice hohe Kosten (seit Start ca. 15000€, Stand Dez. 2019), für welche die Hochschule aufkommen muss. Zum Anderen soll die Software erneuert werden, um neue Features zu ermöglichen und gleichzeitig auch Probleme der aktuellen Struktur zu beheben. Hierbei ist zu beachten, dass die Software momentan lokal auf einem Rechner läuft und damit höchst fehleranfällig ist. Künftig soll das System deshalb auf einen Server ausgelagert werden. 
+
+=== Problem Statement
+|===
+|Das Problem ist, dass| das vorhandene System auf einem Laptop gehostet wird, welcher im Vorbereitungsraum einer Lehrkraft steht. Somit sind die Sicherheitsanforderungen an das System aktuell nicht gegeben. Zudem fehlen bei der abzulösenden Umsetzung wichtige Funktionen, welche gelegentlich manuelle Arbeit am System erfordern.
+|betrifft | den	Auftraggeber
+|Die Auswirkungen davon sind 
+a|	
+* Programm läuft auf lokalem Rechner
+* aktuelles Programm befindet sich in Testphase, weshalb der Service kostenlos angeboten wird
+* technische Fehler/Probleme (z. B. ausgelöst durch Sonderzeichen im Dateinamen) werden nicht abgefangen oder ordnungsgemäß behandelt
+* Auftragserteilung funktioniert über ein E-mail-postfach
+* Eingeschränktheit der Funktionen
+|Eine erfolgreiche Lösung wäre |ausgereiftes und vom Server der HTW gehostetes System, welches sowohl die Anforderungen des bisherigen Systems erfüllt, als auch einige funktionale Neuerungen bietet. Die neue Umsetzung soll stabil sein und mit Fehlern (Bsp. durch unzulässige Zeichen in Dateinamen) gekonnt umgehen. Die neue Lösung soll den Bedarf an manueller Arbeit während des alltäglichen Betriebs verhindern. Zusätzlich soll es in Zukunft mittels einer offenen Systemstruktur einfacher möglich sein, den Funktionsumfang zu erweitern.
+|===
+
+=== Positionierung des Produkts 
+|===
+|Für|	Studierende der HTW Dresden
+|die|	Möglichkeit via Opal einen Druckauftrag für Lehrveranstaltungsunterlagen zu erteilen und die ausgedruckten Dokumente direkt bei der Unidruckerei abzuholen
+|Für|	die Unidruckerei
+|die|	Möglichkeit die Druck-Jobs der Studierenden zu verwalten
+|Das Produkt ist ein | System für die Verarbeitung von Druckaufträgen übermittelt per Email über Opal
+|der| die Erteilung und Verwaltung von Druckaufträgen/Druck-Jobs ermöglicht
+|Im Gegensatz zum	|lokalen Programm
+|ermöglicht unsere Lösung
+a|
+* die Anbindung der Unidruckerei System bzw. der Unidruckerei
+* eine Verwaltung der Druck-Jobs per Datenbank
+* eine komplette Automatisierung ohne regelmäßiges Eingreifen einer Fachkraft
+* eine bessere Einbindung in die Struktur der HTW mittels der Laufumgebung auf dem Server
+|===
+
+==	Stakeholder Beschreibungen
+===	Zusammenfassung der Stakeholder 
+
+[%header]
+|===
+|Name|	Beschreibung	| Verantwortlichkeiten
+|Projektteam 11|Kursteilnehmer des Moduls SE1, welche für dieses Projekt zugeteilt wurden|erstellen den Opal-Druckservice 
+|Coach|Prof. Dr.-Ing. Jürgen Anke|betreut das Projektteam und steht für Rückfragen zur Verfügung 
+|Auftraggeber|Prof. Dr.-Ing. Gunther Naumann
+a|
+* ist  der  Ansprechpartner für das Projekt
+* legt die Anforderungen der zu erstellenden Software fest
+* ist der Entwickler der bisherigen Softwarelösung
+|Studierende|Studierende der HTW Dresden|sind die Nutzer des späteren Drucksystems
+|Unidruckerei| Copyshop in der Reichenbachstraße 19, 01069 Dresden|ist zuständig für die physische Abwicklung der eingehenden Druckjobs (Druckvorgang, Ausgabe der gedruckten Dokumente, Bezahlvorgang)
+|Administrator|Prof. Dr.-Ing. Gunther Naumann|wartet die fertige Software nach Implementierung 
+|Opal|Lehrplattform des Bildungsportals Sachsen; Ansprechpartner an der HTW Dresden: Thomas Haider
+a|stellt die Schnittstelle zur Übermittlung der Dokumente und die Informationen über die Studierenden bereit
+|Server der HTW Dresden|Fr. Dr. Loose|stellt die notwendige Rechenleistung und Wartung der Hardware für das System bereit
+|Datenschutzbeauftragter|Prof. Dr. Andreas Westfeld|definiert Maßnahmen zur Einhaltung der Datenschutzbestimmungen
+|===
+
+=== Benutzerumgebung
+. Studierende
+* Die Anzahl der Nutzer variiert. (potenziell: alle Studierende der HTW Dresden)
+* Die Druckauftragserteilung erfolgt nur online über die Plattform Opal mittels Email.
+* Die Systemplattform Opal wird auch zukünftigt weiter genutzt.
+
+. Unidruckerei
+* Die Nutzeranzahl ist auf die drei Mitarbeiter der Unidruckerei beschränkt, welche gleichberechtigt mit dem System interagieren können sollen.
+* Die Arbeitszeit ist abhängig von Druckauftragsvolumen.
+* Die Unidruckerei nutzt das Betriebssystem Windows.
+* In Zukunft wird den Mitarbeitern über das Rechenzentrum eine Webapplikation auf Basis von Java und dem Framework Spring zur Verfügung gestellt. Mit dieser wird auf die vom Rechenzentrum der HTW ebenfalls gehosteten Datenbank zugegriffen und die Möglichkeit der Sperrung von Nutzern wird gewährleistet.
+
+== Produkt-/Lösungsüberblick
+=== Bedarfe und Hauptfunktionen
+
+[%header]
+|===
+|Bedarf|	Priorität|	Features|	Geplantes Release
+|Druckauftrag erteilen
+(<<Usecases\1_usecase_Druckauftrag_erteilen.adoc#,UC1>>)|5|Druckaufträge mit individuellen Druckeinstellungen über Opal erstellen|14.08.2020
+
+|Verarbeitung des Druckauftrages|5|tägliches Zusammenfassen aller Druckaufträge eines Studierenden zu einem Druck-Job entsprechend der gewählten Druckeinstellungen|14.08.2020
+
+|Weitergabe der Druck-Jobs|5|fertige Druck-Jobs werden an die Unidruckerei übermittelt|14.08.2020
+
+|Bestätigung des Drucks und der Abholung(<<Usecases\6_usecase_Druck_bestaetigen.adoc#,UC6>>,
+<<Usecases\7_usecase_Abholung_bestaetigen.adoc#,UC7>>)
+|4|Vermerk im System über erfolgreichen Druck und Abholung|14.08.2020
+
+|Erinnerungsmails senden
+(<<Usecases\5_usecase_Erinnerungsmail_senden.adoc#,UC5>>)|3|automatische Erinnerung über noch ausstehende Druck-Jobs|14.08.2020
+
+|Informationen zu Ablaufänderungen weiterleiten|2|Informationensweitergabe (z.B. mögliche längere Wartezeiten) durch Mitarbeiter der Unidruckerei|X
+
+|Nutzer sperren
+(<<Usecases\9_usecase_Sperrstatus_aendern.adoc#,UC9>>)|2|Sperrung einzelner Nutzer für Erstellen eines Druckauftrags|
+14.08.2020
+
+|(Nicht) abgeholte Dokumente löschen
+(<<Usecases\10_usecase_Druck-Job_loeschen.adoc#,UC10>>)|2|Löschung von nicht abgeholten Dokumenten im System bei Entsorgung|14.08.2020
+
+|Bestellübersicht anzeigen
+(<<Usecases\2_usecase_Druckuebersicht_oeffnen.adoc#,UC2>>)|1|Übersicht über aktuelle Druckaufträge für Studierenden|14.08.2020
+
+|Druckjob downloaden
+(<<Usecases\3_usecase_Download.adoc#,UC3>>)|5|Die Mitarbeiter können die Druckjobs über die Webanwendung für den Druck downloaden|14.08.2020
+
+|Zusammenfassung der Druckjobs
+(<<Usecases\4_usecase_Druckauftraege_zusammenfassen.adoc#,UC4>>)|5|Die Druckaufträge eines Studenten werden richtig zu einem Druckjob zusammengefasst|14.08.2020
+
+|===
+
+== Zusätzliche Produktanforderungen
+
+[%header]
+|===
+|Anforderung|	Priorität|	Geplantes Release
+|Das System muss die Daten des Druck-Jobs vollständig an die Unidruckerei übermitteln.|5| 14.08.2020
+
+|Das System muss den Datenschutzrichtlinien entsprechen.|5|14.08.2020
+
+|Das System versucht jede PDF-Datei korrekt verarbeiten (Ausnahmen sind allerdings nicht ausgeschlossen, da es keine Versionsübersicht etc. für auf Opal veröffentlichte PDFs gibt).
+(<<Usecases\11_usecase_Druckauftrag_vorbereiten.adoc#,UC11>>)|4|14.08.2020
+
+|Das System muss verständlich für den Administrator dokumentiert sein.|4|14.08.2020
+
+|Das System soll robust bei mehreren parallen Druckauftragserteilungen sein.
+(<<Usecases\11_usecase_Druckauftrag_vorbereiten.adoc#,UC11>>)|4|14.08.2020
+
+|Das System muss mit den gegebenen technischen Ressourcesbegrenzungen konstant lauffähig sein.|5|14.08.2020
+
+|Die Mitarbeiter der Unidruckerei sollen innerhalb von einer Minute den Druck bzw. die Abholung bestätigen können.
+(<<Usecases\7_usecase_Abholung_bestaetigen.adoc#,UC7>>)|3|14.08.2020
+
+|Das System muss für die Studierenden verständliche Informationsemails verschicken.|3|14.08.2020
+
+|Das System muss robust gegen ausgefallene Dateinamen (Umlaute, Sonderzeichen, etc.) sein.|3|14.08.2020
+
+|Das System soll durch Weitergabezeiten und Druckeinstellungen erweiterbar sein.|2|14.08.2020
+
+|Die Webanwendung muss auf gängigen Browsern (Google Chrome und Mozilla Firefox) und unter Windows lauffähig sein.|1|14.08.2020
+
+|Informationsfeld ändern
+(<<Usecases\8_usecase_Informationsfeld_aendern.adoc#,UC8>>)|1|Die Unidruckerei kann Studenten über Ablaufsänderungen informieren|14.08.2020
+
+|===

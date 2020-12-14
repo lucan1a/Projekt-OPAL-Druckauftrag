@@ -1,0 +1,40 @@
+#!/bin/bash
+
+#   $ generate_barcode [price] [s-Nr.] 
+#   return barcode_s-Nr.pdf
+
+price="$1"
+format="ps"
+out="barcode.$format"
+output="barcode_$2.pdf"
+
+#   generate barcode
+barcode -b "$price" -e "code128" -o $out
+
+if [ $? != 0 ]
+then
+    echo "barcode error"
+    exit 1
+fi
+
+#   convert to pdf
+ps2pdf "$out" "$output"
+
+if [ $? != 0 ]
+then
+    echo "covert error"
+    exit 2
+fi
+
+rm "$out"
+
+mv "$output" "/home/druckauftrag/Dateien/preprocessed/$output"
+
+if [ $? != 0 ]
+then
+	echo "Verschieben zu Preprocessed nicht moeglich"
+	exit 3
+fi
+
+exit 0
+
