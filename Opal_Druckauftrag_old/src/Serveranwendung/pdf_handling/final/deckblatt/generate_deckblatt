@@ -1,0 +1,93 @@
+#!/bin/bash
+
+#   $ deckblatt [s-Nr.] [number of files] [number of pages] [price]
+#   return deckblatt_sNr.pd#  return deckblatt_sNr.pdf
+
+#   files for filling pdf
+pdf="/home/druckauftrag/src/pdf_handling/final/deckblatt/form_template.pdf"
+form="/home/druckauftrag/Dateien/preprocessed/form.fdf"
+out_form="/home/druckauftrag/Dateien/preprocessed/out.pdf"
+
+#   help option
+if [ "$1" == "-help" ]
+then 
+	echo "$ deckblatt [s-Nr.] [number of files] [number of pages] [price]"
+	exit 0
+fi
+
+#   input data
+name=$1
+files=$2
+pages=$3
+price=$4
+date=$(date +"%d.%m.%Y")
+information=""
+
+#   remove temporary form if exists
+if [ -f "$form" ]
+then
+    rm "$form"
+    echo "removed form"
+fi
+
+#   create form FDF
+echo "%FDF-1.2
+1 0 obj<</FDF<< /Fields[
+
+<< /T (name_f1)     /V ("$name") >>
+<< /T (name_f2)     /V ("$name") >>
+<< /T (files)       /V ("$files") >>
+<< /T (pages)       /V ("$pages") >>
+<< /T (price)       /V ("$price") >>
+<< /T (name_f3)     /V ("$name") >>
+<< /T (date)        /V ("$date") >>
+<< /T (information) /V ("$information") >>
+
+] >> >>
+
+endobj
+trailer
+<</Root 1 0 R>>
+%%EOF
+" >> "$form"
+
+#   fill form
+pdftk "$pdf" fill_form "$form" output "$out_form" flatten
+
+if [ $? != 0 ]
+then
+    echo "pdftk failed"
+    exit 1
+fi
+
+#   including generated barcode
+barcode="/home/druckauftrag/Dateien/preprocessed/barcode_$1.pdf"
+barcode_pos="/home/druckauftrag/src/pdf_handling/final/barcode/$1_barcode_pos.pdf"
+output="/home/druckauftrag/Dateien/preprocessed/deckblatt_$1.pdf"
+
+#   stamp position
+pdfjam --paper "a4paper" --scale 1 --offset "16.5cm --21cm" "$barcode" -o "$barcode_pos"
+
+if [ $? != 0 ]
+then
+    echo "pdfjam failed"
+    exit 2
+fi
+
+#   stamp barcode
+pdftk "$out_form" stamp "$barcode_pos" output "$output"
+
+if [ $? != 0 ]
+then
+    echo "pdftk failed"
+    exit 3
+fi
+
+#   remove tmp files
+rm "$form" "$out_form" "$barcode_pos"
+rm "/home/druckauftrag/Dateien/preprocessed/barcode_$1.pdf"
+
+echo "Deckblatt erfolgreich erstellt"
+
+exit 0
+

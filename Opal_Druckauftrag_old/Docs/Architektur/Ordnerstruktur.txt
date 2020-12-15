@@ -1,0 +1,107 @@
+Dieses Dokument beschreibt die Ordnerstruktur der VM-Implementierung
+Die Implementierung der Webanwendung ist hierbei vernachlässigt
+Erklärungen sind mit "->" gekennzeichnet
+Weitere Informationen zur Struktur und der Nutzung des Systems sind in der Betriebsdoku zu finden
+
+.
+├── Bulkinsert_DB_Speichertest -> Test inserts für die Datenbank
+│   ├── Bulkinsert_Benutzer_Druckauftrag.sql
+│   ├── bulkinsert_Benutzer.sh
+│   ├── bulkinsert_Da_Be_Datei.sh
+│   ├── bulkinsert_Druckauftrag.sh
+│   ├── bulkinsert_Druckjob.sh
+│   ├── grey_pages
+│   │   ├── 1x2_grey_Druckfehler_alte_Version.pdf
+│   │   ├── 1x2_grey_Mathe_Übung_7.pdf
+│   │   ├── 1x2_grey_Mathe_Übung_8.pdf
+│   │   ├── 1x2_grey_Praktikum_Programmierung5.pdf
+│   │   ├── 1x2_grey_Probeklausur_Statistik_2012.pdf
+│   │   ├── 1x2_grey_Probeklausur_Statistik_2013.pdf
+│   │   └── 1x2_grey_Probeklausur_Statistik_2014.pdf
+│   ├── insert_benutzer.sql
+│   ├── insert_Druckauftrag.sql
+│   ├── insert_Druckjob.sql
+│   ├── s11111_1_Kap1_DWH_OLAP_Test1.pdf
+│   ├── s22222_2_Kap1_DWH_OLAP_Test2.pdf
+│   ├── s33333_3_HandbuchMDX1.pdf
+│   └── s44444_4_HandbuchMDX2.pdf
+├── Dateien -> PDF Dateien der Studenten in verschiedenen Verarbeitungsstati
+│   ├── jobs
+│   │   └── Fertige Jobs *.pdf
+│   ├── preprocessed
+│   │   └── Vorverarbeitete Dateien *.pdf
+│   └── raw
+│       └── Neu Eingetroffene Dateien *.pdf
+├── snap -> Snap installation von Ubuntu tools
+│   ├── pdftk [error opening dir]
+│   └── tree
+│       ├── 18
+│       ├── common
+│       └── current -> 18
+└── src -> Ordner für die Java-Klassen und Shell-Skripte
+    ├── database -> Datenbank Klassen
+    │   ├── bin
+    │   │   ├── Benutzer.class
+    │   │   ├── DBConnection.class
+    │   │   ├── DBInterface.class
+    │   │   ├── Druckauftrag.class
+    │   │   └── Druckjob.class
+    │   ├── lib
+    │   │   └── mariadb-java-client-2.6.0.jar
+    │   └── src
+    │       ├── Benutzer.java
+    │       ├── DBConnection.java
+    │       ├── DBInterface.java
+    │       ├── Druckauftrag.java
+    │       └── Druckjob.java
+    ├── execute -> Ausführungsskript
+    ├── mail -> Mail Klasse für die Mailschnittstelle
+    │   ├── bin
+    │   │   └── MailClient.class
+    │   ├── lib
+    │   │   ├── activation-1.1.jar
+    │   │   ├── javax.mail.jar
+    │   │   └── pdfbox-app-2.0.19.jar
+    │   └── src
+    │       └── MailClient.java
+    ├── nohup.out -> Logfile von nohup
+    ├── pdf_handling -> Shellskripte für die PDF-Verarbeitung
+    │   ├── check_format
+    │   ├── check_password
+    │   ├── convert_grey
+    │   ├── convert_pages
+    │   └── final
+    │       ├── barcode
+    │       │   └── generate_barcode
+    │       ├── combine
+    │       ├── deckblatt
+    │       │   ├── barcode.pdf
+    │       │   ├── barcode.ps
+    │       │   ├── docs
+    │       │   │   ├── form_info.txt
+    │       │   │   └── form_template_tag_names.pdf
+    │       │   ├── form_template.pdf
+    │       │   └── generate_deckblatt
+    │       └── leeres_pdf.pdf
+    ├── process -> Java-Klassen für die Prozesssteuerung
+    │   ├── bin
+    │   │   ├── DailyTask.class
+    │   │   ├── ProcessHandler.class
+    │   │   └── Run.class
+    │   └── src
+    │       ├── DailyTask.java
+    │       ├── ProcessHandler.java
+    │       └── Run.java
+    └── UnitTests -> Implementierung der ausgeführten Unittests
+        ├── bin
+        │   ├── MailTest.class
+        │   └── TestDBFunctions.class
+        ├── lib
+        │   ├── hamcrest-core-1.3.jar
+        │   └── junit-4.13.jar
+        ├── run_tests
+        └── src
+            ├── MailTest.java
+            └── TestDBFunctions.java
+
+165 directories, 721 files

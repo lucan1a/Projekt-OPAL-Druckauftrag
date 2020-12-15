@@ -1,0 +1,27 @@
+#!/bin/bash
+
+#   $ generate_barcode [price] [format = {jpg, png, svg, html}]
+#   return barcode.pdf
+
+price="$1"
+format="JPG"
+out="barcode.$format"
+output="barcode.pdf"
+
+#   generate barcode
+barcode -e CODE_128 -f JPG -h 50 $price $out
+
+if [ $? != 0 ]
+then
+    echo "barcode error"
+    exit 1
+fi
+
+#   convert to pdf
+convert "$out" "$output"
+
+if [ $? != 0 ]
+then
+    echo "covert error"
+    exit 2
+fi

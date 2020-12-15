@@ -1,0 +1,8 @@
+de.HTW.OpalDruckauftrag
+de.HTW.OpalDruckauftrag.configuration
+de.HTW.OpalDruckauftrag.controllers
+de.HTW.OpalDruckauftrag.entities.opal
+de.HTW.OpalDruckauftrag.entities.user
+de.HTW.OpalDruckauftrag.repositories.opal
+de.HTW.OpalDruckauftrag.repositories.user
+de.HTW.OpalDruckauftrag.Services

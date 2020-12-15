@@ -1,0 +1,54 @@
+---
+FieldType: Text
+FieldName: name_f1
+FieldFlags: 0
+FieldValue: 
+FieldJustification: Left
+---
+FieldType: Text
+FieldName: name_f2
+FieldFlags: 0
+FieldValue: 
+FieldJustification: Left
+---
+FieldType: Text
+FieldName: files
+FieldFlags: 0
+FieldValue: 
+FieldJustification: Center
+---
+FieldType: Text
+FieldName: pages
+FieldFlags: 4096
+FieldValue: 
+FieldJustification: Center
+---
+FieldType: Text
+FieldName: price
+FieldFlags: 4096
+FieldValue: 
+FieldJustification: Center
+---
+FieldType: Text
+FieldName: name_f3
+FieldFlags: 0
+FieldValue: 
+FieldJustification: Left
+---
+FieldType: Text
+FieldName: date
+FieldFlags: 0
+FieldValue: 
+FieldJustification: Left
+---
+FieldType: Text
+FieldName: information
+FieldFlags: 4096
+FieldValue: 
+FieldJustification: Left
+---
+FieldType: Text
+FieldName: price_tag
+FieldFlags: 0
+FieldValue: 
+FieldJustification: Left

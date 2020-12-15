@@ -1,0 +1,47 @@
+== Use-Case: Abholung bestätigen
+===	Kurzbeschreibung
+Die Mitarbeiter der Unidruckerei sollen in der Lage sein, die Abholung der Druckaufträge im System zu vermerken. 
+
+===	Kurzbeschreibung der Akteure
+==== Mitarbeiter der Unidruckerei
+Die Unidruckerei will die Abholung der Druck-Jobs im System vermerken.
+
+=== Vorbedingungen
+. Druck-Job eines Studierenden mit dem Druckstatus abholbereit vorhanden
+
+=== Standardablauf (Basic Flow)
+. Der Use Case beginnt, wenn der Mitarbeiter der Unidruckerei die Übersicht aller Druckaufträge für die Bestätigung der Abholung öffnet.
+. Der Mitarbeiter gibt den Benutzernamen des Studierenden ein.
+. Das System filtert alle Druck-Jobs mit dem Status abholbereit nach der Bibliotheksnummer.
+. *For Each* abgeholten Druck-Job. 
+    .. Der Mitarbeiter ändert Druckstatus auf abgeholt.
+    .. Das System nimmt die Daten des Druck-Jobs ins Log auf.
+    .. Das System löscht den Druck-Job.
+. Das System prüft, ob Studierender im System als gesperrt hinterlegt ist.
+. Der Mitarbeiter schließt die Übersicht.
+. Der Use Case ist abgeschlossen.
+
+=== Alternative Abläufe
+==== Studierender ist im System als gesperrt vermerkt
+Wenn das System im Schritt 5 des Standardablauf feststellt dass der Studierende gesperrt ist, dann 
+
+. Das System fragt den Mitarbeiter, ob Studierender entsperrt werden soll.
+. *If* Mitarbeiter bestätigt Entsperrung.
+    .. Das System ändert den Sperrstatus auf entsperrt.
+. Der Use Case wird im Schritt 6 fortgesetzt.
+
+==== Abbruch der Bestätigung
+Wenn der Mitarbeiter der Unidruckerei im Schritt # des Standardablaufs die Übersicht schließt, dann ist der Use Case beendet.
+
+=== Wesentliche Szenarios
+==== Erfolgreiche Bestätigung
+Sc1: Der Mitarbeiter X der Unidruckerei bestätigt die Abholung des Druck-Jobs durch Studierenden A. Das System löscht den Druck-Job des Studierenden A.
+
+Sc2: Der Mitarbeiter Y der Unidruckerei bestätigt die Abholung des Druck-Jobs durch gesperrten Studierenden. Der Mitarbeiter Y entsperrt den Studierenden B. Das System löscht den Druck-Job des Studierenden B.
+
+==== Abbruch der Bestätigung
+Sc3: Der Mitarbeiter Z schließt die Übersicht ohne eine Bestätigung der Abholung. Das System vermerkt keine Änderung.
+
+===	Nachbedingungen (Standardablauf)
+* Das System hat den Druck-Job gelöscht.
+* Das System hat die Daten im Logfile gespeichert.

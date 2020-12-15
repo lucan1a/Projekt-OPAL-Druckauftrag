@@ -1,0 +1,83 @@
+#!/bin/bash
+
+#   $ deckblatt [input.pdf] [form.fdf] [name] [files] [pages] [price] [information]
+#   return filled_form.pd#  return filled_form.pdf
+
+#   files for filling pdf
+pdf="form_template.pdf"
+form="form.fdf"
+out_form="out.pdf"
+
+#   input data
+name="Max Mustermann"
+files=2
+pages=10
+price=5
+date="10.10.2020"
+information="infos"
+
+#   remove temporary form if exists
+if [ -f "$form" ]
+then
+    rm "$form"
+    echo "removed form"
+fi
+
+#   create form FDF
+echo "%FDF-1.2
+1 0 obj<</FDF<< /Fields[
+
+<< /T (name_f1)     /V ("$name") >>
+<< /T (name_f2)     /V ("$name") >>
+<< /T (files)       /V ("$files") >>
+<< /T (pages)       /V ("$pages") >>
+<< /T (price)       /V ("$price") >>
+<< /T (name_f3)     /V ("$name") >>
+<< /T (date)        /V ("$date") >>
+<< /T (information) /V ("$information") >>
+<< /T (price_tag)   /V ("$price") >>
+
+] >> >>
+
+endobj
+trailer
+<</Root 1 0 R>>
+%%EOF
+" >> "$form"
+
+#   fill form
+pdftk "$pdf" fill_form "$form" output "$out_form" flatten
+
+if [ $? != 0 ]
+then
+    echo "pdftk failed"
+    exit 1
+fi
+
+#   including generated barcode
+barcode="barcode.pdf"
+barcode_pos="barcode_pos.pdf"
+output="filled_form.pdf"
+
+#   stamp position
+pdfjam --paper "a4paper" --scale 0.2 --offset "6.5cm --9.5cm" "$barcode" -o "$barcode_pos"
+
+if [ $? != 0 ]
+then
+    echo "pdfjam failed"
+    exit 2
+fi
+
+#   stamp barcode
+pdftk "$out_form" stamp "$barcode_pos" output "$output"
+
+if [ $? != 0 ]
+then
+    echo "pdftk failed"
+    exit 3
+fi
+
+#   remove tmp files
+rm "$form" "$out_form" "$barcode_pos"
+## rm "$barcode" // apply later
+

@@ -1,0 +1,143 @@
+/* style.css */
+
+#nav_download{
+    background-color: #11B0D3;
+    border: none;
+    color: black;
+    padding: 15px 75px;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+    width: 250px
+}
+
+.nav_button{
+    background-color: #11B0D3;
+    border: none;
+    color: black;
+    padding: 15px 75px;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+    width: 250px
+}
+
+table, th, td {
+    border: 2px solid black;
+    border-collapse: collapse;
+}
+
+table{
+    width: 90%;
+    margin-right: auto;
+    margin-left:50px;
+}
+
+th, td {
+    padding: 15px;
+}
+
+button, input[type=button], input[type=submit] {
+    background-color: #11B0D3;
+    border: none;
+    color: white;
+    padding: 15px 75px;
+    text-align: center;
+    display: inline-block;
+    font-size: 20px;
+    margin: 15px 2px;
+    width: 350px
+}
+
+#search_number{
+    float: right;
+    margin-right: 100px;
+}
+
+#btn_pickup, #btn_unblock, #btn_block{
+    background-color: #11B0D3;
+    border: none;
+    color: white;
+    padding: 15px 75px;
+    margin-left: 50px;
+    text-align: center;
+    display: inline-block;
+    font-size: 20px;
+    width: 350px
+}
+
+.container {
+    width: 95%;
+    margin: 0 auto;
+}
+
+header {
+    background: #11B0D3;
+}
+
+header::after {
+    content: '';
+    display: table;
+    clear: both;
+}
+
+header div h1 {
+    float: left;
+    color: azure;
+}
+
+header div nav {
+    float: right;
+}
+
+div nav {
+    float: right;
+}
+
+div nav ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+div nav li {
+    display: inline-block;
+    margin-left: 70px;
+    padding-top: 23px;
+
+    position: relative;
+}
+
+div nav a {
+    color: #444;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 14px;
+}
+
+header {
+    margin: 0;
+}
+
+body {
+    margin: 0;
+}
+
+
+
+.Matrikel {
+    margin-left: 75px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+
+}
+
+p {
+    margin-left: 50px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.free_space{
+    visibility: hidden;
+}

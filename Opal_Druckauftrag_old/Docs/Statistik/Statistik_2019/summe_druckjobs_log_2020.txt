@@ -1,0 +1,7 @@
+Anzahl der gesammelten Druckjobs (Angabe unten) = Angabe der ausgeführten Druckjobs
+
+-------------------------------------------- Jahr 2020 --------------------------------------------
+
+Anzahl der Druckjobs: 224 
+
+Stand: 13.01.2020  5:04:16,23 

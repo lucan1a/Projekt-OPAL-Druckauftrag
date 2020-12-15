@@ -1,0 +1,44 @@
+
+== Use-Case: Druckauftrag erteilen
+===	Kurzbeschreibung
+Die Studierenden haben die Möglichkeit für ein ausgewähltes Dokument im Opal einen Druckauftrag zu starten. Dabei kann eine Auswahl zwischen verschiedenen Druckeinstellungen getroffen werden.
+
+===	Kurzbeschreibung der Akteure
+==== Studierende
+Die Studierenden will den Druckauftrag erteilen und die die Druckeinstellungen bestimmen.
+
+==== Opal
+Die Plattform Opal stellt das zu druckende Dokumente und den Benutzernamen bereit.
+
+=== Vorbedingungen
+* Benutzer ist im Opal angemeldet
+* Im Browser wird die Desktop-Ansicht benutzt
+* zu druckendes Dokument vom Studierenden ausgewählt
+
+=== Standardablauf (Basic Flow)
+. Der Use Case beginnt, wenn der Studierende das Dialogfenster zur Druckauftragserteilung im Opal öffnet. 
+. Das System lädt das Informationsfeld.
+. Der Studierende liest den Infotext und wählt die gewünschte Druckeinstellung aus.
+. Der Studierende akzeptiert seine Datenweitergabe und Studierende bestätigt den Anstoß des Druckauftrages.
+. Das System schließt das Dialogfenster.
+. Das System sendet eine Mail mit der Bibliotheksnummer des Studierenden, den Druckeinstellungen und dem Dokument als Anhang an das Postfach des Druckservices.
+. Der Use Case ist abgeschlossen.
+
+=== Alternative Abläufe
+==== Abbruch des Druckauftrages 
+Wenn der Studierende im Schritt # des Standardablauf den Druckauftrag abbricht, wird der Use-Case beendet.
+
+=== Wesentliche Szenarios
+==== Studierender erteilt erfolgreich einen Druckauftrag
+Sc1: Der Student A öffnet das Dialogfester und wählt die Druckeinstellung "1 Seite (Standard)" aus und bestätigt den Druckauftrag. Der Druckauftrag geht im Postfach ein.
+
+Sc2: Der Student B öffnet das Dialogfester und wählt für seinen Druckauftrag die Druckeinstellung "4 Seiten" aus und bestätigt den Druckauftrag. Der Druckauftrag geht im Postfach ein.
+
+==== Abrruch des Druckauftrags
+Sc3: Der Student C öffnet das Dialogfenster. Nach kurzer Dauer schließt er das Dialogfenster wieder. Es werden keine Druckdaten versendet.
+
+=== Nachbedingungen
+* Der Druckauftrag ist vollständig im Postfach des Druckservices eingegangen.
+* Der Datenweitergabe wurde zugestimmt.
+
+

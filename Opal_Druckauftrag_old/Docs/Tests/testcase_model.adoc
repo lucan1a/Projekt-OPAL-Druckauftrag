@@ -1,0 +1,77 @@
+= Test-Cases - Opal Druckauftrag - Service für Studierende 
+
+
+[%header]
+= Zweck
+Ein Softwaretest prüft und bewertet Software auf Erfüllung der für ihren Einsatz definierten Anforderungen und misst ihre Qualität. Die gewonnenen Erkenntnisse werden zur rechtzeitigen Erkennung und Behebung von Softwarefehlern genutzt. Tests während der Softwareentwicklung dienen dazu, die Software möglichst fehlerfrei in Betrieb zu nehmen. Ein Test kann die Existenz von Fehler zeigen, allerdings nicht deren Nichtvorhandensein. Das Ziel von Testfällen ist es, einen möglichst große Testabdeckung zu erzielen und somit den nahezu vollständigen Funktionsumfang zu testen.
+Testfälle sollen unter anderem die Robustheit des Systems überprüfen, indem ein Grenzfall, welcher im Produktivstatus verhältnismäßig selten vorkommen sollte, simuliert wird. 
+Sollte das System während eines solches Szenario nicht standhalten, kann es im Falle des Eintritts die Funktionsfähigkeit des Systems einschränken und sogar zum Absturz führen.
+Zusätzlich helfen Tests, die Änderbarkeit und Wartbarkeit des zu entwickelden Systems zu verbessern.
+
+= Teststrategie
+Im Folgenden können die drei Testobjekten identifiziert werden, welche getrennt aber auch in Kombination getestet werden.
+
+Das erste Objekt stellt die Kommunikation mit Opal über die E-Mail-Schnittstelle und somit die Übertragung der Druckaufträge dar. 
+Zu diesem Test gehören die Test-Cases TC102, TC105, TC201 und TC209 und die Unit-Tests der Funktionen insert(), exists() und update(). Da die Benutzung der Schnittstelle zum Opal-service genutzt werden muss (Aufnahme der Randbedingung über den Auftraggeber) und die Entwickler keinen Einfluss auf diese haben, muss ausschließlich die Nutzung der Schnittstelle getestet werden. Die Schnittstelle liefert die zu druckende Datei und die diesbezüglich notwendigen Benutzer- und Druckdaten. Mit den genannten Tests wird überprüft, ob die Daten korrekt erfasst und gepeichert werden, um somit die weitere Verarbeitung zu gewährleisten. Die Wahrscheinlichkeit, dass dieser Teil des Systems nicht ordnungsgemäß funktioniert, wird als gering eingestuft.
+
+Das zweite Testobjekt bezieht sich auf die Verarbeitung der PDF-Dateien. Hier besteht aufgrund der Komplexität eine hohe Wahrscheinlichkeit für Fehler. Die Verarbeitung beinhaltet das vorbereiten der PDF-Dateien mittels Graustufenumwandlung, Passwortkontrolle und Seitenbearbeitung. Zusätzlich wird ein Deckblatt als Kundeninformation erzeugt und die Druckaufträge, welche über 24 Stunden eingegangen sind, zusammengefasst. Parallel müssen die Daten und der Status bezüglich Benutzer und Druckaufträge kontinuierlich angepasst werden. Die Integrität der Daten ist von enormer Relevanz. Da die Bearbeitung in mehreren kleinen schritten mittels einer hohen Anzahl von Skripten realisiert wird, kann bei fehlerhaften Skriptausführungen die weitere Verarbeitung verhindert werden. Der Test von alternativen Abläufen und Randfällen ist wichtig, um die Belastbarkeit und Qualität im Allgemeinen zu fördern. Die Wahrscheinlichkeit und Auswirkung auf das erfolgreiche fungieren des Systems wird als sehr hoch eingeschätzt. Die Komponente der PDF-Verarbeitung wird mit den Tests TC103, TC104, TC105, TC106, TC107, TC203, TC206, TC207 und den Modultests der Funktionen replaceName(), getSnr() und getEinstellungen getestet.
+
+Die dritte Komponente stellt die Webanwendung dar. Diese ermöglicht es den Mitarbeitern der Unidruckerei Druckjobs und Benutzer zu verwalten. Die Webanwendung interagiert ausschließlich mit der Datenbank. Da die Daten jedoch zu jedem Zeitpunkt konistent sein müssen, muss gewährleistet werden, dass die Webanwendung ausschließlich konistente Daten erzeugt und die Mitarbeiter keine Möglichkeit haben, dies zu verhindern. Zusätzlich muss die Webanwendung immer erreichbar sein, da sie ein unverzichtbares Werkzeug zur Erfüllung des Systemziels darstellt. Ebenso muss sichergestellt werden, dass die Druckjobs täglich über die Downloadfunktion bereitgestellt werden. Die Wahrscheinlichkeit für Fehler wird als gering eingestuft. Dem Testobjekt können die Tests TC101, TC108, TC202, TC204, TC205 und TC301 zugeordnet werden. Die diesbezüglichen Modultests beziehen sich auf die Methode pickJobs(). 
+
+Alle Tests, abgesehen von den Modultests, werden manuell durchgeführt. Mit Hilfe von Skripts können Systemzustände hergestellt werden, was die Tests anschließend schnell und zielführend durchführen lässt.
+Der Hauptaugenmerk liegt bei nicht erfolgreichen und hoch priorisierten Tests. Dennoch werden aufgrund von kontinuierlichen Änderungen des Systems ebenfalls bereits erfolgreiche Tests erneut durchgeführt. Der Zeitpunkt des nächsten Testdurchlaufs kann der unten stehenden Tabellen entnommen werden. Sollte ein Test nicht erfolgreich sein, so werden die Fehler und die daraus resultierenden notwendigen Anpassungen im log des Test-Cases festgehalten. Vor jedem Teammeeting werden alle Fehler und notwendigen Verbesserungen der unerfolgreich durchgeführten Tests gesammelt und dem gesamten Team mitgeteilt. In dem darauffolgenden Teammeating wird das jeweilige Entwicklerteam nach der Behebung des Fehlers gefragt. Sollte dieser laut der Entwickler behoben sein, so wird der Test möglichst zeitnah nach der Besprechung durchgeführt. Sollte eine Komponente, die von einem Testfall abgedeckt wird, nicht geändert werden, so werden diese Tests nach etwa 14 Tagen erneut durchgeführt. Bereits erfolgreiche Tests werden erneut durchgeführt, um so auzuschließen, dass die Interaktion von in sich korrekt funktionierenden Komponenten aufgrund von Verknüpfungsänderungen fehlschlägt. 
+
+= Unit-Tests (Modultests)
+|===
+| Funktionsname | Datei |  Verantwortlichkeit | Durchführender/Programmierer | Testergebnis/Informationen
+| insert() | Druckauftrag.java |  Paul Rogge (Tester) | Paul Jannasch(Developer) | erfolgreich
+| delete() | Druckjob.java |  Paul Rogge(Tester) | Paul Jannasch(Developer) | erfolgreich
+| update(), existst() | Benutzer.java |  Paul Rogge(Tester) | Paul Jannasch(Developer) | erfolgreich
+| replaceName(), getSnr(), getEinstellungen() | Client.java | Paul Rogge(Tester) | Paul Jannasch(Developer) | erfolgreich
+| pickJobs() | JobController.java | Paul Rogge(Tester) | Felix Müller(Architekt)| erfolgreich
+|===
+
+= nichtfunktionale Tests (systemorientiert)
+|===
+|ID: Name |	Priorität (1-5)	| Verantwortlichkeit | Durchführender | Status Test-Case | Testinformationen | nächste Durchführung
+| TC101: nichtverfügbarkeit_Unidruckerei | 2 | | | | |
+| <<Test-Cases/TC102_gleiche_Datei_mehrfach_drucken.adoc#,TC102: gleiche_Datei_mehrfach_drucken>> | 3 | Paul Rogge(Tester) | Paul Rogge(Tester) | ausformuliert | Test erfolgreich | keine, Projekt abgeschlossen 
+
+| <<Test-Cases/TC103_hohe_Anzahl_Druckaufträge.adoc#,TC103: hohe_Anzahl_Druckaufträge>> | 3 | Paul Rogge(Tester) | Paul Rogge(Tester) | ausformuliert | Test erfolgreich | keine, Projekt abgeschlossen
+| TC104: Dateiformatänderung | 1 | | | | |
+| TC105: Überschreitung_Dateigröße | 2 | | | | |
+| TC106: leere_Seiten | 1 | | | | |
+| <<Test-Cases/TC107_Druckauftrag_waehrend_zusammenfassung.adoc#,TC107: Druckauftrag_während_zusammenfassung>> | 4 | Paul Rogge(Tester) | Paul Rogge(Tester) | ausformuliert | Test erfolgreich | keine, Projekt abgeschlossen
+| TC108: verschiedene_Betriebssysteme_Browser | 2 | | | | |
+|===
+
+
+= funktionale Tests (systemorientiert)
+|===
+|ID: Name |	Priorität	| Verantwortlichkeit | Durchführender | Status Test-Case | Testinformationen  | nächste Durchführung
+| <<Test-Cases/TC201_Druckauftrag_erteilen.adoc#,TC201: Druckauftrag_erteilen>> | 5 | Paul Rogge(Tester) | Paul Rogge(Tester) | ausformuliert | Test erfolgreich | keine, Projekt abgeschlossen
+| TC202: Durckauftrag_stornieren | 2 | | | | |
+| <<Test-Cases/TC203_Druckauftrag_zusammenfassen.adoc#,TC203: Druckauftrag_zusammenfassen>> | 5 | Paul Rogge(Tester) | Paul Rogge(Tester) | ausformuliert | Test nicht erfolgreich (siehe Verbesserung in Test-Case) | keine, Projekt abgeschlossen
+| <<Test-Cases/TC204_Sperrstatus_ändern.adoc#, TC204: Sperrstatus_ändern>> | 4 | Paul Rogge(Tester) | Paul Rogge(Tester)| ausformuliert  | Test erfolgreich | keine, Projekt abgeschlossen
+| TC205: Druck-Job_löschen | 2 | | | | |
+| <<Test-Cases/TC206_Druckauftrag_optionen.adoc#,TC206: Druckauftrag_optionen>> | 4 | Paul Rogge(Tester) | Paul Rogge(Tester)| ausformuliert | Test erfolgreich | keine, Projekt abgeschlossen
+| <<Test-Cases/TC207_Druckauftrag_vorbereiten.adoc#,TC207: Druckauftrag_vorbereiten>> | 5 | Paul Rogge(Tester) | Paul Rogge(Tester)| ausformuliert  | Test erfolgreich | keine, Projekt abgeschlossen
+| <<Test-Cases/TC208_Nichtabholung_Druck.adoc#,TC208: Nichtabholung_Druck>> | 3 | Paul Rogge (Tester)| Paul Rogge (Tester) | ausformuliert | Test erfolgreich | keine, Projekt abgeschlossen
+| <<Test-Cases/TC209_Druckversuch_gesperrter_Nutzer.adoc#,TC209: Druckversuch_gesperrter_Nutzer>> | 4 | Paul Rogge(Tester) | Paul Rogge(Tester) | ausformuliert | Test nicht erfolgreich | keine, Projekt abgeschlossen
+|===
+
+
+
+= Akzeptanztest
+|===
+|ID: Name |	Priorität	| Verantwortlichkeit | Durchführender | Status Test-Case | Testinformationen | nächste Durchführung
+| <<Test-Cases/TC301_Funktionalität_Design_UI.adoc#,TC301: Funktionalität_Design_UI>> | 4 | Paul Rogge(Tester) | Paul Rogge(Tester), Francesco Ryplewitz(Projektleiter/Entwickler), Felix Müller(Architekt) | teilweise ausformuliert | Test erfolgreich | 14.06.2020
+|===
+
+
+
+
+
+
+
+

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2020-07-30T16:54:55.929349Z</date>
+  <millis>1596128095929</millis>
+  <nanos>349000</nanos>
+  <sequence>4</sequence>
+  <logger>de.HTW.OpalDruckauftrag.controllers.BlockedUserController</logger>
+  <level>INFO</level>
+  <class>de.HTW.OpalDruckauftrag.controllers.BlockedUserController</class>
+  <method>&lt;init&gt;</method>
+  <thread>1</thread>
+  <message>BlockedUserController initialisiert</message>
+</record>
+</log>

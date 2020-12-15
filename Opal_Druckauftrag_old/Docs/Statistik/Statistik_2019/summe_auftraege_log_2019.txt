@@ -1,0 +1,13 @@
+Anzahl der Aufträge (Angabe unten) = Angabe der ausgeführten Druckjobs
+
+Summe der Seiten (Angabe unten) = Angabe als Einzel(Druck-)Seiten.
+Im Ausdruck wird dann doppelseitig ausgedruckt.
+Die Anzahl der (doppelseitig bedruckten) Blätter ist also Einzel(Druck-)Seiten geteilt durch 2.
+Hinzu kommen noch jeweils 2 Druckseiten (= 1 doppelseitige Druckseite) für das jeweilige Deckblatt.
+
+-------------------------------------------- Jahr 2019 --------------------------------------------
+
+Anzahl der Auftraege: 29968 
+Summe der Seiten:     472607 
+
+Stand: 19.12.2019 21:54:30,48 

@@ -1,0 +1,60 @@
+= Glossar Opal-Druckservice
+Kai Löning s77721@htw-dresden.de; Tom Jandke s77831@htw-dresden.de 
+:toc: 
+:toc-title: Inhaltsverzeichnis
+:sectnums:
+// Platzhalter für weitere Dokumenten-Attribute 
+
+== Einführung
+In diesem Dokument werden die wesentlichen Begriffe aus dem Anwendungsgebiet (Fachdomäne) des Opal-Druckservice definiert. Zur besseren Übersichtlichkeit sind Begriffe, Abkürzungen und Datendefinitionen gesondert aufgeführt.
+
+== Begriffe
+[%header]
+|===
+|Begriff|	Definition und Erläuterung|	Synonyme
+|Auftragsliste|Summe aller Druckaufträge, welche zwischen den Weitergabezeiten in Auftrag gegeben werden|
+|Benutzer|Studierender der HTW Dresden; besteht aus: Benutzername, Sperrvermerk, Dokumente|Nutzer; Studierende
+|Dokument|PDF-Datei, welche gedruckt werden soll|
+|Druckauftrag|Dokument, welches der Studierende ausgedruckt haben möchte, bestehend aus: Benutzername, Dokument, Ablagedatum, Druckeinstellungen|
+|Druckeinstellungen|Formatierungsvorgaben für das Dokument; bestehend aus: Anzahl Seiten pro Blatt (Blattseiten), Beidseitigkeit, Seitenbereich|Formatierungseinstellungen
+|Druck-Job|Zusammenfassung aller Druckaufträge eines Nutzers zu einem Dokument; bestehend aus: Benutzernamen, Dokument, Druckdatum, Seitenzahl, Preis, Druckstatus|
+|Druckvorgaben|Vorgaben, welche ein Dokument erfüllen muss, damit es gedruckt werden kann: max. 20 MB groß, PDF-Datei, nicht passwortgeschützt|
+|Informationsfeld|angezeigter Text, wenn Druckauftrag im Opal gestartet wird|
+|Opal|Online-Plattform für Studierende und Dozenten der Bildungsportal Sachsen GmbH|
+|lokales Frontend|Software mit GUI, die an die Unidruckerei ausgeliefert wird und die Aktualisierung der Sperrung von Benutzern und das Abholen der Druckjobs ermöglicht|
+|Server-Beckend|Software die auf dem RZ-Server läuft und die Hauptlast (Zusammenfassen aller Druckaufträge eines Benutzers zu einem Druckjob, Umsetzen der Druckvorgaben, Überprüfen ob Benutzer gesperrt ist, ...) der Problemlösung trägt|
+|Softwaresystem|Gesamtheit der zur Problemlösung entwickelten Software (Frontend, Beckend, ggf. Software auf Opal-Server)|
+|Standarddruckeinstellungen|Formatierungseinstellungen, welche beim Erstellen eines neuen Druckauftrags vorausgewählt sind: Anzahl Seiten pro Blatt = 1; Beidseitig = ja; Seitenbereich = alle|
+|Sperrung|gesperrte Nutzer können keine weiteren Druckaufträge erstellen|
+|Weitergabezeiten|Zeitpunkte zu denen die Druckaufträge weiterverarbeitet werden: täglich 5.00 Uhr morgens|
+|Ressourcesbegrenzungen|8Gb Arbeitsspeicher, 32Gb Fesplattenspeicher, 4CPU-Kerne auf 2,8Ghz)|
+|Relation | Tabelle einer Datenbank |
+|Tupel | Eintrag in einer Tabelle einer Datenbank | Datensatz
+|===
+		
+
+
+== Abkürzungen und Akronyme
+[%header]
+|===
+|Abkürzung|	Bedeutung|	Erläuterung
+|PDF|Portable Document Format|Dateiformat|
+|===
+
+== Verzeichnis der Datenstrukturen
+[%header]
+|===
+|Bezeichnung|	Definition |	Format | Gültigkeitsregeln | Aliase
+|Ablagedatum|Datum und Uhrzeit zu welchem der Druckauftrag erstellt wird| Date ||Ablagezeitpunkt
+|Beidseitigkeit|Option, ob Blatt ein oder zweiseitig bedruckt|Boolean||
+|Benutzername|Bibliotheksnummer|Integer|Nummer muss fünfstellig sein|
+|Blattseiten|Anzahl der Seiten pro Blatt|Integer||
+|Druckstatus|Zustand mit dem der Druckauftrag im System hinterlegt ist|Boolean|Der Druckstatus muss eine der folgenden Ausprägungen haben: zu drucken, abholbereit, abgeholt|
+|Druckdatum|Datum zu welchem der Druck-Job den Druckstatus abholbereit erhält|Date||
+|Preis|Kosten des Druckauftrages bei der Abholung|Money||
+|Seitenbereich|Seiten, die gedruckt werden soll|Integer||
+|Seitenzahl|Anzahl der Seiten eines Druckauftrages oder Druck-Jobs|Integer||
+|Sperrvermerk|Gibt an, ob ein Studierender von der Unidruckerei für die Nutzung des Services gesperrt wurde|Boolean||Sperrung; Sperrstatus
+|===
+
+

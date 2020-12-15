@@ -1,0 +1,31 @@
+== Use-Case: Bereitstellung der Dokumente
+
+=== Kurzbeschreibung
+
+Bereitstellen eines Datenaustausches zwischen dem Softwaresystem und dem Rechner der Unidruckerei.   
+
+=== Kurzbeschreibung der Akteure
+
+Ein Mitarbeiter der Unidruckerei, möchte alle, seit dem letzten Abholen, neuen Dokumente abholen.
+
+=== Vorbedingungen
+
+* Es wurden seit dem letzten Abholen neue Druckaufträge erteilt und erfolgreich bearbeitet.
+* Der Mitarbeiter der Unidruckerei ist die der Webanwendung angemeldet.
+
+=== Standardablauf (Basic Flow)
+
+* Der Use Case beginnt, wenn der Mitarbeiter der Unidruckerei den Download anfordert.
+* Das System komprimiert ein Verzeichnis, das alle angeforderten Dokumente enhält und stellt es als Download bereit.
+* Der Download ist beendet und der Mitarbeiter der Unidruckerei bestätigt den Erfolg.
+* Das System aktualisiert die Metadaten aller angeforderten Druckjobs und löscht die entsprechenden Dokumente.
+* Der Use Case ist abgeschlossen.
+
+=== Alternative Abläufe
+==== Download fehlgeschlagen, unvollständig oder anderweitig unbrauchbar
+Wenn der Mitarbeiter im Schritt 3 des Standardablauf den Erfolg der Bereitstellung nicht bestätigt, dann dürfen die Metadaten der angeforderten Druckjobs nicht verändert werden und die entsprechenden Dokumente müssen erhalten bleiben. Der Use Case ist beendet.
+
+=== Nachbedingungen
+
+* Das heruntergeladene Verzeichnis kann entpackt werden.
+* Alle enthaltenen Dateien sind unbeschädigt.

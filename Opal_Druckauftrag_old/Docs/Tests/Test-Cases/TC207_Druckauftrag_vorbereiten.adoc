@@ -1,0 +1,74 @@
+[%header]
+
+== TC109 - Druckauftrag_vorbereiten
+
+
+=== Beschreibung:
+Sobald ein Druckauftrag über die E-Mail-Schnittstelle eintrifft und der Auftraggeber des Druckauftrages nicht als gesperrt registriert ist, wird die gesendete Datei vor dem Zusammenfassen (UC4) für den Druck umgewandelt und validiert. Somit befasst sich dieser Test mit Teilanforderungen aus UC1.
+Eingehende Dateien werden auf Passwortschutz überprüft, da passwortgeschützte Dateien nicht verarbeitet und gedruckt werden können. Zusätzlich werden die Dateien in Graustufen umgewandelt, da die Druckjobs nur im Schwarz-Weiß-Modus gedruckt werden. Anschließend wird die Seitenbearbeitung vorgenommen. Sollte ein Benutzer als Druckoptionen beim Aufgeben eines Druckauftrags über Opal beispielsweise "4 Seiten" ausgewählt haben, so werden 4 Seiten der Original-PDF auf eine Seite der vorbereiteten PDF-Datei übertragen. Nachdem die Dateien entsprechend der Seiteneneinstellungen des Nutzers bearbeitet wurde, werden sie im Verzeichnis "preprocessed" in der virtuellen Maschine abgelegt und sind für das Zusammenfassen bereit.
+
+
+=== Vorbedingungen:
+- Kunde, der Druckauftrag erteilt, ist nicht gesperrt
+- Anwendung (execute) zur Vorbereitung der Dateien wurde ohne Fehlermeldungen gestartet
+
+
+=== benötigte Daten: 
+- Sperrinformation des Nutzers
+- Systemzustand der Komponente zum Empfangen der Druckaufträge
+
+
+=== Handlungen
+
+Das Test Script beschreibt den detaillierten Ablauf des Tests.
+
+- Schritt 1: Symbol zum Drucken einer beliebigen PDF-Datei im Opal auswählen
+
+- Schritt 2: Druckoption "4 Seiten" wählen
+
+- Schritt 3: Den Druckauftrag über die Schaltfläche "Druckauftrag abschicken" auslösen
+
+- Schritt 4: Ein Terminalfenster öffnen und über SSH mit der virtuellen Maschine für den Druckauftrag verbinden
+
+- Schritt 5: zwei Minuten warten, bis das Vorbereiten der Dateien abgeschlossen sein sollte
+
+- Schritt 6: Den Ordner "preprocessed" nach der Datei des zuvor aufgegebenen Druckauftrags durchsuchen
+
+- Schritt 7: verarbeitete Datei überprüfen, ob Graustufen umgesetzt und 4 Seiten der Original-Datei auf eine Seite der vorbereiteten Datei übertragen wurden
+
+
+
+=== erwartete Reaktionen
+- Das System überprüft die PDF-Datei des Druckauftrags auf Passwortschutz
+- Das System wandelt die PDF-Datei in Graustufen um
+- Das System wandelt die Seiteneinstellung in die vom Nutzer übergebene Struktur um ("4 Seiten" -> 4 Seiten abgeschickten Datei werden auf eine verarbeitete Seite übertragen)
+- Das System speichert die schlussendlich verarbeitete Datei im Ordner "preprocessed" ab
+
+=== Nachbedingungen:
+- Die verarbeitete Datei entspricht der Struktur der gewünschten Druckeigenschaften (Seiteneinstellungen)
+- Die verarbeitete Datei wurde in Graustufen umgewandelt
+- Die Datei wird ordnungsgemäß im ordner "preprocessed" abgespeichert
+
+=== Test Log
+
+Durchführung 1, Datum: 16.06.2020, 13:40
+
+kommentare zu den einzelnen Schritten:
+
+- Schritt 1-7: erfolgreich
+
+notwendige Verbesserungen:
+- /
+
+Der Test wird als erfolgreich durchgeführt angesehen.
+
+Durchführung 2, Datum: 08.07.2020, 16:00
+
+kommentare zu den einzelnen Schritten:
+
+- Schritt 1-7: erfolgreich
+
+notwendige Verbesserungen:
+- /
+
+Der Test wird als erfolgreich durchgeführt angesehen.

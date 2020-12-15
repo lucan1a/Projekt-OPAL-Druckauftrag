@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"></meta>
+    <title>Druckjobs</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+</head>
+
+<script type="text/javascript" src="/link.js"> </script>
+
+<header>
+    <div th:replace="navbar :: navbar"/>
+</header>
+
+<body style="background-color: #CDCDCD">
+
+<div class="form-group" STYLE="margin-left: 50px; margin-top: 25px">
+    <form  th:action="@{/blocked}"  method="post" class="form-inline">
+        <div class="col-xs-3">
+            <input type="text"   name="Matrikel" id="matrikel" class="form-control input-sm"/>
+            <button class="btn btn-success" type="submit" value="Nutzer suchen">Nutzer suchen</button>
+            <button class="btn btn-success" id="btn_unblock" type="submit" form="form1" value="Submit">Nutzer entsperren</button>
+        </div>
+    </form>
+</div>
+
+<div>
+
+    <form  th:action="@{/blocked/unblock}"  method="post" id="form1">
+        <table class="table table-hover table-bordered" style="width: 90%; margin-right: auto; margin-left:50px;">
+            <thead class="thead-dark">
+            <tr>
+                <th></th>
+                <th>Bibliotheksnummer</th>
+
+            </tr>
+            <tr th:each="user: ${users}">
+                <td>
+                    <input type="checkbox" name="Matrikel" th:value="${user.getBibliotheksnummer()}">
+                </td>
+                <td> <span th:text="${user.getBibliotheksnummer()}" /></td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+</body>
+</html>

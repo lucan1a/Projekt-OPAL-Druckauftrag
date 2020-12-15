@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2020-07-31T12:55:26.987264Z</date>
+  <millis>1596200126987</millis>
+  <nanos>264000</nanos>
+  <sequence>0</sequence>
+  <logger>de.HTW.OpalDruckauftrag.controllers.JobController</logger>
+  <level>INFO</level>
+  <class>de.HTW.OpalDruckauftrag.controllers.JobController</class>
+  <method>&lt;init&gt;</method>
+  <thread>1</thread>
+  <message>JobController initialisiert</message>
+</record>
+<record>
+  <date>2020-07-31T12:55:27.619241Z</date>
+  <millis>1596200127619</millis>
+  <nanos>241000</nanos>
+  <sequence>1</sequence>
+  <logger>de.HTW.OpalDruckauftrag.controllers.JobController</logger>
+  <level>INFO</level>
+  <class>de.HTW.OpalDruckauftrag.controllers.JobController</class>
+  <method>pickJobs</method>
+  <thread>1</thread>
+  <message>/jobs/pick POST aufgerufen</message>
+</record>
+<record>
+  <date>2020-07-31T12:55:27.619898Z</date>
+  <millis>1596200127619</millis>
+  <nanos>898000</nanos>
+  <sequence>2</sequence>
+  <logger>de.HTW.OpalDruckauftrag.controllers.JobController</logger>
+  <level>INFO</level>
+  <class>de.HTW.OpalDruckauftrag.controllers.JobController</class>
+  <method>pickJobs</method>
+  <thread>1</thread>
+  <message>folgende Druckjobs werden gelöscht:</message>
+</record>
+<record>
+  <date>2020-07-31T12:55:27.620246Z</date>
+  <millis>1596200127620</millis>
+  <nanos>246000</nanos>
+  <sequence>3</sequence>
+  <logger>de.HTW.OpalDruckauftrag.controllers.JobController</logger>
+  <level>INFO</level>
+  <class>de.HTW.OpalDruckauftrag.controllers.JobController</class>
+  <method>pickJobs</method>
+  <thread>1</thread>
+  <message>[Ljava.lang.String;@35f3a22c</message>
+</record>
+<record>
+  <date>2020-07-31T12:55:27.620746Z</date>
+  <millis>1596200127620</millis>
+  <nanos>746000</nanos>
+  <sequence>4</sequence>
+  <logger>de.HTW.OpalDruckauftrag.controllers.JobController</logger>
+  <level>INFO</level>
+  <class>de.HTW.OpalDruckauftrag.controllers.JobController</class>
+  <method>pickJobs</method>
+  <thread>1</thread>
+  <message>1 gelöscht</message>
+</record>
+</log>

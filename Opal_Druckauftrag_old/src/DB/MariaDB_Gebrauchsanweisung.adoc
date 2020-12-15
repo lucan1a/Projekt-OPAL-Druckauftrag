@@ -1,0 +1,72 @@
+=== Für den Zugriff auf die Datenbank über Spring wird ein aktiver VPN zur HTW und SSH-Tunnel benötigt:
+
+VPN wie gewohnt aktivieren und SSH-Tunnel wiefolgt starten:
+
+==== Windows:
+1. Powershell öffnen
+2. ssh -L 3306:localhost:3306 druckauftrag@141.56.132.17
+3. mit "yes" bestätigen
+4. Passwort (92987s_) eingeben
+
+==== Linux/MacOS
+1. Terminal öffnen
+2. ssh -L 3306:localhost:3306 druckauftrag@141.56.132.17
+3. mit "yes" bestätigen
+4. Passwort (92987s_) eingeben
+
+
+
+=== Um Datensätze mittels Kommandozeile in die Datenbank einzufügen verbindet euch mit der VM (wie Francesco über Whatsapp beschrieb)
+
+ mysql -u root -p			//startet die dKommandozeile der MariaDb  (Passwort: Opal-Druckauftrag2020)
+ use Opal-Druckauftrag-DB;		//wechselt in die Datenbank Opal-Druckauftrag (ab hier ganz normale SQL-Anweisungen - vergesst das Simikolon nicht)
+ Select * from Benutzer;			
+ Insert into ...
+ show table status;
+ show columns from Benutzer;
+ ...
+ exit					//beendet Kommdandozeile der MariaDB
+
+
+
+=== Datenstruktur
+
+ CREATE TABLE Benutzer(
+	Bibliotheksnummer VARCHAR(6) PRIMARY KEY,
+	Sperrung BOOLEAN,
+	Vorname VARCHAR(25),
+	Nachname VARCHAR(25)
+);
+
+
+ CREATE TABLE Druckauftrag(
+	Auftrags_ID SMALLINT AUTO_INCREMENT PRIMARY KEY,
+	Auftraggeber_Bibliotheksnummer VARCHAR(6),
+	Bearbeitungsstatus BOOLEAN,
+	Seitenzahl_roh SMALLINT,
+	Seitenzahl_bearbeitet SMALLINT,
+	Druckeinstellung TINYINT,
+	Dateiname_originial VARCHAR(50),
+	Dateigröße SMALLINT,
+	FOREIGN KEY(Auftraggeber_Bibliotheksnummer) REFERENCES Benutzer(Bibliotheksnummer)
+);
+
+ CREATE TABLE Druckjob(
+	Job_ID SMALLINT AUTO_INCREMENT PRIMARY KEY,
+	Auftraggeber_Bibliotheksnummer VARCHAR(6),
+	Seitenzahl SMALLINT,
+	Preis Decimal(7,2),
+	Druckstatus BOOLEAN,
+	Auftragsadtum DATETIME;
+	FOREIGN KEY(Auftraggeber_Bibliotheksnummer) REFERENCES Benutzer(Bibliotheksnummer)	
+);
+
+
+ INSERT INTO Benutzer VALUES('s78898',FALSE,'Max','Mustermann');
+ //NULL da auto-Inkrement
+ INSERT INTO Druckauftrag VALUES(NULL,'s78898',FALSE,16,9,11,'Übung 5 Mathe bei Prof xyz',78);
+ //NULL da auto-Inkrement
+ INSERT INTO Druckjob VALUES(NULL,'s78898',3,'345.25',TRUE,'2020-04-14');
+
+
+

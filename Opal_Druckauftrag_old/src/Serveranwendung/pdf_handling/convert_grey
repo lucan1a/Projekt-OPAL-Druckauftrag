@@ -1,0 +1,45 @@
+#!/bin/bash
+
+# $ convert_grey [input.pdf]
+# return grey_$input.pdf
+echo "convert $1"
+
+#   define input and output pdf-file
+input="$1"
+file="$(basename -- $input)"
+output="/home/druckauftrag/Dateien/raw/test/grey_$file"
+
+#   ghostscript conversion for installation check documentation
+#   source https://forum.ubuntuusers.de/topic/pdf-in-graustufen-konvertieren/#post-4821252
+gs -sOutputFile="$output" -sDEVICE=pdfwrite \
+   -sColorConversionStrategy=Gray -dProcessColorModel=/DeviceGray \
+   -dCompatibilityLevel=1.4 -dNOPAUSE -dBATCH "$input"
+
+#   return check von ghostscript
+if [ $? -ne 0 ]
+then
+    echo "could not convert into grey version"
+    if [ -f "$output" ]
+    then
+        echo "removing output file"
+        rm "$output"
+        exit 1
+    else
+        exit 2
+    fi
+fi
+
+#   remove old file und exit wert checken
+rm "$input"
+if [ $? -ne 0 ]
+then
+   exit 3
+fi
+
+mv "$output" "$input"
+if [ $? -ne 0 ]
+then
+   exit 4
+fi
+
+exit 0

@@ -1,0 +1,31 @@
+== Use-Case: Informationsfeld ändern
+===	Kurzbeschreibung
+Die Unidruckerei hat über das Dialogfenster zur Druckauftragserteilung die Möglichkeit Informationen bei Ablaufänderung mitzuteilen. 
+
+===	Kurzbeschreibung der Akteure
+==== Mitarbeiter der Unidruckerei
+Die Unidruckerei will den Informationstext im Dialogfenster zur Druckauftragserteilung ändern. 
+ 
+=== Standardablauf (Basic Flow)
+. Der Use Case beginnt, wenn der Mitarbeiter der Unidruckerei das Eingabefenster zum Anpassung des Informationstextes im Dialogfenster der Auftragserteilung öffnet.
+. Der Mitarbeiter den Informationstext an.
+. Der Mitarbeiter speichert die Änderung.
+. Die Der Mitarbeiter schließt das Fenster.
+. Der Use Case ist abgeschlossen.
+
+=== Alternative Abläufe
+==== vorzeitiges Schließen 
+Wenn Der Mitarbeiter im Schritt # des Standardablauf das Eingabefenster schließt, ohne voher gespeichert zu haben, dann öffnet sich ein Dialogfenster, in dem gefragt wird, ob die Änderung gespeichert werden soll. 
+
+
+=== Wesentliche Szenarios
+==== Erfolgreiche Änderung des Informationstextes
+ SC1: Der Mitarbeiter X öffnet das Eingabefenster und passt den Informationstext an. Der neue Informationstext weißt auf eine längere Bearbeitungszeit der Druckjobs hin, weil beispielweise ein Mitarbeiter der Unidruckerei erkrankt ist. Das System hat den Informationstext gespeichert.
+
+==== Abbruch der Änderung
+SC2: Der Mitarbeiter Y öffnet das Eingabefenster und passt den Informationstext an. Er schließt das Fenster ohne zu speichern. Die Änderung wird nicht im System festegehalten.
+
+===	Nachbedingungen
+* Das System hat den angepassten Informationstext gespeichert.
+
+

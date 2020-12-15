@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"></meta>
+    <title>Druckjobs</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+
+</head>
+
+
+<script type="text/javascript" src="/link.js"> </script>
+
+<header>
+    <div th:replace="navbar :: navbar"/>
+</header>
+
+
+
+
+<body style="background-color: #CDCDCD">
+
+<div class="form-group" STYLE="margin-left: 50px; margin-top: 25px">
+    <form  th:action="@{/jobs}"  method="post" class="form-inline">
+        <div class="col-xs-3">
+            <input type="text"   name="Matrikel" id="matrikel" class="form-control input-sm"/>
+            <button class="btn btn-success" type="submit" value="Aufträge suchen">Aufträge suchen</button>
+            <button  type="submit" id="btn_pickup" th:value="abgeholt" class="btn btn-success" form="jobs/pick">Abholung bestätigen </button>
+        </div>
+    </form>
+</div>
+
+
+<div>
+
+    <form action="#" th:action="@{/jobs/pick}" th:object="${jobs}" method="post" id="jobs/pick">
+
+        <table class="table table-hover table-bordered" style="width: 90%; margin-right: auto; margin-left:50px;">
+            <thead class="thead-dark">
+            <tr>
+                <th> Abholung </th>
+                <th>Gedruckt</th>
+                <th>Druckjob-ID</th>
+                <th>Auftraggeber</th>
+                <th>Seitenzahl</th>
+                <th>Preis</th>
+                <th>Auftragsdatum</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="job: ${jobs}">
+
+                <td><label>
+                    <input type="checkbox" th:name="id" th:value="${job.getId()}">
+                </label> </td>
+
+                <td>
+                    <div th:if="${job.getPrinted() == 0}">
+                        <button th:formaction="@{/jobs/printed}"  formmethod="post" class="btn btn-success" type="submit" th:value="${job.getId()}" th:name="printed" >Gedruckt?</button>
+                    </div>
+                </td>
+
+                <td> <span th:text="${job.getId()}"></span> </td>
+                <td> <span th:text="${job.getAuftraggeber_Bibliotheksnummer()}"></span> </td>
+                <td> <span th:text="${job.getSeitenzahl()}"></span> </td>
+                <td> <span th:text="${job.getPreis()}"></span>  </td>
+                <td> <span th:text="${#dates.format(job.getAuftragsdatum(), 'dd. MM. yyyy')}"></span> </td>
+
+            </tr>
+            </tbody>
+        </table>
+    </form>
+
+
+</div>
+
+</body>
+</html>
+
+
+
+

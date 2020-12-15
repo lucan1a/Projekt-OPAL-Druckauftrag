@@ -1,0 +1,107 @@
+#!/bin/bash
+
+#   using pdfnup for formatting pages
+#   https://github.com/DavidFirth/pdfjam
+
+#  $ convert_pages [input].pdf [column] [line] [snr] [auftrags_id]
+#  returns [col]x[line]_[input].pdf
+
+#  parameter check (nötig?)
+if ! [ -f "$1" ]
+then
+    echo "file not found"
+    exit 1
+fi
+
+if [[ $1 != *.pdf ]] || [[ $2 != [1-2] ]] || [[ $3 != [1-2] ]] || [ $# -ne 5 ]
+then
+    echo "fehler"
+    exit 2
+fi
+
+input="$1"		#PDF-File (mit Pfad)
+
+# Zusammensetzung Outputfile aus sNr_AuftragsID_Inputfile und Ablageort festlegen
+file="$(basename -- $input)"	#ohne Pfad
+pre_output="/home/druckauftrag/Dateien/preprocessed/preconvert_$4_$5_$file"
+output="/home/druckauftrag/Dateien/preprocessed/$4_$5_$file"
+
+# $ check_format: 0 -> landscape (Querformat); 1 -> portrait (Hochformat)
+/home/druckauftrag/src/pdf_handling/check_format "$1"
+ret="$?"
+
+# keine Konvertierung erforderlich (1x1) - Datei nur verschieben und sofortiges Exit
+if [[ $2 -eq 1 ]] && [[ $3 -eq 1 ]]
+then
+# ggf. drehen auf Hochformat erforderlich
+    if [ $ret -eq 0 ] ; then
+        pdftk $1 cat 1-endwest output $output
+        if [ $? -ne 0 ] ; then
+            rm "$input"
+            exit 6
+        fi
+        rm "$input"
+        exit 0
+	fi
+	
+    # Hochformat: keine Aenderung
+    mv "$input" "$output"
+    exit 0
+    
+fi
+
+# Hochformat 1x2 oder Querformat 2x2 =Querformat
+portrait_landscape="landscape"
+
+# Querformat 1x2 oder Hochformat 2x2 =Hochformat
+if [[ $ret -eq 0 && $2 -eq 1 && $3 -eq 2 ]] || [[ $ret -ne 0 && $2 -eq 2 && $3 -eq 2 ]]
+then
+    portrait_landscape="no-landscape"
+fi	
+
+
+# Wechsel von Spalte x Zeile auf Zeile x Spalte bei Hochformat 1x2 
+if [[ $ret -eq 1 && $2 -eq 1 && $3 -eq 2 ]]
+then
+	format="$3x$2"
+else
+	format="$2x$3"
+fi
+
+#   convert pages Ausführung
+pdfnup "$input" --outfile "$pre_output" --nup "$format" --"$portrait_landscape" --column true --paper a4paper --scale 0.95 --offset "0cm 0cm"
+
+#   return check
+if [ $? -ne 0 ]
+then
+    echo "could not convert pages"
+    if [ -f "$pre_output" ]
+    then
+        echo "removing output file"
+        rm "$pre_output"
+        exit 3
+    else
+        exit 4
+    fi
+fi
+
+#Ausrichtung der kombinerten PDF testen und ggf. auf Hochformat drehen
+/home/druckauftrag/src/pdf_handling/check_format "$pre_output"
+if [ $? -eq 0 ] 
+then
+    pdftk "$pre_output" cat 1-endwest output "$output"
+    if [ $? -ne 0 ] ; then
+            rm "$input" "$pre_output"
+			
+            exit 6
+    else
+		rm "$input" "$pre_output"
+	fi
+else
+	mv "$pre_output" "$output"
+
+fi
+
+rm "$input" 
+
+exit 0

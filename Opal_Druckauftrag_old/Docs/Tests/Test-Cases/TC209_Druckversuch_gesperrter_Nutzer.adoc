@@ -1,0 +1,81 @@
+[%header]
+
+== TC209 - Druckversuch_gesperrter_Nutzer
+
+=== Beschreibung:
+Die Unidruckerei soll während der produktiven Phase in der Lage sein, Nutzer aus verschiedenen Gründen zu sperren. Druckaufträge von gesperrten Nutzern werden nicht gespeichert, Zusammengefasst und gedruckt. Die Nutzer werden zwar in der Lage sein, Dateien über Opal an den Server zu übermitteln, allerdings wird die Anwendung eingehende Aufträge von gesperrten Nutzern nicht bearbeiten. In diesem Test wird überprüft, ob die Druckaufträge von bereits gesperrten Nutzern nachdem sie den Server erreichen nicht weiter vearbeitet werden. Zusätzlich soll der gesperrte Kunde nach Erteilung eines Druckauftrags mithilfe einer E-Mail über seinen Status informiert werden. Die E-Mail soll dem Nutzer zusätzlich einen Kontakt zur Unidruckerei übermitteln, wodurch diesem die Möglichkeit geboten wird, seine Sperrung über einen Mitarbeiter aufzuheben.
+Dieser Test ist ein Positivtest und prüft somit das System bei korrekter Nutzung.
+
+=== Vorbedingungen:
+- Tester ist mit seinem Hochschulzugang im Opal angemeldet
+- Der Tester(inklusive seiner s-Nummer) ist in der Datenbank als als gesperrter Nutzer registriert (Eintrag in der Datenbankrelation Benutzer bei Sperrung ist true)
+- Die Anwendung(Run.java) zum Empfangen von Druckaufträgen wurde gestartet
+
+
+=== benötigte Daten: 
+- Zustand (aktiv, inaktiv) der Anwendung zum Empfangen von Druckaufträgen 
+- s-Nummer des Testers
+- Datenbankreintrag des Testers mit seiner s-Nummer in der Relation Benutzer
+
+
+=== Handlungen
+
+- Schritt 1: Symbol zum Drucken einer beliebigen PDF-Datei im Opal auswählen
+
+- Schritt 2: beliebige Druckotionen wählen
+
+- Schritt 3: Den Druckauftrag über die Schaltfläche "Druckauftrag abschicken" auslösen
+
+- Schritt 4: Ein Terminalfenster öffnen und über SSH mit der virtuellen Maschine für den Druckauftrag verbinden
+
+- Schritt 5: Die Kommandozeile der MariaDB starten (siehe MariaDB_Gebrauchsanweisung.adoc)
+
+- Schritt 6: in die Datenbank Opal-Druckauftrag-DB wechseln (sql: use Opal-Druckauftrag-DB;)
+
+- Schritt 7: Überprüfen, ob Druckauftrag in der Relation Druckauftrag registriert wurde (sql: SELECT * FROM Druckauftrag ORDER BY Auftrags_ID;)
+
+- Schritt 8: Auf Eingang auf das E-Mail-Postfach (sXXXXX@htw-dresden.de) des Testers warten
+
+- Schritt 9: erhaltene e-Mail auf Schlüssigkeit überprüfen
+
+
+=== erwartete Reaktionen
+- Das System erkennt, dass gesperrter Nutzer einen Druckauftrag aufgegeben hat
+- Das System versendet eine E-Mail an den gesperrten Nutzer
+
+
+=== Nachbedingungen:
+- Der Druckauftrag wird nicht als Tupel in der Relation Druckauftrag abgespeichert
+- Der Anhang der e-Mail(die Druckaufträge werden über eine Mail-Schnittstelle übermittelt) wird nicht im System gespeichert
+
+=== Test Log
+
+Durchführung 1, Datum: 26.06.2020 16:45 Uhr
+
+kommentare zu den einzelnen Schritten:
+
+- Schritt 1-6: erfolgreich
+
+- Schritt 7: Ist nicht als Auftrag eingegangen, Datei existiert nicht in Verzeichnis Dateien/preprocessed
+
+- Schritt 8: es wurde keine Mail empfangen
+
+notwendige Verbesserungen:
+- gesperrter Nutzer muss eine Mail erhalten, die ihn auf seinen Status als gesperrter Nutzer hinweist.
+
+Der Test wird als nicht bestanden angesehen.
+
+Durchführung 2, Datum: 02.07.2020 15:15 Uhr
+
+kommentare zu den einzelnen Schritten:
+
+- Schritt 1-6: erfolgreich
+
+- Schritt 7: Ist nicht als Auftrag eingegangen, Datei existiert nicht in Verzeichnis Dateien/preprocessed
+
+- Schritt 8: erfolgreich
+
+notwendige Verbesserungen:
+- /
+
+Der Test wird als erfolgreich durchgeführt angesehen.

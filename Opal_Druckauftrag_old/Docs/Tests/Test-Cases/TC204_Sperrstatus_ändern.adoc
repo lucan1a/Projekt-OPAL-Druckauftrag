@@ -1,0 +1,127 @@
+[%header]
+
+== TC204 - Sperrstatus_ändern
+
+=== Beschreibung:
+Die Unidruckerei soll während der produktiven Phase in der Lage sein, Nutzer aus verschiedenen Gründen zu sperren. Druckaufträge von gesperrten Nutzern werden nicht gespeichert, zusammengefasst und gedruckt. Die Nutzer werden zwar in der Lage sein, Dateien über Opal an den Server zu übermitteln, allerdings wird die Anwendung eingehende Aufträge von gesperrten Nutzern nicht bearbeiten. Sollte einem Nutzer bereits ein aktiver Druckjob zugeordnet werden können, so wird dieser Druckjob nach dem Sperren gelöscht. Dieser Test überprüft unter Anderem die Funktionsweise der Webanwendung. Über die Webanwendung können Benutzer einzeln ausgewählt und gesperrt werden. In diesem Test wird die Übermittlung und Speicherung des Sperrvermerks überprüft. Im Test-Case TC209 wird weiterführend getestet, ob die Druckaufträge von gesperrten Nutzern, wie vorgesehen, vom Server ignoriert werden. Dieser Test ist ein Positivtest und prüft somit das System bei korrekter Nutzung. Dieser Test orientiert sich an dem Use-Case UC9.
+
+=== Vorbedingungen:
+- Kunde hat bereits einen Druckauftrag erteilt
+- Kundenauftrag wurde in Druckjob umgewandelt (Zusammenfassung um 5 Uhr Nachts fand bereits statt)
+- Webanwendung gestartet
+- in Webanwendung mit Zugangsdaten der Unidruckerei eingeloggt
+- Die Verarbeitung des jeweiligen Druckjobs liegt mehr als drei Tage in der Vergangenheit (es können ausschließlich Benutzer von zeitkritischen Druckjobs gesperrt werden)
+
+=== benötigte Daten: 
+- Zugangsdaten Webanwendung (Zugangsdaten der Unidruckerei)
+- Zugangsdaten Datenbank (MariaDB)
+- s-Nummer eines zu sperrenden Nutzers
+- Sperrstatus eines Benutzers (Attribut Sperrung der Relation Benutzer)
+
+=== Handlungen
+
+Das Test Script beschreibt den detaillierten Ablauf des Tests.
+
+- Schritt 1: In der Webanwendung die Liste der zeitkritischen Druckjobs aufrufen
+- Schritt 2: Nutzer für gewünschte Sperrung suchen (Mithilfe der S-Nummer)
+- Schritt 3: Nutzer auswählen und die Schaltfläche "sperren" betätigen
+- Schritt 4: Die Reaktion der Webanwendung an den Nutzer abwarten und notieren
+- Schritt 5: Ein Terminalfenster öffnen und über SSH mit der virtuellen Maschine für den Druckauftrag verbinden
+- Schritt 6: Die Kommandozeile der MariaDB starten (siehe MariaDB_Gebrauchsanweisung.adoc)
+- Schritt 7: in die Datenbank Opal-Druckauftrag-DB wechseln (sql: use Opal-Druckauftrag-DB;)
+- Schritt 8: Überprüfen, ob gesperrter Nutzer in der Relation Benutzer als gesperrt markiert ist (sql: SELECT * FROM Benutzer WHERE Sperrung=true;)
+- Schritt 9: Die Kommandozeile des Servers nach diesbezüglichen Warnungen und Fehlern durchsuchen und ggf. notieren
+ 
+=== erwartete Reaktionen
+- Die Webanwendung lädt die Seite zum Anzeigen der Benutzer erneut
+- Der Server ändert den Eintrag des jeweiligen Nutzers in der Datenbank (Sperrung -> true)
+- Der Server löscht die dazugehörige Datei des Druckjobs
+
+=== Nachbedingungen:
+- Die Webanwendung ist weiterhin lauffähig
+- Druckjobeinträge des jeweiligen Nutzers wurden in der Relation "druckjob" der Datenbank entfernt
+- die dazugehörige Datei zu dem Druckjob wurde ebenfalls gelöscht
+
+=== Test Log
+
+Durchführung 1, Datum: 25.05.2020, 18:35
+
+kommentare zu den einzelnen Schritten:
+
+- Schritt 1: erfolgreich
+- Schritt 2: Nutzer s10124 mit der DruckjobID 450 ausgewählt
+- Schritt 3-4: erfolgreich, Die Seite wird neu geladen und der Nutzer wird im unteren Bereich der Seite als gesperrer Nutzer aufgeführt
+- Schritt 5-7: erfolgreich
+- Schritt 8: erfolgreich, Wert des Attributs Sperrung des Benutzers s10124 wurde auf True gesetzt
+- Schritt 9: erfolgreich, keine Warnungen/Fehlermeldungen
+
+notwendige Verbesserungen:
+
+- /
+
+Der Test gilt als erfolgreich da das System die erwartete Reaktion gezeigt hat und alle Nachbedingungen erfüllt sind
+
+Durchführung 2, Datum: 18.06.2020, 12:00
+
+kommentare zu den einzelnen Schritten:
+
+- Schritt 1: erfolgreich
+- Schritt 2: Nutzer s78898 mit der DruckjobID 12 ausgewählt
+- Schritt 3-4: erfolgreich, Die Seite wird neu geladen und der Nutzer wird im unteren Bereich der Seite als gesperrer Nutzer aufgeführt
+- Schritt 5-7: erfolgreich
+- Schritt 8: erfolgreich, Wert des Attributs Sperrung des Benutzers s78898 wurde auf True gesetzt
+- Schritt 9: erfolgreich, keine Warnungen/Fehlermeldungen
+
+notwendige Verbesserungen:
+
+- /
+
+Der Test gilt als erfolgreich da das System die erwartete Reaktion gezeigt hat und alle Nachbedingungen erfüllt sind
+
+Durchführung 3, Datum: 02.06.2020, 17:00
+
+kommentare zu den einzelnen Schritten:
+
+- Schritt 1: erfolgreich
+- Schritt 2: Nutzer s78898 mit der DruckjobID 126 ausgewählt
+- Schritt 3-4: erfolgreich, Die Seite wird neu geladen und der Nutzer wird im unteren Bereich der Seite als gesperrer Nutzer aufgeführt
+- Schritt 5-7: erfolgreich
+- Schritt 8: erfolgreich, Wert des Attributs Sperrung des Benutzers s78898 wurde auf True gesetzt
+- Schritt 9: erfolgreich, keine Warnungen/Fehlermeldungen
+
+notwendige Verbesserungen:
+
+- /
+
+Der Test gilt als erfolgreich da das System die erwartete Reaktion gezeigt hat und alle Nachbedingungen erfüllt sind
+
+Durchführung 4, Datum: 24.06.2020, 15:00
+
+kommentare zu den einzelnen Schritten:
+
+- Schritt 1: erfolgreich
+- Schritt 2: Nutzer s78898 mit der DruckjobID 126 ausgewählt
+- Schritt 3-4: erfolgreich, Die Seite wird neu geladen und der Nutzer wird im unteren Bereich der Seite als gesperrer Nutzer aufgeführt
+- Schritt 5-7: erfolgreich
+- Schritt 8: erfolgreich, Wert des Attributs Sperrung des Benutzers s78898 wurde auf True gesetzt
+- Schritt 9: erfolgreich, keine Warnungen/Fehlermeldungen
+
+notwendige Verbesserungen:
+
+- /
+
+Der Test gilt als erfolgreich da das System die erwartete Reaktion gezeigt hat und alle Nachbedingungen erfüllt sind
+
+Durchführung 5, Datum: 12.07.2020, 10:00
+
+kommentare zu den einzelnen Schritten:
+
+- Schritt 1-9: erfolgreich
+
+notwendige Verbesserungen:
+
+- /
+
+Der Test gilt als erfolgreich da das System die erwartete Reaktion gezeigt hat und alle Nachbedingungen erfüllt sind
+
+

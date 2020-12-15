@@ -1,0 +1,27 @@
+== Use-Case: Erinnerungsmail senden
+===	Kurzbeschreibung
+Das System soll automatisch sieben Tagen nachdem der Druckjob erzeugt wurde und noch nicht abgeholt ist, eine Erinnerungsmail zur Abholung an den Studierenden senden.
+
+===	Kurzbeschreibung der Akteure
+==== Timer
+Der Akteur Timer ist ein zeitlicher Trigger, welcher täglich vor 1 Uhr auslöst. 
+
+=== Vorbedingungen
+* Druckjob hat ein Auftragsdatum, welches genau sieben Tage alt ist.
+* Druckjob ist laut Druckstatus abholbereit.
+
+=== Standardablauf (Basic Flow)
+. Der Use Case beginnt, wenn der Timer auslöst.
+. Das System ermittelt alle Druckjobs, welche die Vorbedingungen erfüllen und hohlt sich die Bibliotheksnummern dieser Jobs.
+. *For Each* Bibliotheksnummer eines nicht abgeholten Druckjobs
+    .. Das System setzt aus der Bibliotheksnummer die E-Mail Adresse zusammen.
+    .. Das System verschickt an den Studierenden eine E-Mail zur Erinnerung der Abholung.
+. Der Use Case ist abgeschlossen.
+
+=== Wesentliche Szenarios
+==== Erfolgreiche Erinnerung des Studierenden
+Sc1: Im System ist eine noch nicht abgeholter und sieben Tage alter Druckjob von Student A hinterlegt. Der Student A erhält eine Erinnerungsmail, dass sein Auftrag abholbereit ist.
+
+===	Nachbedingungen
+* Erinnerungsmail an den Studenten ist abgeschickt.
+

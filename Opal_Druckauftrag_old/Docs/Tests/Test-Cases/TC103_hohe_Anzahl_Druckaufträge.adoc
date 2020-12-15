@@ -1,0 +1,157 @@
+[%header]
+
+== TC103 - Hohe Anzahl von Druckaufträgen
+
+
+=== Beschreibung:
+Dieser Test dient der Performancekontrolle des Systems. Die Vergangenheit zeigte, dass an einigen Tagen 500 Dateien zu Druckjobs zusammengefasst werden müssen. Das System muss in der Lage sein, diese Menge inklusive eines gewissen Puffers aufgrund von Steigerungspotential in weniger als 45 Minuten verarbeiten zu können.
+Das Zusammenfassen der Dateien beginnt jeden Morgen 5:00 Uhr. Ca. 6:00 Uhr beginnt die Unidruckerei mit dem Drucken der an diesem Tage anfallenden Dokumente. Das Zusammenfassen und das Skript zur Simulation der Druckauftragserteilung wurden bereits ausführlich im Test-Case TC203_Druckauftrag_Zusammenfassen getestet und wird im folgenden als voll funktionsfähig angesehen. Der Test stellt ausschließlich eine Extremsituation dar, die den Umgang bei hohen Auftragszahlen untersucht. Für den Test werden folgende Kennzahlen benutzt:
+
+Anzahl der Druckaufträge (Dateien zur Verarbeitung): 500
+
+Zeit zur Zusammenfassung dieser Dateien: 45 Minuten
+
+Der Test gilt als Erfüllt, wenn 500 Druckaufträge in unter 45 Minuten verarbeiten wurden. Dieser Test ist ein Positivtest und prüft somit das System bei korrekter Nutzung.
+
+=== Vorbedingungen:
+- Das Skript bulkinsert_Da_Be.sh im Verzeichnis Bulkinsert_DB_Speichertest wurde erfolgreich ausgeführt (./bulkinsert_Da_Be 500)
+- Es wurden 500 Dateien in den Ordner "preprocessed" verschoben
+- es wurden 500 Datensätze in der Relation "Druckauftrag" eingefügt (inklusive Verknüpfung mit den Dateien über s-Nummer und ID des Druckauftrags)
+- dazugehörige Datensätze in der Relation "Benutzer" wurden eingefügt
+
+=== benötigte Daten: 
+- aktuelle Zeit
+- Zeitpunkt des Zusammenfassungsbeginn
+- Zeitpunkt des Zusammenfassungsende
+
+
+=== Handlungen
+
+Das Test Script beschreibt den detaillierten Ablauf des Tests. Das Einfügen der 500 Datensätze in der Relation "Druckauftrag" und der entsprechenden Datensätze in der Relation "Benutzer" wird über ein Skript realisiert. Das Erzeugen von 500 PDF-Datein wird ebenfalls in das Skript integriert. Die Vorbedingungen beschreiben den Endzstand eines erteilten Druckauftrags. Dieser Zustand kann mithilfe eines Shell-Skripts künstlich erzeugt werden. Sobald die Komponente zur Erteilung des Druckauftrags über die in der Produktiven Phase genutzten Methode zur Verfügung steht, wird der Test erneut über diesen Weg durchgeführt.
+
+include::../testrelevante_Dateien/bulkinsert_Da_Be_Datei.sh[leveloffset=+1]
+
+- Schritt 1: oben genanntes Skript ausführen und Anzahl der zu generierenden Dateien übergeben (./bulkinsert_Da_Be_Datei.sh 500)
+- Schritt 2: Zeitpunkt des Zusammenfassens von 5:00 Uhr auf eine passende Zeit umstellen (z.B. 5 Minuten nach der aktuellen Zeit) (DailyTask.java im Verzeichnis src/process/src1 der virtuellen Maschine)
+- Schritt 3: Skript (run_test im Verzeichnis src) zum Zusammenfassen starten (Das Zusammenfassen wird zur definierten Zeit beginnen)
+- Schritt 4: überprüfen, ob Zusammenfassen zur definierten Zeit gestartet wurde
+- Schritt 5: warten bis Zusammenfassen der Dateien abgeschlossen wurde (Kommandozeilenausgabe "DailTask executed") und Zeit notieren
+- Schritt 6: Konsole auf mögliche Warnungen oder Fehlermeldungen durchsuchen und ggf. notieren
+
+=== erwartete Reaktionen
+- Das System beginnt zur vordefinierten Zeit mit der Verarbeitung der Druckaufträge
+- Das System wird alle Druckaufträge verarbeiten und anschließend das Beenden der Zusammenfassung mitteilen
+
+
+=== Nachbedingungen:
+- Deckblatt mit korrekten Information wurde erstellt
+- einzelne PDF-Datei beinhaltet das Deckblatt und alle Dateien, die der auf dem Deckblatt identifizierbaren Person gehören
+- Die Verknüpfung von Person und eingesendeten Datein wird in der Datenbank gelöscht (Druckauftrag)
+- Die Verknüpfung zwischen Person und fertigen zu druckenden Dokument (Druckjob) wird in der Datenbank erstellt
+- Der Barcode lässt auf den Preis für den Druck verlangten Preis schließen
+
+
+
+=== Test Log
+
+Durchführung 1, Datum: 16.05.2020, 12:13
+
+kommentare zu den einzelnen Schritten:
+
+- Schritt 1-4: erfolgreich
+
+- Schritt 5: Die Konsole weiste eine Fehlermeldung bezüglich der Datenbank auf und das Zusammenfassen der Druckaufträge wurde frühzeitig abgebrochen.
+
+include::../testrelevante_Dateien/hohe_anzahl-Druckaufträge_console.txt[leveloffset=+1]
+
+
+notwendige Verbesserungen:
+
+- Beheben des Fehlers, damit die Verarbeitung einer hohen Anzahl von Druckaufträgen erfolgreich durchgeführt werden kann. Die Entwickler werden beim nächsten Treffen auf diesen Fehler hingewiesen. Der Test wird erneut durchgeführt, wenn die Entwickler angeben, den Fehler behoben zu haben
+
+
+
+Durchführung 2, Datum: 20.05.2020, 15:40
+
+kommentare zu den einzelnen Schritten:
+
+- Schritt 1-4: erfolgreich
+
+- Schritt 5: Start der Verarbeitung: 15:46, Ender der Verarbeitung: 16:19
+
+- Schritt 6: erfolgreich, keine Fehler
+
+notwendige Verbesserungen:
+
+- /
+
+Der Test gilt als erfolgreich durchgeführt, da das Zusammenfassen nur 34 Minuten und somit weniger als die im Test beschriebenen 45 Minuten benötigt hat.
+
+Durchführung 3, Datum: 12.06.2020, 11:00
+
+kommentare zu den einzelnen Schritten:
+
+- Schritt 1-4: erfolgreich
+
+- Schritt 5: Start der Verarbeitung: 11:00, Ender der Verarbeitung: 11:33
+
+- Schritt 6: erfolgreich, keine Fehler
+
+notwendige Verbesserungen:
+
+- /
+
+Der Test gilt als erfolgreich durchgeführt, da das Zusammenfassen nur 34 Minuten und somit weniger als die im Test beschriebenen 45 Minuten benötigt hat.
+
+
+Durchführung 4, Datum: 25.06.2020, 13:00
+
+kommentare zu den einzelnen Schritten:
+
+- Schritt 1-4: erfolgreich
+
+- Schritt 5: Start der Verarbeitung: 13:05, Ender der Verarbeitung: 13:22
+
+- Schritt 6: erfolgreich, keine Fehler
+
+notwendige Verbesserungen:
+
+- /
+
+Der Test gilt als erfolgreich durchgeführt, da das Zusammenfassen nur 18 Minuten und somit weniger als die im Test beschriebenen 45 Minuten benötigt hat.
+
+Durchführung 5, Datum: 09.07.2020, 22:00
+
+kommentare zu den einzelnen Schritten:
+
+- Schritt 1-4: erfolgreich
+
+- Schritt 5: Start der Verarbeitung: 22:03, Ender der Verarbeitung: 22:44
+
+- Schritt 6: erfolgreich, keine Fehler
+
+notwendige Verbesserungen:
+
+- /
+
+Der Test gilt als erfolgreich durchgeführt, da das Zusammenfassen nur 41 Minuten und somit weniger als die im Test beschriebenen 45 Minuten benötigt hat.
+
+
+Durchführung 6, Datum: 26.07.2020, 09:00
+
+kommentare zu den einzelnen Schritten:
+
+- Schritt 1-4: erfolgreich
+
+- Schritt 5: Start der Verarbeitung: 09:10, Ender der Verarbeitung: 09:44
+
+- Schritt 6: erfolgreich, keine Fehler
+
+notwendige Verbesserungen:
+
+- /
+
+Der Test gilt als erfolgreich durchgeführt, da das Zusammenfassen nur 34 Minuten und somit weniger als die im Test beschriebenen 45 Minuten benötigt hat.
+
+
+
