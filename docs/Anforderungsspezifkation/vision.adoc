@@ -1,0 +1,199 @@
+== Einführung
+In diesem Dokument werden die Anforderungen an die Workflow Ergänzung für den Opal Druckauftrag gesammelt und definiert. Im Fokus liegen die von den Stakeholdern und Nutzern geforderten Funktionen und Fähigkeiten der Software sowie die Begründung dieser. Die Lösungen, mit denen auf die Anforderungen eingegangen wird, werden in den Use-Cases und den Ergänzenden Spezifikationen (Supplementary Specifications) beschrieben.
+
+=== Zweck
+Der Zweck dieses Dokuments ist es die Anforderungen der Stakeholder und der künftigen Nutzer zu definieren.
+
+=== Gültigkeitsbereich (Scope)
+Dieses Dokument gilt für das Projekt „Workflow Opal Druckauftrag“ des SE Teams I1 der HTW Dresden. Die entwickelte Systemerweiterung wird es Nutzern erlauben ein Kundenkonto aufzurufen. Zudem wird eine Funktion Auftragsverfolgung, Stornierung und Rabattierung sowie „sofortige Generierung des Druckauftrags“ entwickelt. Des Weiteren werden Fehler, die im bestehenden System bereits dokumentiert sind, bereinigt. Alle Funktionen dienen der Befriedigung von Nutzerbedürfnissen und Druckereibedürfnissen.
+
+=== Definitionen, Akronyme und Abkürzungen
+siehe <<glossary.adoc#,Glossar>>
+
+== Positionierung
+=== Fachliche Motivation
+Projekt der HTW Dresden im Kurs Software Engeneering/Requirements Engeneering. Es wird ein bereits bestehendes Projekt erweitert. In Kooperation mit der „UNIdruckerei“ (Inh. Bert Buschmann) wird an einem verfahren gearbeitet welches Studierenden der HTW Dresden erlaubt über das OPAL Portal PDF-Dateien zu drucken. Um auf die Bedürfnisse der Nutzer des Druckauftrags besser eingehen zu können wird ein Kundenkonto benötigt.
+
+* Da von Seiten der Nutzer oftmals Unklarheit besteht ob der Druckauftrag bereits gedruckt ist wird die Funktion einer Auftragsverfolgung und die Funktion einer sofort Generierung des Druckauftrags benötig
+* Da von Seiten der Nutzer Druckaufträge nur durch einen Anruf oder E-Mail an die Uni-Druckerei storniert werden können wird die Funktion einer Stornierung benötigt.
+* Um Kunden einen Kaufanreiz zu geben soll die Funktion einer vom Kunden einsehbaren Rabattierung durch den Admin geschaffen werden.
+* Da Während der Verarbeitung des Druckauftrags unregelmäßig Fehler auftreten soll das bestehende System angepasst und dokumentierte Fehler beseitigt werden.
+
+=== Problem Statement
+|===
+|Das Problem| Der Inhaber der UNI-Druckerei kann mit dem bestehenden System  die Kundenanforderungen nicht erfüllen.
+|betrifft| Kunden (Nutzer), Inhaber UNI-Druckerei (Admin)
+|Die Auswirkungen davon sind 
+a|	
+* Druckaufträge werden nicht abgeholt – Kosten, Stornierung, Auftragsverfolgung
+* Unklarheit beim Kunden über Druckzustand – Auftragsverfolgung, sofort Generierung
+* Druckaufträge werden fehlerhaft verarbeitet und nicht gedruckt – Fehler im System
+*  Kundenbindung ist geringer als möglich wäre – Rabattierung
+|Eine erfolgreiche Lösung wäre |Ein Nutzerkonto und die Funktionen Auftragsverfolgung, Stornierung, Rabattierung und sofort Generierung sowie eine Behebung der dokumentierten Fehler
+|===
+
+=== Positionierung des Produkts 
+|===
+|Für|	Studenten der HTW-Dresden
+|die|	Aus dem Opal-System PDF-Dokumente drucken
+|Das Produkt ist ein|	Online-Kommunikations-System
+|das|	Drucken von PDF-Dokumenten aus dem Opal-System für Studierende der HTW-Dresden ermöglicht
+|Im Gegensatz zu |Reinen Druckauftrags Systemen
+|Unser Produkt| Besitzt ein Kundenkonto und die Funktionen Auftragsverfolgung, Stornierung, Rabattierung und sofort Generierung
+|===
+
+==	Stakeholder Beschreibungen
+===	Zusammenfassung der Stakeholder 
+
+[%header]
+|===
+|Name|	Beschreibung	| Verantwortlichkeiten
+|Projektteam I1|Studierende, die an dem Modul SE1 teilnehmen und dem Projekt zugeordnet wurden|Eine Workflowergänzung zum OPAL-Druckauftrag erarbeiten
+
+|Coach|Prof. Dr.-Ing. Jürgen Anke,  Felix Müller|Betreuen das Projektteam und geben Hilfestellungen, falls Fragen aufkommen 
+
+|Auftraggeber|Prof. Dr.-Ing. Gunther Naumann|Ist der Projektleiter und Ansprechpartner
+
+|Inhaber der Uni-druckerei
+a| 
+* Herr Buschmann
+* Stellt Drucker zur Verfügung
+* Möchte einen komfortableren Umgang mit Kunden
+a|
+* Lässt Dokumente drucken,damit sie zum vereinbarten Termin abholbereit sind
+* Kundenkontos, um bessere Übersichtlichkeit und Verwaltung zu erhalten
+* Aufträge sollen stornierbar sein
+
+|Nutzer|Studenten der HTW-Dresden
+a|
+* Dokumente drucken
+* Dokumente noch am selben Tag abholen
+
+
+|Opal|Lehrplattform des Bildungsportals Sachsen; Ansprechpartner an der HTW Dresden: Thomas Haider
+a|stellt die Schnittstelle zur Übermittlung der Dokumente und die Informationen über die Studierenden bereit
+
+|Server der HTW Dresden|Fr. Dr. Loose|stellt die notwendige Rechenleistung und Wartung der Hardware für das System bereit
+
+|Datenschutzbeauftragter|Prof. Dr. Andreas Westfeld|definiert Maßnahmen zur Einhaltung der Datenschutzbestimmungen
+|===
+
+=== Benutzerumgebung
+. Studierende
+* Die Nutzeranzahl kann variieren. (derzeit wenige Nutzer)
+* Das Kundenkonto soll Funktionen zur Auftragsverfolgung, Übersicht zu Rabattstufen und eine Stornieroption bieten.
+* Die Aufträge werden weiterhin über die Plattform OPAL mittels einer E-Mail an den Server gesendet.
+
+
+. Unidruckerei
+* Die Nutzeranzahl ist auf die drei Mitarbeiter der Unidruckerei beschränkt, welche gleichberechtigt mit dem System interagieren können sollen.
+* Die Arbeitszeit richtet sich nach den Aufträgen und deren Auftragsgrößen.
+* Die bisherige Webanwendung soll erweitert werden.
+* Die Anmeldung soll über ein Kundenkonto erfolgen.
+* Der Admin soll eine Stornieroption für Aufträge besitzen.
+
+
+== Produkt-/Lösungsüberblick
+=== Bedarfe und Hauptfunktionen
+
+[%header]
+|===
+|Bedarf|	Priorität|	Features|	Geplantes Release
+
+|Nutzerkonto
+|5
+|Funktionen Auftragsverfolgung, Stornierung, Rabattierung  
+|Zum Ende des Projekts
+
+|Auftragsverfolgung
+|5
+|Zustand des Druckauftrags untergliedert in gedruckt/nicht gedruckt 
+|Zum Ende des Projekts
+
+|Stornierung
+|5
+|bei nicht gedruckten Druckaufträgen möglich & löscht Druckauftrag sofort 
+|Zum Ende des Projekts
+
+|Rabattierung
+|5
+|Nutzergebunden und lässt nach dem Erreichen von gewissen Blattzahlen Rabatt zu
+|Zum Ende des Projekts
+
+|Drucken in Farbe
+|2
+|Drucke sollen auch in Farbe möglich sein   
+|Zum Ende des Projekts
+
+|Sofortige Abholung
+|4
+|sofortige Joberstellung zur Abholung am selben Tag    
+|Zum Ende des Projekts
+
+|Drucken von anderen Formaten (zB. Doc)
+|2
+|Druckauftrag muss nicht mehr immer PDF sein 
+|Zum Ende des Projekts
+
+|Drucken über E-Mail o.ä.
+|2
+|Zusätzliche Möglichkeiten zum Drucken, außer den Auftrag in OPAL zu erstellen, zB über E-Mail
+|Zum Ende des Projekts
+
+|===
+
+== Zusätzliche Produktanforderungen
+
+[%header]
+|===
+|Anforderung|	Priorität|	Geplantes Release
+
+|Das System muss die Daten des Druck-Jobs vollständig an die Unidruckerei übermitteln.
+|5
+|
+
+|Das System muss den aktuellen Druckstatus abfragen und anzeigen können.
+|5
+|
+
+|Das System muss Rabatte richtig berechnen und ausgeben können.
+|5
+|
+
+|Das System muss dem Administrator die Möglichkeit geben Rabattierungen zu ändern.
+|4
+|
+
+|Das System muss verschiedene Druckaufträge eines Nutzers zusammenfassen.
+|3
+|
+
+|Das System muss mit den gegebenen Ressourcen konstant laufen.
+|5
+|
+
+|Das System muss den Datenschutzrichtlinien entsprechen.
+|5
+|
+
+|Das System muss mit den gegebenen Ressourcen konstant laufen.
+|5
+|
+
+|Das System muss Farbdruck ermöglichen.
+|2
+|
+
+|Das System muss weitere Dateiformate unterstützen.
+|2
+|
+
+|Das System muss weitere Medienzugänge unterstützen.
+|2
+|
+
+|Das System muss sämtliche Dateinamen unterstützen. 
+|4
+|
+
+|===
