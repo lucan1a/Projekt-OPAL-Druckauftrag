@@ -5,19 +5,19 @@ In diesem Dokument werden die Anforderungen an die Workflow Ergänzung für den 
 Der Zweck dieses Dokuments ist es die Anforderungen der Stakeholder und der künftigen Nutzer zu definieren.
 
 === Gültigkeitsbereich (Scope)
-Dieses Dokument gilt für das Projekt „Workflow Opal Druckauftrag“ des SE Teams I1 der HTW Dresden. Die entwickelte Systemerweiterung wird es Nutzern erlauben ein Kundenkonto aufzurufen. Zudem wird eine Funktion Auftragsverfolgung, Stornierung und Rabattierung sowie „sofortige Generierung des Druckauftrags“ entwickelt. Des Weiteren werden Fehler, die im bestehenden System bereits dokumentiert sind, bereinigt. Alle Funktionen dienen der Befriedigung von Nutzerbedürfnissen und Druckereibedürfnissen.
+Dieses Dokument gilt für das Projekt „Workflow Opal Druckauftrag“ des SE Teams I1 der HTW Dresden. Die entwickelte Systemerweiterung wird es Kunden erlauben ein Kundenkonto aufzurufen. Zudem wird eine Funktion Auftragsverfolgung, Stornierung und Rabattierung sowie „sofortige Generierung des Druckauftrags“ entwickelt. Des Weiteren werden Fehler, die im bestehenden System bereits dokumentiert sind, bereinigt. Alle Funktionen dienen der Befriedigung von Kundenbedürfnissen und Druckereibedürfnissen.
 
 === Definitionen, Akronyme und Abkürzungen
 siehe <<glossary.adoc#,Glossar>>
 
 == Positionierung
 === Fachliche Motivation
-Projekt der HTW Dresden im Kurs Software Engeneering/Requirements Engeneering. Es wird ein bereits bestehendes Projekt erweitert. In Kooperation mit der „UNIdruckerei“ (Inh. Bert Buschmann) wird an einem verfahren gearbeitet welches Studierenden der HTW Dresden erlaubt über das OPAL Portal PDF-Dateien zu drucken. Um auf die Bedürfnisse der Nutzer des Druckauftrags besser eingehen zu können wird ein Kundenkonto benötigt.
+Projekt der HTW Dresden im Kurs Software Engeneering/Requirements Engeneering. Es wird ein bereits bestehendes Projekt erweitert. In Kooperation mit der „UNIdruckerei“ (Inh. Bert Buschmann) wird an einem Verfahren gearbeitet welches Studierenden der HTW Dresden erlaubt über das OPAL Portal PDF-Dateien zu drucken. Um auf die Bedürfnisse der Nutzer des Druckauftrags besser eingehen zu können wird ein Kundenkonto benötigt.
 
-* Da von Seiten der Nutzer oftmals Unklarheit besteht ob der Druckauftrag bereits gedruckt ist wird die Funktion einer Auftragsverfolgung und die Funktion einer sofort Generierung des Druckauftrags benötig
-* Da von Seiten der Nutzer Druckaufträge nur durch einen Anruf oder E-Mail an die Uni-Druckerei storniert werden können wird die Funktion einer Stornierung benötigt.
-* Um Kunden einen Kaufanreiz zu geben soll die Funktion einer vom Kunden einsehbaren Rabattierung durch den Admin geschaffen werden.
-* Da Während der Verarbeitung des Druckauftrags unregelmäßig Fehler auftreten soll das bestehende System angepasst und dokumentierte Fehler beseitigt werden.
+* Da von Seiten der Nutzer oftmals Unklarheit besteht ob der Druckauftrag bereits gedruckt ist wird die Funktion einer Auftragsverfolgung und die Funktion einer sofortigen Generierung des Druckauftrags benötigt
+* Da von Seiten der Nutzer Druckaufträge nur durch einen Anruf oder E-Mail an die Uni-Druckerei storniert werden können, wird die Funktion einer Stornierung benötigt.
+* Um Kunden einen Kaufanreiz zu geben, soll die Funktion einer vom Kunden einsehbaren Rabattierung durch den Admin geschaffen werden.
+* Da während der Verarbeitung des Druckauftrags unregelmäßig Fehler auftreten soll das bestehende System angepasst und dokumentierte Fehler beseitigt werden.
 
 === Problem Statement
 |===
@@ -80,7 +80,7 @@ a|stellt die Schnittstelle zur Übermittlung der Dokumente und die Informationen
 
 === Benutzerumgebung
 . Studierende
-* Die Nutzeranzahl kann variieren. (derzeit wenige Nutzer)
+* Die Kundenanzahl kann variieren. (derzeit wenige Nutzer)
 * Das Kundenkonto soll Funktionen zur Auftragsverfolgung, Übersicht zu Rabattstufen und eine Stornieroption bieten.
 * Die Aufträge werden weiterhin über die Plattform OPAL mittels einer E-Mail an den Server gesendet.
 
@@ -137,7 +137,7 @@ a|stellt die Schnittstelle zur Übermittlung der Dokumente und die Informationen
 
 |Drucken über E-Mail o.ä.
 |2
-|Zusätzliche Möglichkeiten zum Drucken, außer den Auftrag in OPAL zu erstellen, zB über E-Mail
+|Zusätzliche Möglichkeiten zum Drucken, außer den Auftrag in OPAL zu erstellen, z.B. über E-Mail
 |Zum Ende des Projekts
 
 |===
