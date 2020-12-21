@@ -26,6 +26,7 @@ include::../_includes/default-attributes.inc.adoc[]
 * Verstehen der Vorstellungen der Themensteller
 * Verteilung der einzelnen Aufgaben
 * Erstellen der Vision, des Glossars und der Use Cases um sie den Themenstellern zur Vefügung zu stellen
+* Verbessern der Arbeit mit Github
 
 
 == Aufgabenzuordnung
