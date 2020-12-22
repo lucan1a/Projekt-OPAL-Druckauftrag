@@ -1,0 +1,44 @@
+
+== Use-Case: Auftragsverfolgung einsehen
+===	Kurzbeschreibung
+Der Kunde soll den Status seinen Druckauftrags einsehen können, d.h. ob der Auftrag bereit zum drucken ist.
+
+===	Kurzbeschreibung der Akteure
+
+==== Nutzer
+Der Nutzer möchte seine Druckaufträge einsehen und den Status verfolgen können.
+
+==== System
+Bereits bestehendes System, das von der vorherigen Gruppe entwickelt wurde und über welches die Druckaufträge verarbeitet werden.
+
+=== Vorbedingungen
+* Der Nutzer hat bereits ein oder mehrere Druckaufträge gesendet.
+* Der Nutzer besitzt ein Kundenkonto.
+
+
+=== Standardablauf (Basic Flow)
+. Der Use Case beginnt, wenn der Nutzer sich in sein Nutzerkonto eingeloggt hat
+. Der Nutzer ruft die Auftragsverfolgung auf.
+. Das System sucht nach den Druckaufträgen der S-Nummer in seiner Datenbank.
+. Das System zeigt dem Nutzer die Druckaufträge samt Status an.
+. Der Use Case ist abgeschlossen. 
+
+
+=== Alternative Abläufe
+====  Nutzer hat keine Druckaufträge
+. Der Use Case beginnt, wenn der Nutzer sich in sein Nutzerkonto eingeloggt hat.
+. Der Nutzer ruft die Auftragsverfolgung auf.
+. Das System sucht nach den Druckaufträgen der S-Nummer in seiner Datenbank.
+. Das System zeigt dem Nutzer eine Meldung, dass keine Aufträge vorhanden sind.
+. Der Use Case ist abgeschlossen.
+
+
+=== Wesentliche Szenarios
+==== Nutzer besitzt Druckaufträge
+Sc1: Der Nutzer A befindet sich in seinem Kundenkonto und ruft die Auftragsverfolgung auf. Es öffnet sich eine Übersicht mit den Druckaufträgen des Kunden.
+
+==== Nutzer besitzt keine Druckaufträge
+Sc2: Der Nutzer B befindet sich in seinem Kundenkonto und ruft die Auftragsverfolgung auf. Es öffnet sich eine Meldung, dass der Kunde keine Aufträge besitzt.
+
+=== Nachbedingungen
+* Ausgabe der Aufträge oder einer Meldung das keine existieren

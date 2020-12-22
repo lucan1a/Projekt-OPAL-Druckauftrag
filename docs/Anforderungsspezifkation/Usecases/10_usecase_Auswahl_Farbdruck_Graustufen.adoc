@@ -1,0 +1,46 @@
+
+== Use-Case: Auswahl Farbdruck/Graustufen
+===	Kurzbeschreibung
+Der Nutzer hat bei der Erteilung des Druckauftrags zusätzlich die Auswahl, ob ein Farbdruck oder in Graustufen gedruckt werden soll.
+
+===	Kurzbeschreibung der Akteure
+
+==== Nutzer
+Der Nutzer kann die Druckeinstellungen bestimmen.
+
+==== Uni-Druckerei
+Die UNIdruckerei muss je nach gewählter Einstellung Bunt oder in Graustufen drucken
+
+==== System
+Das System muss je nach gewählter Einstellung unterschiedliche Kosten pro Druckseite Ausgeben
+
+==== Verarbeitung
+Die Verarbeitung muss je nach gewählter Einstellung eine Reduzierung auf Graustufen durchführen oder nicht
+
+
+=== Vorbedingungen
+* Benutzer ist im Opal angemeldet
+* Im Browser wird die Desktop-Ansicht benutzt
+* Zu druckendes Dokument vom Studierenden ausgewählt
+
+
+=== Standardablauf (Basic Flow)
+. Der Use Case beginnt, wenn der Nutzer das Dialogfenster zur Druckauftragserteilung im Opal öffnet
+. Das System lädt das Informationsfeld
+. Der Nutzer liest den Informationstext und wählt die gewünschten Druckeinstellungen aus.
+. Der Use Case ist abgeschlossen
+
+=== Alternative Abläufe
+==== Abbruch des Druckauftrags
+Wenn der Studierende in einem beliebigen Schritt des Standartablauf den Druckauftrag abbricht, wird der Use Case beendet.
+
+=== Wesentliche Szenarios
+SC1: Der Student A öffnet das Dialogfenster und wählt die Druckeinstellung “1 Seite (Standard)“ und „Bunt“ aus und bestätigt den Druckauftrag. Der Druckauftrag geht im Postfach ein.
+SC2: Der Student B öffnet das Dialogfenster und wählt die Druckeinstellung „2 Seiten“ und „Graustufen“ aus und bestätigt den Druckauftrag. Der Druckauftrag geht im Postfach ein.
+
+==== Abbruch des Druckauftrags
+SC3: Der Student C öffnet das Dialogfenster und wählt die Druckeinstellung „4 Seiten“ und „Graustufen“ aus und bricht den Druckauftrag ab. Es werden keine Druckdaten versendet.
+
+=== Nachbedingungen
+* Der Druckauftrag ist vollständig im Postfach des Druckservices eingegangen
+* Der Datenweitergabe wurde zugestimmt

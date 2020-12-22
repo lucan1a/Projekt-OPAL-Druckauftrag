@@ -1,0 +1,48 @@
+
+== Use-Case: Stornierung durch Nutzer 
+===	Kurzbeschreibung
+Die Kunden sollen einen Druckauftrag stornieren können, falls dieser versehentlich beauftragt wurde oder der Kunde die Dokumente nicht mehr benötigt.
+
+===	Kurzbeschreibung der Akteure
+
+==== Nutzer
+Der Nutzer möchte seinen Druckauftrag stornieren.
+
+==== System
+Bereits bestehendes System, das von der vorherigen Gruppe entwickelt wurde und über welches die Druckaufträge verarbeitet werden. Das System muss den Auftrag löschen.
+
+=== Vorbedingungen
+* Es wurde ein Druckauftrag ausgelöst.
+* Die Dokumente wurden noch nicht gedruckt.
+
+
+=== Standardablauf (Basic Flow)
+. Der Use Case beginnt, wenn der Nutzer sich in sein Nutzerkonto eingeloggt hat.
+. Der Nutzer ruft die Stornierung auf. 
+. Das System listet die Druckaufträge auf, welche noch stornierbar sind.
+. Der Kunde wählt den gewünschten Druckauftrag aus.
+. Der Kunde bestätigt seine Auswahl.
+. Das System löscht den Auftrag und gibt dem Kunden eine Rückmeldung.
+. Der Use Case ist abgeschlossen. 
+
+
+=== Alternative Abläufe
+==== Nutzer bricht Stornierung ab
+. Der Use Case beginnt, wenn der Nutzer sich in sein Nutzerkonto eingeloggt hat.
+. Der Nutzer ruft die Stornierung auf. 
+. Das System listet die Druckaufträge auf, welche noch stornierbar sind.
+. Der Kunde bricht die Auswahl ab.
+. Das System löscht keinen Auftrag.
+. Der Use Case ist abgeschlossen. 
+
+=== Wesentliche Szenarios
+==== Nutzer gibt einen Druckauftrag auf
+Sc1: Der Nutzer A öffnet die Stornierungsübersicht. Das System listet die verfügbaren Druckaufträge auf. Anschließend wählt der Nutzer den gewünschten Auftrag aus und bestätigt die Stornierung. Das System löscht den Auftrag und gibt dem Nutzer die Rückmeldung, dass die Stornierung erfolgreich war. 
+
+==== Nutzer bricht die Stornierung ab
+Sc2: Der Nutzer B A öffnet die Stornierungsübersicht. Das System listet die verfügbaren Druckaufträge auf. Der Kunde bricht die Auswahl ab und es wird keine Löschung vom System ausgeführt.
+
+
+
+=== Nachbedingungen
+* Löschen des Auftrags oder einer Meldung das keine existieren

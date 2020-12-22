@@ -1,0 +1,44 @@
+
+== Use-Case: Modifikation der Rabattierung 
+===	Kurzbeschreibung
+Die Uni-Druckerei muss in der Lage sein die Rabattierung zu erstellen und zu bearbeiten.
+
+===	Kurzbeschreibung der Akteure
+
+==== Uni-Druckerei
+Die Unidruckerei kann Rabattierungen modifizieren.
+
+==== System
+Das System bearbeitet die Rabattstufen und gibt diese wieder.
+
+=== Vorbedingungen
+* Das System kann den Rabatt richtig berechnen.
+* Der Rabatt kann im System geändert werden.
+
+
+=== Standardablauf (Basic Flow)
+. Der Use Case beginnt, wenn die Uni-Druckerei das System einsieht.
+. Die Uni-Druckerei öffnet das Bedienfenster der Rabattierung.
+. Die Uni-Druckerei ändert die Rabatteinstellungen des Systems.
+. Das System passt die Rabattierung laut den Einstellungen neu an.
+. Der Use Case ist abgeschlossen. 
+
+
+=== Alternative Abläufe
+==== Rabatteinstellungen sind nicht möglich
+. Der Use Case beginnt, wenn die Uni-Druckerei das System einsieht.
+. Die Uni-Druckerei öffnet das Bedienfenster der Rabattierung.
+. Die Uni-Druckerei ändert die Rabatteinstellungen des Systems.
+. Die eingegebenen Einstellungen sind nicht möglich.
+. Das System gibt einen Fehlermeldung bei der Bestätigung der Einstellungen.
+
+
+=== Wesentliche Szenarios
+==== Uni-Druckerei stellt Rabatt ein.
+Sc1: Ein Mitarbeiter der Uni-Druckerei stellt die Rabattstufen für Druckaufträge ein. Der Mitarbeiter bestätigt seine Auswahl und das System übernimmt die neuen Parameter.
+
+==== Das System kann die Einstellungen nicht verarbeiten
+Sc2:. Ein Mitarbeiter der Uni-Druckerei stellt die Rabattstufen für Druckaufträge ein. Der Mitarbeiter bestätigt seine Auswahl und das System gibt eine Fehlermeldung wieder. Der Mitarbeiter verändert die Einstellungen erneut und bestätigt diese.
+
+=== Nachbedingungen
+* Das System hat die Rabatteinstellungen übernommen.

@@ -1,0 +1,84 @@
+= Use-Case Model: Opal-Druckservice
+Team
+:toc: 
+:toc-title: Inhaltsverzeichnis
+:sectnums:
+
+[%header]
+== Identifizierte Use Cases
+=== für Akteur Nutzer
+* UC2: Zugriff auf Kundenkonto
+* UC3: Auftragsverfolgung einsehen
+* UC7: Stornierung durch Nutzer
+* UC10: Auswahl Farbdruck/Graustufen
+* UC11: Auswahl Dateiformat
+* UC12: Druck-Auftragserteilung durch E-Mail
+
+=== für Akteur PDF-Programm
+* UC9: Sofortige Generierung des Druckauftrags
+
+=== für Akteur Unidruckerei
+* UC5: Rabattierung modifizieren 
+* UC8: Stornierung durch UNI-Druckerei
+
+=== für Akteur System
+* UC1: Kundenkonto erstellen
+* UC4: Rabatt berechnen 
+* UC6: Rabatt freischalten
+
+== Use Case Diagramm
+image::Usecases/Usecasediagramm.png[]
+
+
+== Priorisierung der Use Cases
+
+|===
+|Use Case ID|	Use Case Name	| Priorität (1-5)
+
+|UC1|   Kundenkonto erstellen	                    | 5
+|UC2|	Zugriff auf Kundenkonto	                    | 5
+|UC3|	Auftragsverfolgung einsehen 	            | 5
+|UC4|	Rabatt berechnen            	            | 5
+|UC5|	Rabattierung modifizieren                   | 4
+|UC6|	Rabatt freischalten                         | 5
+|UC7|	Stornierung durch Nutzer                    | 5
+|UC8|	Stornierung durch UNI-Druckerei             | 3
+|UC9|	Sofortige Generierung des Druckauftrags     | 3
+|UC10|	Auswahl Farbdruck/Graustufen                | 2
+|UC11|	Auswahl Dateiformat                         | 2
+|UC12|	Druck-Auftragserteilung durch E-Mail        | 1
+
+|===
+
+
+
+== Ausgearbeitete Use Cases
+
+include::Usecases/1_usceace_Kundenkonto_erstellen.adoc[leveloffset=+1]
+
+include::Usecases/2_usecase_Zugriff_auf_das_Kundenkonto.adoc[leveloffset=+1]
+
+include::Usecases/3_usecase_Auftragsverfolgung_einsehen.adoc[leveloffset=+1]
+
+include::Usecases/4_usecase_Rabatt_berechnen.adoc[leveloffset=+1]
+
+include::Usecases/5_usecase_Rabattierung_modifizieren.adoc[leveloffset=+1]
+
+include::Usecases/6_usecase_Rabatt_freischalten.adoc[leveloffset=+1]
+
+include::Usecases/7_usecase_Stornierung_durch_Nutzer.adoc[leveloffset=+1]
+
+include::Usecases/8_usecase_Stornierung_durch_Uni-Druckerei.adoc[leveloffset=+1]
+
+include::Usecases/9_usecase_Sofortige_Generierung_des_Druckauftrags.adoc[leveloffset=+1]
+
+include::Usecases/10_usecase_Auswahl_Farbdruck_Graustufen.adoc[leveloffset=+1]
+
+include::Usecases/11_usecase_Auswahl_Dateiformat.adoc[leveloffset=+1]
+
+include::Usecases/12_usecase_Druck-Auftragserteilung_durch-E-Mail.adoc[leveloffset=+1]
+
+
+
+
+
