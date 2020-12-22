@@ -1,0 +1,44 @@
+
+== Use-Case: Rabatt berechnen
+===	Kurzbeschreibung
+
+
+===	Kurzbeschreibung der Akteure
+
+==== Nutzer
+
+
+==== Opal
+
+
+==== System
+
+
+=== Vorbedingungen
+* 
+
+=== Standardablauf (Basic Flow)
+. 
+
+=== Alternative Abläufe
+==== Nutzer mit bestehenden Kundenkonto gibt Druckauftrag auf
+. 
+
+==== Nutzer loggt sich in Kundenkonto ein
+. 
+
+
+
+=== Wesentliche Szenarios
+==== Nutzer gibt einen Druckauftrag auf
+
+
+
+
+==== Nutzer loggt sich in Kundenkonto ein
+
+
+
+
+=== Nachbedingungen
+* 

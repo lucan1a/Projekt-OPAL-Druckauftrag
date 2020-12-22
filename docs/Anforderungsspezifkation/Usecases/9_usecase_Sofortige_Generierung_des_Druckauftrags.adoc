@@ -1,0 +1,57 @@
+
+== Use-Case: Sofortige Generierung des Druckjobs 
+===	Kurzbeschreibung
+Der Nutzer soll die Möglichkeit haben alle seiner Druckaufträge selbstständig in einen Druckjob zu bündeln.
+
+
+===	Kurzbeschreibung der Akteure
+
+==== Nutzer
+Der Nutzer löst durch die Betätigung einer Schaltfläche die sofortige Generierung des Druckjobs aus und übergeht so den sonst üblichen Timer.
+
+=== Vorbedingungen
+* Es existiert eine Schaltfläche „sofortige Generierung des Druckjobs“
+* Mindestens ein Druckauftrag mit den dazugehörigen Druckeinstellungen liegt vor.
+* Je Druckauftrag liegen im Datenspeicher entsprechende Einträge vor.
+* Alle Druckaufträge enthalten keinen Passwortschutz.
+* Bei allen Druckaufträgen wurden die entsprechenden Druckeinstellungen durchgeführt.
+* Alle umgewandelten Dateien sind im System abgelegt und für die weitere Zusammenfassung bereit.
+
+=== Standardablauf (Basic Flow)
+. Der Use Case beginnt mit der Betätigung der Schaltfläche
+. Das System generiert auf Grundlage der vorhandenen Druckaufträge einen Druckjob für die Eingeloggte Bibliotheksnummer
+. For Each Druckjob wird der Unterablauf Nachverarbeitung gestartet
+. Das System löscht die verarbeiteten Druckaufträge
+. Das System leert den Ordner mit den verarbeiteten vorverarbeiteten Dokumenten
+
+=== Alternative Abläufe
+==== Fehler bei der Nachverarbeitung
+Wenn das System im Schritt 3 des Standardablaufes feststellt, dass die ordnungsgemäße
+Zusammenstellung des Druckjobs nicht möglich ist.
+
+. Das System gibt eine Fehlermeldung auf der Konsole aus.
+. Das System setzt aus dem Benutzernamen die E-Mail-Adresse zusammen und schickt eine
+Fehlermail an den Studierenden.
+. Das System bricht die Nachverarbeitung für den jeweiligen Druckjob ab.
+. Das System löscht den fehlgeschlagenen Druckjob.
+. If Vorverarbeitung für alle Druckjobs nun abgeschlossen. Fortsetzung des Standardablaufes im Schritt 4
+. Else Fortsetzung des Standardablaufes im Schritt 3
+
+===	Unterabläufe (Sub flow)
+Nachverarbeitung
+. Das System sucht nach passenden Dokumenten der jeweiligen Bibliotheksnummer im Ordner der Vorverarbeitung.
+. Das System berechnet auf Grundlage der Seitenzahlen den Gesamtpreis und erstellt einen Barcode.
+. Das System erstellt auf Grundlage der Druckauftragsdaten und unter Verwendung des Barcodes ein Deckblatt mit Datei- und Seitenzahl.
+. Das System fügt das Deckblatt und alle PDF-Dokumente der Bibliotheksnummer nacheinander zusammen.
+. Das System verschiebt den fertigen Druckjob in den Ordner der fertigen Jobs.
+
+=== Wesentliche Szenarios
+==== Erfolgreiche Zusammenfassung der Druckaufträge
+SC1: Fünf Druckaufträge eines Studenten A befinden sich im Ordner der Vorverarbeitung. Der Student A gibt den Befehl der sofortigen Generierung des Druckjobs. Ein Deckblatt wird generiert und mit den Druckaufträgen entsprechend zu einem Druckjob zusammengefasst. Der Druckjob wird vom System im Ordner der fertigen Druckjobs gespeichert.
+
+==== Druckjob kann nicht zusammengefasst werden
+SC2: Vier Druckaufträge eines Studenten B liegen im Ordner der Vorverarbeitung. Der Student B gibt den Befehl der sofortigen Generierung des Druckjobs Das Dokument des vierten Druckauftrages kann nicht verarbeitet werden. Zunächst wird das Deckblatt ordnungsgemäß erstellt und mit den ersten drei Dokumenten zusammengefasst. Beim Zusammenfügen mit dem vierten Dokument tritt ein Fehler auf. Der Student B wird mittels einer E-Mail über den Abbruch des Druckjobs informiert. Das fehlerhafte Dokument wird am Ende der gesamten Verarbeitung gelöscht.
+
+=== Nachbedingungen
+* Der vollständige Druckjob ist im System gespeichert und im Datenspeicher hinterlegt
+* (Eine E-Mail wird an den Nutzer verschickt, die die mögliche Abholzeit angibt. )

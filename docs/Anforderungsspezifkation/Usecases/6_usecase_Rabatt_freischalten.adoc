@@ -1,0 +1,47 @@
+
+== Use-Case: Freischaltung der Rabattierung
+===	Kurzbeschreibung
+Das System schaltet automatisch einen Rabatt für Nutzer frei, die eine bestimmte Anzahl an Druckaufträgen/Seitenzahlen gedruckt haben.
+
+===	Kurzbeschreibung der Akteure
+==== System
+Das System ordnet dem jeweiligen Nutzer einen Rabatt entsprechend seiner gedruckten Seiten zu.
+
+=== Vorbedingungen
+* Nutzer hat bestimmte Seitenzahl gedruckt
+* Rabattstufen wurden vorher im System festgelegt
+
+=== Standardablauf (Basic Flow)
+. Der Use Case beginnt, wenn der Nutzer die Seitenzahl einer bestimmten Rabattstufe erreicht.
+. Das System lädt die Rabattstufe. 
+. Das System ordnet dem Nutzer die entsprechende Stufe zu.
+. Die Information, dass der Nutzer eine Rabattstufe besitzt wird im System gespeichert.
+. Das System zeigt dem Nutzer an, dass er eine Rabattierung freigeschaltet hat. 
+. Der Use Case ist abgeschlossen.
+
+=== Alternative Abläufe
+==== Fehler bei der Zuteilung der Rabattstufe
+Das Speichern der Rabattstufe im System schlägt fehl und dem Nutzer wird nicht angezeigt, dass er Rabatt erhält.
+Der Nutzer wendet sich an die UNIdruckerei, um den Fehler beheben zu lassen.
+
+==== Fehler bei der Anzeige der Rabattstufe
+Das Speichern der Rabattstufe im System ist erfolgreich, jedoch wird dem Nutzer der Rabatt nicht angezeigt.
+Der Nutzer wendet sich an die UNIdruckerei, um den Fehler beheben zu lassen.
+
+
+=== Unterabläufe (Sub Flow)
+* Das System zählt im Hintergrund, wie viele Seiten der Nutzer bereits gedruckt hat.
+
+
+=== Wesentliche Szenarios
+==== Erfolgreiche Zuordnung der Rabattstufe
+Sc1: Dem Nutzer wird erfolgreich eine Stufe zugeordnet, und auch angezeigt. Er kann weiter Druckaufträge in Auftrag geben und erhält für jeden seinen vorgegebenen Rabatt.
+
+Sc2: Dem Nutzer wird erfolgreich eine Rabattstufe zugeordnet und auch angezeigt. Er druckt weiterhin über die UNIdruckerei und kann nach einiger Zeit die nächste Rabattstufe freischalten.
+
+==== Nicht erfolgreiche Zuordnung der Rabattstufe
+Sc3: Der Nutzer erhält keinen Rabatt, obwohl er die Bedingungen einer Rabattstufe bereits erfüllt hat. Dies bemerkt er und wendet sich an die UNIdruckerei, welche dem Fehler beheben können.
+
+
+=== Nachbedingungen
+* Die Rabattstufe ist im System gespeichert und bei jedem Druckauftrag abrufbar.

@@ -1,0 +1,37 @@
+
+== Use-Case: Auswahl Dateiformat
+===	Kurzbeschreibung
+Die Möglichkeit Dateien zu Drucken wird ausgeweitet auf Dateien mit dem Dateiformat … das Druckpiktogramm erscheint auch neben Dateien dieser Dateiformate.
+
+===	Kurzbeschreibung der Akteure
+
+==== System
+Im System ist es möglich nun auch Dateien mit dem Dateiformat ... zu drucken
+
+=== Vorbedingungen
+* Datei wurde in das Opal-System hochgeladen
+* Benutzer ist im Opal angemeldet
+* Im Browser wird die Desktop-Ansicht benutzt
+
+
+=== Standardablauf (Basic Flow)
+. Der Use Case beginnt mit dem Hochladen einer Datei mit dem Dateiformat …
+. Vom System wird automatisch die Möglichkeit diese Datei zu Drucken bereitgestellt
+. Der Datei wird die Druck-Schaltfläche zugeordnet
+. Der Use Case endet
+
+=== Alternative Abläufe
+==== Ein Nicht unterstütztes Dateiformat wird hochgeladen
+
+==== Der Datei wird nicht die Möglichkeit eines Drucks bereitgestellt
+
+
+
+=== Wesentliche Szenarios
+SC1: Von einem Autorisierten Opal Nutzer wird eine Datei im unterstützten Dateiformat hochgeladen. Das System stellt automatisch die Möglichkeit diese Datei zu drucken bereit. Einem zum Drucken Autorisierten Nutzer wird die Druck-Schaltfläche angezeigt
+
+SC2: Von einem Autorisierten Opal Nutzer wird eine Datei in einem nicht unterstützen Dateiformat hochgeladen. Das System stellt nicht die Möglichkeit diese Datei zu drucken bereit. Es wird keine Druck-Schaltfläche angezeigt
+
+
+=== Nachbedingungen
+* Bei unterstützten Dateiformaten gibt es die Möglichkeit zu drucken

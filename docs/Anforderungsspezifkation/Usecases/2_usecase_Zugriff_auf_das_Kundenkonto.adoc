@@ -1,0 +1,60 @@
+
+== Use-Case: Zugriff auf das Kundenkonto
+===	Kurzbeschreibung
+Die Kunden sollen ein eigenes Kundenkonto besitzen, damit sie Funktionen, wie z.B. ihre Auftragsverfolgung oder ihre Rabattstufen einsehen und vorhandene Druckaufträge stornieren können.
+
+===	Kurzbeschreibung der Akteure
+
+==== Nutzer
+Der Nutzer möchte eine komfortable und übersichtliche Nutzeroberfläche zum Verwalten seiner Druckaufträge nutzen.
+
+==== Opal
+Die Plattform Opal soll die Anmeldung zur Verfügung stellen. 
+
+==== System
+Bereits bestehendes System, das von der vorherigen Gruppe entwickelt wurde und über welches die Druckaufträge verarbeitet werden.
+
+=== Vorbedingungen
+* Benutzer besitzt OPAL-Login 
+
+=== Standardablauf (Basic Flow)
+. Der Use Case beginnt, wenn der Nutzer einen Druckauftrag via OPAL erteilt hat.
+. Das System prüft ob für die S-Nummer bereits ein Kundenkonto existiert.
+. Das System erstellt ein Kundenkonto.
+. Das System leitet den Nutzer auf die Webseite zur Anmeldung weiter.
+. Der Kunde loggt sich mit seinem OPAL-Login in sein Kundenkonto ein.
+. Das System verifiziert den Kunden.
+. Der Use Case ist abgeschlossen. 
+
+=== Alternative Abläufe
+==== Nutzer mit bestehenden Kundenkonto gibt Druckauftrag auf
+. Der Use Case beginnt, wenn der Nutzer einen Druckauftrag via OPAL erteilt hat.
+. Das System prüft ob für die S-Nummer bereits ein Kundenkonto existiert.
+. Das Kundenkonto wurde in Datenbank gefunden.
+. Das System leitet den Nutzer auf die Webseite zur Anmeldung weiter.
+. Der Kunde loggt sich mit seinem OPAL-Login in sein Kundenkonto ein.
+. Das System verifiziert den Kunden.
+. Der Use Case ist abgeschlossen. 
+
+==== Nutzer loggt sich in Kundenkonto ein
+. Der Use Case beginnt, wenn der Nutzer die Webseite zur Anmeldung für sein Kundenkonto aufruft.
+. Der Kunde loggt sich mit seinem OPAL-Login in sein Kundenkonto ein.
+. Das System verifiziert den Kunden.
+. Der Use Case ist abgeschlossen. 
+
+
+
+=== Wesentliche Szenarios
+==== Nutzer gibt einen Druckauftrag auf
+Sc1: Der Nutzer A erteilt einen Druckauftrag, woraufhin ein neues Kundenkonto erstellt wird. Es öffnet sich eine neue Webseite, wo der Nutzer gebeten wird sich mit seinem OPAL-Login anzumelden. Der Nutzer meldet sich an und hat Zugriff auf sein Kundenkonto. 
+
+Sc2: Der Nutzer B erteilt einen Druckauftrag, das System findet ein bereits vorhandenes Kundenkonto. Es öffnet sich eine neue Webseite, wo der Nutzer gebeten wird sich mit seinem OPAL-Login anzumelden. Der Nutzer meldet sich an und hat Zugriff auf sein Kundenkonto. 
+
+==== Nutzer loggt sich in Kundenkonto ein
+Sc3: Der Nutzer C ruft die Webseite zur Anmeldung zu seinem Kundenkonto auf. Er loggt sich mit seinem OPAL-Login ein. 
+
+
+
+=== Nachbedingungen
+* Der Nutzer hat die Webseite zur Anmeldung nicht direkt geschlossen.
+* Der Nutzer hat der Erstellung eines Kundenkontos zugestimmt.

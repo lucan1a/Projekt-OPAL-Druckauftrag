@@ -1,0 +1,46 @@
+
+== Use-Case: Druck Auftragserteilung durch E-Mail 
+===	Kurzbeschreibung
+Jeder Nutzer kann einen Druckauftrag mit seiner privaten E-Mail erteilen.
+
+===	Kurzbeschreibung der Akteure
+
+==== Nutzer
+Der Nutzer möchte mit seiner eigenen E-Mail einen Druckauftrag versenden.
+
+==== Uni-Drucker
+Die Uni-Drucker bearbeitet den Auftrag.
+
+==== System
+Das System verarbeitet die E-Mails und leitet sie weiter.
+
+=== Vorbedingungen
+* Nutzer hat eine E-Mail Adresse
+* Das System kann externe E-Mails verarbeiten
+
+=== Standardablauf (Basic Flow)
+. Der Use Case beginnt, wenn der Nutzer einen Druckauftrag mit seiner privaten E-Mail  erteilt hat.
+. Das System prüft die eingegangene E-Mail.
+. Das System erstellt einen Druckauftrag aus der E-Mail.
+. Der Nutzer bekommt eine Eingangsbestätigung.
+. Der Druckjob wird von der Uni-Druckerei gedruckt.
+. Der Kunde bekommt eine Abholbenachrichtigung.
+. Der Use Case ist abgeschlossen. 
+
+
+=== Alternative Abläufe
+==== Abbruch des Druckauftrags
+. Der Use Case beginnt, wenn der Nutzer einen Druckauftrag mit seiner privaten E-Mail  erteilt hat.
+. Das System prüft die eingegangene E-Mail.
+. Das System erstellt einen Druckauftrag aus der E-Mail.
+. Der Nutzer bekommt eine Eingangsbestätigung.
+. Der Kunde bricht den Druckauftrag ab.
+. Das System löscht den Druckauftrag.
+. Der Use Case ist abgeschlossen. 
+
+=== Wesentliche Szenarios
+==== Nutzer gibt einen Druckauftrag auf
+Sc1: Der Nutzer erteilt einen Druckauftrag mit seiner privaten E-Mail. Dieser wird vom System bearbeitet und von der Uni-Druckerei fertiggestellt. Der Nutzer kann seinen Auftrag abholen.
+
+=== Nachbedingungen
+* 
