@@ -39,9 +39,9 @@ image::Usecases/Usecasediagramm.png[]
 |UC2|	Zugriff auf Kundenkonto	                    | 5
 |UC3|	Auftragsverfolgung einsehen 	            | 5
 |UC4|	Rabatt berechnen            	            | 5
-|UC5|	Rabattierung modifizieren                   | 4
-|UC6|	Rabatt freischalten                         | 5
-|UC7|	Stornierung durch Nutzer                    | 5
+|UC5|	Rabatt freischalten                         | 5
+|UC6|	Stornierung durch Nutzer                    | 5
+|UC7|	Rabattierung modifizieren                   | 4
 |UC8|	Stornierung durch UNI-Druckerei             | 3
 |UC9|	Sofortige Generierung des Druckauftrags     | 3
 |UC10|	Auswahl Farbdruck/Graustufen                | 2
@@ -62,11 +62,11 @@ include::Usecases/3_usecase_Auftragsverfolgung_einsehen.adoc[leveloffset=+1]
 
 include::Usecases/4_usecase_Rabatt_berechnen.adoc[leveloffset=+1]
 
-include::Usecases/5_usecase_Rabattierung_modifizieren.adoc[leveloffset=+1]
+include::Usecases/5_usecase_Rabatt_freischalten.adoc[leveloffset=+1]
 
-include::Usecases/6_usecase_Rabatt_freischalten.adoc[leveloffset=+1]
+include::Usecases/6_usecase_Stornierung_durch_Nutzer.adoc[leveloffset=+1]
 
-include::Usecases/7_usecase_Stornierung_durch_Nutzer.adoc[leveloffset=+1]
+include::Usecases/7_usecase_Rabattierung_modifizieren.adoc[leveloffset=+1]
 
 include::Usecases/8_usecase_Stornierung_durch_Uni-Druckerei.adoc[leveloffset=+1]
 
