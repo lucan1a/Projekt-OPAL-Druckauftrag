@@ -1,0 +1,47 @@
+@startuml usecase-example 
+left to right direction 
+
+actor System
+actor UniDruckerei
+actor Nutzer
+
+rectangle "Opal-Druckservice"{
+    (UC01/Kundenkonto erstellen) as (uc01)
+    (UC02/Zugriff Kundenkonto) as (uc02)
+    (UC03/Auftragsverfolgung) as (uc03)
+    (UC04/Rabatt berechnen) as (uc04)
+    (UC05/Rabatt freischalten) as (uc05)
+    (UC06/Stornierung durch Nutzer) as (uc06)
+    (UC07/Rabatt modifizeren) as (uc07)
+    (UC08/Stornierung durch Uni-Druckerei) as (uc08)
+    (UC09/Sofortige Generierung) as (uc09)
+    (UC10/Auswahl Farbdruck/Graustufen) as (uc10)
+    (UC11/Auswahl Dateiformat) as (uc11)
+    (UC12/Aufragserteilung durch E-Mail) as (uc12)
+    rectangle "Kundenkonto"{ 
+
+    }
+}
+
+
+
+UniDruckerei --> uc08
+UniDruckerei --> uc07
+
+System --> uc04
+uc04 --> uc05
+
+Nutzer --> uc02
+uc02 --> uc06
+uc02 --> uc03
+uc02 --> uc09
+
+Nutzer --> uc10
+Nutzer --> uc11
+Nutzer --> uc12
+
+System --> uc01
+uc01 --> Kundenkonto
+
+
+@enduml 
