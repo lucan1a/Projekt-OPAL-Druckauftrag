@@ -1,44 +1,40 @@
 
 == Use-Case: Kundenkonto erstellen
 ===	Kurzbeschreibung
-
+Bei dem Ersten Druckauftrag pro Nutzer wird automatisch ein Kundenkonto angelegt und eine E-Mail mit Zugangsinformationen Versand
 
 ===	Kurzbeschreibung der Akteure
 
-==== Nutzer
-
-
-==== Opal
-
 
 ==== System
-
+System: Das System erstellt automatisch ein Kundenkonto und versendet eine E-Mail mit Zugangsinformationen 
 
 === Vorbedingungen
-* 
+* 	Der Nutzer ist im Opal System als Student angemeldet
+*	Ein Druckauftrag wird von einem Nutzer in Auftrag gegeben
+
 
 === Standardablauf (Basic Flow)
-. 
+.	Bei Eingang des Druckauftrags wird im System abgeglichen ob für die s-Nummer schon ein Kundenkonto angelegt wurde
+.	Wenn kein Kundenkonto mit entsprechender s-Nummer gefunden wurde wird ein Kundenkonto erstellt
+.	Wenn ein Kundenkonto erstellt wurde wird eine Mail an die aus der s-Nummer generierte E-Mail-Adresse generiert in der Mail enthalten sind:
+*	Ein Link zur Login Seite für die Kundenkonten
+*	Anmeldedaten für die Erstanmeldung
+*	Ein Tex mit dem Inhalt „“
+.	Der Standartablauf ist beendet
 
 === Alternative Abläufe
-==== Nutzer mit bestehenden Kundenkonto gibt Druckauftrag auf
-. 
-
-==== Nutzer loggt sich in Kundenkonto ein
-. 
-
+*   Wenn im Schritt 1. Festgesellt wird das ein Kundenkonto besteht wird der Standartablauf beendet
 
 
 === Wesentliche Szenarios
-==== Nutzer gibt einen Druckauftrag auf
-
-
-
-
-==== Nutzer loggt sich in Kundenkonto ein
-
+==== Nutzer A gibt einen Druckauftrag in Auftrag. 
+Das System gleicht ab ob bereits ein Kundenkonto besteht. Es besteht noch kein Kundenkonto. Es wird ein Kundenkonto erstellt und eine Mail mit Login Informationen Versand. Der Prozess wird beendet.
+==== Nutzer B gibt einen Druckauftrag in Auftrag. 
+Das System gleicht ab ob bereits ein Kundenkonto besteht. Es besteht bereits ein Kundenkonto. Der Prozess wird beendet.
 
 
 
 === Nachbedingungen
-* 
+*   Ein Kundenkonto für die jeweilige s-Nummer ist angelegt.
+*   Eine Mail mit Login Informationen wurde Versand

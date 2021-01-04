@@ -1,44 +1,54 @@
 
 == Use-Case: Rabatt berechnen
 ===	Kurzbeschreibung
-
+Das System berechnet anhand der Anzahl der Gedruckten Seiten einen Rabatt pro Nutzer.
 
 ===	Kurzbeschreibung der Akteure
 
 ==== Nutzer
+Der Nutzer kann seine Rabattstufe einsehen.
 
-
-==== Opal
-
+==== Admin
+Der Admin kann die Berechnung des Rabattes verändern.
 
 ==== System
-
+Im System wird ein Rabatt berechnet.
 
 === Vorbedingungen
-* 
+*   Es wird ein Kundenkonto benötigt, um die Rabattierung eindeutig zuzuordnen.
+*   Im System müssen die gedruckten Seiten gezählt und für jedes Kundenkonto einzeln gespeichert werden.
 
 === Standardablauf (Basic Flow)
-. 
+.	Der Ablauf beginnt mit dem Eingang eines Druckauftrags
+.	Die Anzahl der Seiten im Druckauftrag wird vom System gezählt
+.	Der Druckauftrag wird in einen Druckjob umgewandelt
+.	Bei der Erstellung des Druckjobs wird der Gesamtpreist mit dem Rabattfaktor (Standartmäßig 1) multipliziert
+.	Die Anzahl der Seiten des Druckjobs wird dem Seitenzahlcounter des Kundenkontos gutgeschrieben
+.	Ab gewissen Seitenzahlen wird der Rabattfaktor für das Kundenkonto verändert
+.	Der Admin kann immer die Rabattstufe von jedem Kundenkonto zurücksetzen
+
 
 === Alternative Abläufe
-==== Nutzer mit bestehenden Kundenkonto gibt Druckauftrag auf
-. 
+*   Wenn beim Standartablauf vor Schritt 5 der Druckauftrag oder Druckjob storniert wird, so bricht der Standartablauf ab
+*   Wenn beim Standartablauf vor Schritt 5 der Druckauftrag oder Druckjob storniert wird, so werden die gutgeschriebenen Seiten wieder vom Kundenkonto subtrahiert.
+*   Wenn der Gedruckte Druckjob nicht abgeholt wird kann die Rabattstufe vom Admin zurückgesetzt oder die Seiten subtrahiert werden
 
-==== Nutzer loggt sich in Kundenkonto ein
-. 
+ 
 
 
 
 === Wesentliche Szenarios
-==== Nutzer gibt einen Druckauftrag auf
 
+==== Nutzer A gibt einen Druckauftrag von 21 Seiten in Auftrag. 
+*   Der Druckjob wird erstellt und die Kosten werden standartmäßig mit dem Faktor 1 multipliziert. Die Seitenanzahl wird dem Seitenzahlcounter des Kundenkontos A gutgeschrien. Nutzer A hat nun 21 Seiten gedruckt und bekommt für seinen nächsten Druckjob den Rabattfaktor 0,95.
 
+==== Nutzer B gibt einen Druckauftrag von 201 Seiten in Auftrag. 
+*   Der Druckjob wird erstellt und die Kosten werden standartmäßig mit dem Faktor 1 multipliziert. Die Seitenanzahl wird dem Kundenkonto gutgeschrien. Nutzer B storniert den Druckjob. Das System subtrahiert die Seitenanzahl vom Seitenzahlcounter des Kundenkontos B. Das Kundenkonto von Nutzer B hat wieder 0 Seiten gedruckt
 
-
-==== Nutzer loggt sich in Kundenkonto ein
-
-
+==== Nutzer C gibt einen Druckauftrag von 50 Seiten in Auftrag. 
+*   Der Druckjob wird erstellt und die Kosten werden standartmäßig mit dem Faktor 1 multipliziert. Die Seitenanzahl wird dem Seitenzahlcounter des Kundenkontos C gutgeschrien. Nutzer C holt seine gedruckten Seiten nicht innerhalb von X Tagen ab. Der Admin setzt den Seitenzahlcounter des Kundenkontos C zurück.
 
 
 === Nachbedingungen
-* 
+*   Der Seitenzahlcounter des entsprechenden Kundenkontos wurde um die Anzahl der gedruckten Seiten erhöht
+*   Der Rabatt sowie der Rabattfaktor wurden dem Seitenzahlcounter entsprechend ausgewählt
