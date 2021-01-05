@@ -8,13 +8,13 @@ Priorität: 1 (niedrig) - 5 (hoch)
 [%header, cols="3,1,1,1,2,1,1,1,1"]
 |===
 | Aufgabe bzw. Beschreibung | Priorität |Schätzung der Größe (Punkte) |Status | Referenzen |geplante Iteration | Zugewiesen (Name) | Gearbeite Stunden | Schätzung der verbleibenden Stunden
-| Erstellung der Teamstruktur | 4 | x | hergestellt | x | 1 | x | alle | -
-| Kontakt zu Themensteller und Coach | 5 | x | aufgenommen | x | 1 | x | Kevin | -
+| Erstellung der Teamstruktur | 4 | x | hergestellt | x | 1 | alle | x | -
+| Kontakt zu Themensteller und Coach | 5 | x | aufgenommen | x | 1 | Kevin | x | -
 | Vision schreiben | 3 | x | x | x | 2 | x | x | x
 | Use Cases definieren | x | x | x | x | 2 | x | x | x
 | Glossary vervollständigen | x | x | x | x | x | x | x | x
-| Iteration planen | 3 | x | x | x | 1 | x | Kevin | x
-| Projektplan verfassen | 2 | x | x | x | x | x | Kevin | x
-| Interface designen | 2 | x | x | x | x | x | Andreas, Kay | x
-| Bugs fixen | 4 | x | x | x | x | x | Huy, Beni | x
+| Iteration planen | 3 | x | x | x | 1 | Kevin | x | x
+| Projektplan verfassen | 2 | x | x | x | x | Kevin | x | x
+| Interface designen | 2 | x | aufgenommen | x | 2 | Andreas, Kay | x | x
+| Bugs fixen | 4 | x | x | x | x | Huy, Beni | x | x
 |===
