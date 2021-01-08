@@ -32,7 +32,7 @@ Team
 * UC5: Rabatt freischalten
 
 == Use Case Diagramm
-.Klassendiagramm mit PlantUML
+.Usecasediagramm
 
 [plantuml, "{diagramsdir}/Usecasediagramm", svg]
 ....
