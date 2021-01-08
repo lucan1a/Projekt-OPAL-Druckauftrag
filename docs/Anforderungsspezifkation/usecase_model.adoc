@@ -3,6 +3,11 @@ Team
 :toc: 
 :toc-title: Inhaltsverzeichnis
 :sectnums:
+:imagesdir: images
+
+// --- PlantUML directories ---
+:diagramsdir: diagrams
+:plantumlsdir: plantuml
 
 [%header]
 == Identifizierte Use Cases
@@ -27,7 +32,12 @@ Team
 * UC5: Rabatt freischalten
 
 == Use Case Diagramm
-image::Usecases/Usecasediagramm.png[]
+.Klassendiagramm mit PlantUML
+
+[plantuml, "{diagramsdir}/Usecasediagramm", svg]
+....
+include::{plantumlsdir}/Usecasediagramm.puml[]
+....
 
 
 == Priorisierung der Use Cases

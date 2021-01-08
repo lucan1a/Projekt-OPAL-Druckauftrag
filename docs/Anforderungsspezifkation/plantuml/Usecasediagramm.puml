@@ -1,4 +1,4 @@
-@startuml usecase-example 
+@startuml Usecasediagramm
 left to right direction 
 
 actor System
