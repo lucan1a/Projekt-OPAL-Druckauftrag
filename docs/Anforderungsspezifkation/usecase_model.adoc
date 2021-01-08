@@ -9,7 +9,7 @@ Team
 === für Akteur Nutzer
 * UC2: Zugriff auf Kundenkonto
 * UC3: Auftragsverfolgung einsehen
-* UC7: Stornierung durch Nutzer
+* UC6: Stornierung durch Nutzer
 * UC10: Auswahl Farbdruck/Graustufen
 * UC11: Auswahl Dateiformat
 * UC12: Druck-Auftragserteilung durch E-Mail
@@ -18,13 +18,13 @@ Team
 * UC9: Sofortige Generierung des Druckauftrags
 
 === für Akteur Unidruckerei
-* UC5: Rabattierung modifizieren 
+* UC7: Rabattierung modifizieren 
 * UC8: Stornierung durch UNI-Druckerei
 
 === für Akteur System
 * UC1: Kundenkonto erstellen
 * UC4: Rabatt berechnen 
-* UC6: Rabatt freischalten
+* UC5: Rabatt freischalten
 
 == Use Case Diagramm
 image::Usecases/Usecasediagramm.png[]
