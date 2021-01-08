@@ -1,0 +1,104 @@
+= Opal-Druckservice: System-Wide Requirements Specification
+Team
+:toc: 
+:toc-title: Inhaltsverzeichnis
+:sectnums:
+:icons: font
+
+== Einführung
+In diesem Dokument werden die systemweiten Anforderungen für das Projekt Workflowergänzung zum OPAL-Druckauftrag spezifiziert. Die Gliederung erfolgt nach der FURPS+ Anforderungsklassifikation:
+
+* Systemweite funktionale Anforderungen (F),
+* Qualitätsanforderungen für Benutzbarkeit, Zuverlässigkeit, Effizienz und Wartbarkeit (URPS) sowie 
+* zusätzliche Anforderungen (+) für technische, rechtliche und organisatorische Randbedingungen
+
+== Systemweite funktionale Anforderungen
+*NFAF-1 Das System muss den Zugriff auf das Kundenkonto ermöglichen.*
+
+Zur Überprüfung wird ein Testbetrieb eingerichtet.
+(relevant für: <<2_usecase_Zugriff_auf_das_Kundenkonto.adoc#,UC2>>)
+
+*NFAF-2 Die Authentifizierung erfolgt über den HTW-Login.*
+
+. ...
+(relevant für: <<Usecases\4_usecase_Druckauftraege_zusammenfassen.adoc#,UC4>>)
+
+*NFAF-3 Eine Stornierung ist von Anbieter und Kunden möglich.*
+
+Zur Überprüfung wird ein Testbetrieb eingerichtet.
+//evt. noch das Ereignis der Erinnerungsemail
+
+*NFAF-4 Das System soll den aktuellen Auftragsstatus wiedergeben.*
+
+Zur Überprüfung wird ein Testbetrieb eingerichtet.
+
+*NFAF-5 Das System soll die aktuelle Rabattstufe anzeigen können.*
+
+Zur Überprüfung wird ein Testbetrieb eingerichtet.
+
+
+
+
+== Qualitätsanforderungen für das Gesamtsystem
+=== Benutzbarkeit (Usability)
+*NFAU-1 Die E-mail-mitteilungen an die Studierenden müssen eindeutig verständlich sein*
+
+Zur Überprüfung werden E-Mails an Testpersonen versendet.
+(relevant für: <<1_usceace_Kundenkonto_erstellen.adoc#,UC1>>)
+
+*NFAU-2 Der Anbieter und die Kunden sollen innerhalb von einer Minute den Druck stornieren können.*
+
+Zur Überprüfung wird eine Zeitmessung mit einem Entwickler durchgeführt. (relevant für: <<Usecases\6_usecase_Druck_bestaetigen.adoc#,UC6>>, <<Usecases\7_usecase_Abholung_bestaetigen.adoc#,UC7>>)
+
+*NFAU-3 Der Nutzer soll innerhalb von einer Minute die Auftragsverfolgung einsehen können.*
+
+Zur Überprüfung wird eine Zeitmessung mit einem Entwickler durchgeführt. 
+
+// * Ziel effektiv und zufriedenstellend ereichen
+// * Auf das Wesentliche beschränken und sofort ausbauen
+// ** Druckauftrag starten (Aus Sicht des Anwenders), spezielle Applikationen einbauen z.B.
+// *** bestimmte Seiten drucken
+// *** das ganze Dokument
+// *** Teilbereich
+
+
+=== Zuverlässigkeit (Reliability)
+//*NFAR-1 Das System muss zu den Öffnungszeiten der Unidruckerei zur Verfügung stehen*
+
+//Zur Überprüfung...
+
+*NRAR-1 Es sollten mehrere Kunden gleichzeitig in ihren Kundenkontos angemeldet sein können.*
+
+Zur Überprüfung werden sowohl Entwickler, als auch Mitarbeiter der UNI-Druckerei gleichzeitig auf Ihre Kundenkonten zugreifen. 
+(relevant für: <<Usecases\1_usecase_Druckauftrag_erteilen.adoc#,UC1>>)
+
+
+    
+=== Effizienz (Performance)
+*NRAP-1 Das System soll robust gegen eine hohe Anzahl an Druckaufträgen auf einmal sein*
+
+Zur Überprüfung werden Probedokumente (500 Aufträge) ins System gegeben und die Zeit, sowie die Systemauslastung für die Verarbeitung gemessen.
+(relevant für: <<Usecases\11_usecase_Druckauftrag_vorbereiten.adoc#,UC4>>)
+
+* Berechnungsbasis: Im Jahr 2019 gab es circa 30.000 Druckaufträge mit 472.000 Seiten, welche zu 4.100 Druck-Jobs zusammengefasst wurden. Zwischen dem Beginn der Zusammenfassung und den Öffnungszeiten der Unidruckerei liegt ein Zeitfenster von vier Stunden. Davon ausgehend, dass für Studierende aufgrund von Semesterferien oder Feiertagen nur an knapp 270 Tagen im Jahr gedruckt wird, fallen pro Tag circa 111 Druckaufträge mit circa 16 Seiten an. 
+
+=== Wartbarkeit (Supportability)
+*NRAS-1 Das System soll zusätzliche Einbindungen von Rabattstufen ermöglichen.*
+
+Zur Überprüfung wird testweise eine weitere Rabattstufe hinzugefügt. (relevant für: <<Usecases\4_usecase_Druckauftraege_zusammenfassen.adoc#,UC4>>)
+
+*NRAS-2 Das System soll für den Administrator verständlich dokumentiert sein.*
+
+Zur Überprüfung wird der Code einschließlich Dokumentation dem Administrator vorgelegt und dieser zum Verständnis befragt.
+
+//*NRAS-3 Das System soll durch zusätzliche Druckeinstellungen erweiterbar sein*
+
+//Zur Überprüfung wird testweise 
+
+== Zusätzliche Anforderungen
+=== Einschränkungen
+
+* Das System muss auf den gängigen Browsern Google Chrome und Mozilla Firefox lauffähig sein.
+
+=== Rechtliche Anforderungen
+* Das System muss den Datenschutzrichtlinien entsprechen.
