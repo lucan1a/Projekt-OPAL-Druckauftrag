@@ -1,0 +1,81 @@
+
+== Use-Case: Stornierung
+===	Kurzbeschreibung
+Die Kunden sollen einen Druckauftrag stornieren können, falls dieser versehentlich beauftragt wurde oder der Kunde die Dokumente nicht mehr benötigt.
+Die UNIdruckerei hat auch die möglichkeit den vom Nutzer erstellten Druckauftrag zu stornieren und somit das Drucken des Dokuments zu verhindern
+
+===	Kurzbeschreibung der Akteure
+
+==== Nutzer
+Der Nutzer ersellt einen Druckauftrag. Der Nutzer möchte seinen Druckauftrag stornieren.
+
+==== UNIdruckerei
+Die UNIdruckerei möchte einen Druckauftrag stornieren
+
+==== System
+Bereits bestehendes System, das von der vorherigen Gruppe entwickelt wurde und über welches die Druckaufträge verarbeitet werden. Das System muss den Auftrag löschen. Im System wird der Auftrag unwiderruflich gelöscht.
+
+=== Vorbedingungen
+* Der Nutzer hat einen Druckauftrag generiert
+* Der Druckauftrag ist noch nicht mit anderen Druckaufträgen zusammengefasst
+* Die Dokumente wurden noch nicht gedruckt
+* Die UNIdruckerei oder der Nutzer möchten den Druckauftrag stornieren
+
+
+=== Standardablauf (Basic Flow)
+. Der Use Case beginnt, wenn sich ein Nutzer dazu entschließt, einen Auftrag zu stornieren.
+. Der Nutzer ruft die Stornierung auf. 
+. Das System listet die Druckaufträge auf, welche noch stornierbar sind.
+. Der Kunde wählt den gewünschten Druckauftrag aus.
+. Der Kunde bestätigt die Auswahl.
+. Das System löscht den Auftrag und gibt dem Kunden eine Rückmeldung.
+. Der Use Case ist abgeschlossen. 
+
+
+=== Alternative Abläufe
+==== Nutzer kontaktiert die UNIdruckerei
+. Der Use Case beginnt, wenn sich ein Nutzer dazu entschließt, einen Auftrag zu stornieren.
+. Der Nutzer kontaktiert die UNIdruckerie und gibt an welcher Druckauftrag storniert werden soll.
+. Die UNIdruckerei ruft die Druckübersicht auf
+. Das System zeigt alle in Auftrag gegebenen und stornierbaren Druckaufträge an.
+. Die UNIdruckerei wählt den zu stornierenden Auftrag aus.
+. Die UNIdruckerei bästätigt die auswahl
+. Der Auftrag wird unwiderruflich aus dem System gelöscht.
+. Das System schließt das Dialogfenster. 
+. Das System sendet eine E-Mail an den betreffenden Nutzer und informiert ihn über die Stornierung seines Druckauftrags durch die UNIdruckerei. 
+. Der Use Case ist abgeschlossen. 
+
+==== Nutzer bricht Stornierung ab
+. Der Use Case beginnt, wenn sich ein Nutzer dazu entschließt, einen Auftrag zu stornieren.
+. Der Nutzer ruft die Stornierung auf. 
+. Das System listet die Druckaufträge auf, welche noch stornierbar sind.
+. Der Kunde bricht die Auswahl ab.
+. Das System löscht keinen Auftrag.
+. Der Use Case ist abgeschlossen. 
+
+==== UNIdruckerei bricht Stornierung ab 
+. Der Use Case beginnt, wenn sich die UNIdruckerei dazu entschließt, einen Auftrag zu stornieren.
+. Die UNIdruckerei ruft die Stornierung auf. 
+. Das System listet die Druckaufträge auf, welche noch stornierbar sind.
+. Die UNIdruckerei bricht die Auswahl ab.
+. Das System löscht keinen Auftrag.
+. Der Use Case ist abgeschlossen. 
+
+=== Unterabläufe (Sub Flow)
+1. Zusammenführung der Druckaufträge findet ohne den stornierten Druckauftrag statt.
+
+=== Wesentliche Szenarios
+==== Nutzer storniert einen Druckauftrag
+Sc1: Der Nutzer A öffnet die Stornierungsübersicht. Das System listet die verfügbaren Druckaufträge auf. Anschließend wählt der Nutzer den gewünschten Auftrag aus und bestätigt die Stornierung. Das System löscht den Auftrag und gibt dem Nutzer die Rückmeldung, dass die Stornierung erfolgreich war. 
+==== UNIdruckerei storniert einen Druckauftrag
+Sc2: Die UNIdruckerei storniert den Druckauftrag erfolgreich und eine E-Mail wird erfolgreich an den Nutzer verschickt. Die Bearbeitung der Druckaufträge läuft normal weiter.
+Sc3: Die UNIdruckerei storniert den Druckauftrag erfolgreich. Das System sendet unerfolgreich eine E-Mail an den Nutzer. Die Bearbeitung der verbleibenden Druckaufträge läuft normal weiter.
+
+==== Nutzer bricht die Stornierung ab
+Sc2: Der Nutzer B A öffnet die Stornierungsübersicht. Das System listet die verfügbaren Druckaufträge auf. Der Kunde bricht die Auswahl ab und es wird keine Löschung vom System ausgeführt.
+
+
+
+=== Nachbedingungen
+* Die verbleibenden Druckaufträge werden normal weiterbearbeitet.
+* Der stornierte Druckauftrag ist nicht mehr im System aufzufinden.

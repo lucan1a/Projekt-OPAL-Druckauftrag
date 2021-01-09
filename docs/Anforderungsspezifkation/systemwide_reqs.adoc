@@ -13,7 +13,7 @@ In diesem Dokument werden die systemweiten Anforderungen für das Projekt Workfl
 * zusätzliche Anforderungen (+) für technische, rechtliche und organisatorische Randbedingungen
 
 == Systemweite funktionale Anforderungen
-*NFAF-1 Das System muss den Zugriff auf das Kundenkonto ermöglichen.*
+*NFAF-1 Das System muss den Zugriff auf das Kundenkonto und allen darin eingebetteten Funktionen ermöglichen.*
 
 Zur Überprüfung wird ein Testbetrieb eingerichtet.
 (relevant für: <<2_usecase_Zugriff_auf_das_Kundenkonto.adoc#,UC2>>)
