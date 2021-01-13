@@ -12,29 +12,21 @@ In diesem Dokument werden die systemweiten Anforderungen für das Projekt Workfl
 * Qualitätsanforderungen für Benutzbarkeit, Zuverlässigkeit, Effizienz und Wartbarkeit (URPS) sowie 
 * zusätzliche Anforderungen (+) für technische, rechtliche und organisatorische Randbedingungen
 
+
+
+
+
+
 == Systemweite funktionale Anforderungen
-*NFAF-1 Das System muss den Zugriff auf das Kundenkonto ermöglichen.*
+*NFAF-1 Die Authentifizierung erfolgt über den HTW-Login.*
 
 Zur Überprüfung wird ein Testbetrieb eingerichtet.
 (relevant für: <<2_usecase_Zugriff_auf_das_Kundenkonto.adoc#,UC2>>)
 
-*NFAF-2 Die Authentifizierung erfolgt über den HTW-Login.*
+*NFAF-2 Der Admin soll einen höheren Rechtezugriff haben.*
 
-. ...
-(relevant für: <<Usecases\4_usecase_Druckauftraege_zusammenfassen.adoc#,UC4>>)
+Zur Überprüfung wird der Zugriff auf das Adminkonto mit dem eines normalen Nutzers verglichen.
 
-*NFAF-3 Eine Stornierung ist von Anbieter und Kunden möglich.*
-
-Zur Überprüfung wird ein Testbetrieb eingerichtet.
-//evt. noch das Ereignis der Erinnerungsemail
-
-*NFAF-4 Das System soll den aktuellen Auftragsstatus wiedergeben.*
-
-Zur Überprüfung wird ein Testbetrieb eingerichtet.
-
-*NFAF-5 Das System soll die aktuelle Rabattstufe anzeigen können.*
-
-Zur Überprüfung wird ein Testbetrieb eingerichtet.
 
 
 
@@ -54,51 +46,80 @@ Zur Überprüfung wird eine Zeitmessung mit einem Entwickler durchgeführt. (rel
 
 Zur Überprüfung wird eine Zeitmessung mit einem Entwickler durchgeführt. 
 
-// * Ziel effektiv und zufriedenstellend ereichen
-// * Auf das Wesentliche beschränken und sofort ausbauen
-// ** Druckauftrag starten (Aus Sicht des Anwenders), spezielle Applikationen einbauen z.B.
-// *** bestimmte Seiten drucken
-// *** das ganze Dokument
-// *** Teilbereich
+
+*NFAU-4 Eine Stornierung muss von einem durchschnittlichen Internetnutzer ohne Anleitung durchführbar sein.*
+
+Zur Überprüfung wird eine Stornierung von einer Testperson durchgeführt.
+
+
+
 
 
 === Zuverlässigkeit (Reliability)
-//*NFAR-1 Das System muss zu den Öffnungszeiten der Unidruckerei zur Verfügung stehen*
 
-//Zur Überprüfung...
+*NFAR-1 Das System soll nach einer Stornierung den Auftrag aus der Auftragsverfolgung als storniert gekennzeichnet werden.*
 
-*NRAR-1 Es sollten mehrere Kunden gleichzeitig in ihren Kundenkontos angemeldet sein können.*
+Zur Überprüfung wird eine Stornierung von einer Testperson durchgeführt.
 
-Zur Überprüfung werden sowohl Entwickler, als auch Mitarbeiter der UNI-Druckerei gleichzeitig auf Ihre Kundenkonten zugreifen. 
-(relevant für: <<Usecases\1_usecase_Druckauftrag_erteilen.adoc#,UC1>>)
 
 
     
+
+
+
 === Effizienz (Performance)
-*NRAP-1 Das System soll robust gegen eine hohe Anzahl an Druckaufträgen auf einmal sein*
+*NFAP-1 Das System muss bis zu 10 Nutzern gleichzeitig den Zugriff auf das Kundenkonto ermöglichen können.*
 
-Zur Überprüfung werden Probedokumente (500 Aufträge) ins System gegeben und die Zeit, sowie die Systemauslastung für die Verarbeitung gemessen.
-(relevant für: <<Usecases\11_usecase_Druckauftrag_vorbereiten.adoc#,UC4>>)
+Zur Überprüfung werden sowohl Entwickler, als auch Mitarbeiter der UNI-Druckerei gleichzeitig auf Ihre Kundenkonten zugreifen. 
+(relevant für: <<2_usecase_Zugriff_auf_das_Kundenkonto.adoc#,UC2>>)
 
-* Berechnungsbasis: Im Jahr 2019 gab es circa 30.000 Druckaufträge mit 472.000 Seiten, welche zu 4.100 Druck-Jobs zusammengefasst wurden. Zwischen dem Beginn der Zusammenfassung und den Öffnungszeiten der Unidruckerei liegt ein Zeitfenster von vier Stunden. Davon ausgehend, dass für Studierende aufgrund von Semesterferien oder Feiertagen nur an knapp 270 Tagen im Jahr gedruckt wird, fallen pro Tag circa 111 Druckaufträge mit circa 16 Seiten an. 
+*NFAP-2 Zeitaufwand Sofortgenerierung*
+
+*NFAP-3 Zeitaufwand Stornierung*
+
+
+
+
+
 
 === Wartbarkeit (Supportability)
-*NRAS-1 Das System soll zusätzliche Einbindungen von Rabattstufen ermöglichen.*
 
-Zur Überprüfung wird testweise eine weitere Rabattstufe hinzugefügt. (relevant für: <<Usecases\4_usecase_Druckauftraege_zusammenfassen.adoc#,UC4>>)
+*NFAS-1 Das System soll die Anmeldung der HTW-Dresden nutzen können.*
 
-*NRAS-2 Das System soll für den Administrator verständlich dokumentiert sein.*
+Zur Überprüfung wird ein Testbetrieb eingerichtet.
+
+*NFAS-2 Die Erweiterungen müssen kompatibel mit dem bestehenden System sein.*
+
+Zur Überprüfung wird ein Testbetrieb eingerichtet.
+
+*NFAS-3 Das System soll zusätzliche Einbindungen von Rabattstufen ermöglichen.*
+
+Zur Überprüfung wird testweise eine weitere Rabattstufe hinzugefügt. (relevant für: <<7_usecase_Rabattierung_modifizieren.adoc#,UC7>>)
+
+
+*NFAS-4 Das System soll für den Administrator verständlich dokumentiert sein.*
 
 Zur Überprüfung wird der Code einschließlich Dokumentation dem Administrator vorgelegt und dieser zum Verständnis befragt.
 
-//*NRAS-3 Das System soll durch zusätzliche Druckeinstellungen erweiterbar sein*
 
-//Zur Überprüfung wird testweise 
+
+
+
+
 
 == Zusätzliche Anforderungen
-=== Einschränkungen
+=== Interfaces
 
-* Das System muss auf den gängigen Browsern Google Chrome und Mozilla Firefox lauffähig sein.
+*NFAI-1 Das System muss für verschiedene Bildschirmgrößen nutzbar sein.*
 
-=== Rechtliche Anforderungen
-* Das System muss den Datenschutzrichtlinien entsprechen.
+Zur Überprüfung wird ein Testbetrieb eingerichtet.
+
+*NFAI-2 Das System muss auf den gängigen Browsern Google Chrome und Mozilla Firefox lauffähig sein.*
+
+Zur Überprüfung wird ein Testbetrieb eingerichtet.
+
+=== Business Rules
+
+*NFABR-1 Die Stornierung ist nur möglich, solange das Dokument noch nicht gedruckt wurde.*
+
+Zur Überprüfung wird ein Testbetrieb eingerichtet.
