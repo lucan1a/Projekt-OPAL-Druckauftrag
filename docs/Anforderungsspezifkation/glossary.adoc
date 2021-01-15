@@ -49,6 +49,10 @@ In diesem Dokument werden die wesentlichen Begriffe aus dem Anwendungsgebiet (Fa
 |Vergünstigung nach gewissen Vorgaben 
 |Rabatt; Rabattstufen
 
+|Umsatz
+|Erlös den die UNIdruckerei aus einem Druckjob generiert
+|
+
 |Umsatzcounter
 |Eine Zähleinheit in der pro Nutzerkonto der erbrachte Umsatz gezählt wird um einen Rabatt zu vergeben
 |
