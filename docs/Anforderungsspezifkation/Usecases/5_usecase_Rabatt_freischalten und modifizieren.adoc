@@ -1,0 +1,38 @@
+
+== Use-Case: Freischaltung der Rabattierung
+===	Kurzbeschreibung
+Die UNIdruckerei kann einen Rabatt für einzelne Kundenkontos freischalten. 
+
+===	Kurzbeschreibung der Akteure
+
+==== UNIdruckerei
+Die UNIdruckerei kann einen Rabatt für einzelne Kundenkontos freischalten. 
+
+==== Kunde
+Der Kunde kann einsehen ob er einen Rabatt bekommt oder nicht
+
+=== Vorbedingungen
+* Die Höhe des Rabattes wurde vorher im System festgelegt
+* Das System kann den Rabatt richtig berechnen.
+
+=== Standardablauf (Basic Flow)
+. Der Use Case beginnt, wenn die UNIdruckerei auf die Rabatteinstellungen zugreift
+. Die UNIdruckerei hat die möglichkeit für einzelne Nutzer den Rabatt ein und aus zu schalten 
+. Die Information, dass der Nutzer eine Rabattierung besitzt wird im System gespeichert.
+. Das System zeigt dem Nutzer an, dass er eine Rabattierung freigeschaltet hat. 
+. Der Use Case ist abgeschlossen.
+
+=== Alternative Abläufe
+
+=== Unterabläufe (Sub Flow)
+*Das System zählt den erbrachten Umsatz pro Nutzer
+
+=== Wesentliche Szenarios
+==== Erfolgreiche Zuordnung der Rabattstufe
+Sc1: Dem Nutzer wird erfolgreich die Rabattierung zugeordnet, und auch angezeigt. Er kann weiter Druckaufträge in Auftrag geben und erhält für jeden seinen vorgegebenen Rabatt.
+
+==== Nicht erfolgreiche Zuordnung der Rabattstufe
+
+
+=== Nachbedingungen
+*   Die Rabattstufe ist im System gespeichert und bei jedem Druckauftrag abrufbar.

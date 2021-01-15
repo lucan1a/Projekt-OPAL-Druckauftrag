@@ -49,13 +49,9 @@ In diesem Dokument werden die wesentlichen Begriffe aus dem Anwendungsgebiet (Fa
 |Vergünstigung nach gewissen Vorgaben 
 |Rabatt; Rabattstufen
 
-|Rabattfaktor
-|Faktor mit dem die Kosten des Druckjobs verrechnet werden und damit die Vergünstigung angewendet wird
+|Umsatzcounter
+|Eine Zähleinheit in der pro Nutzerkonto der erbrachte Umsatz gezählt wird um einen Rabatt zu vergeben
 |
-
-|Seitenzahlcounter
-|Ein Zähler der die Gedruckten Seiten pro Nutzerkonto zählt grundlage für die Berechnung des -> Rabattfaktors
-|Seitenzahlzähler
 
 |sofort Generierung des Druckauftrags
 |Funktion um den Druckauftrag nach einer gewissen Bearbeitungszeit abholen zu können umgeht -> Weitergabezeiten
