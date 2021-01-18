@@ -1,54 +1,44 @@
 
 == Use-Case: Rabatt berechnen
 ===	Kurzbeschreibung
-Das System berechnet anhand der Anzahl der Gedruckten Seiten einen Rabatt pro Nutzer.
+Das System gibt pro Kundenkonto ab einem Umsatz von 25€ einen dauerhaften Rabatt in höhe von 10%
 
 ===	Kurzbeschreibung der Akteure
 
 ==== Nutzer
-Der Nutzer kann seine Rabattstufe einsehen.
-
-==== Admin
-Der Admin kann die Berechnung des Rabattes verändern.
+Der Nutzer kann seinen Rabattstatus einsehen.
 
 ==== System
-Im System wird ein Rabatt berechnet.
+Im System wird der Umsatz gezählt und ab 25€ Umsatz ein Rabatt in höhe von 10% aktiviert
 
 === Vorbedingungen
 *   Es wird ein Kundenkonto benötigt, um die Rabattierung eindeutig zuzuordnen.
-*   Im System müssen die gedruckten Seiten gezählt und für jedes Kundenkonto einzeln gespeichert werden.
+*   Im System muss der erbrachte Umsatz gezählt und für jedes Kundenkonto einzeln gespeichert werden.
 
 === Standardablauf (Basic Flow)
 .	Der Ablauf beginnt mit dem Eingang eines Druckauftrags
-.	Die Anzahl der Seiten im Druckauftrag wird vom System gezählt
-.	Der Druckauftrag wird in einen Druckjob umgewandelt
-.	Bei der Erstellung des Druckjobs wird der Gesamtpreist mit dem Rabattfaktor (Standartmäßig 1) multipliziert
-.	Die Anzahl der Seiten des Druckjobs wird dem Seitenzahlcounter des Kundenkontos gutgeschrieben
-.	Ab gewissen Seitenzahlen wird der Rabattfaktor für das Kundenkonto verändert
-.	Der Admin kann immer die Rabattstufe von jedem Kundenkonto zurücksetzen
-
+.   Es wird überprüft ob für dieses Kundenkonto ein Anspruch auf die Rabattierung besteht
+.   Wenn kein Anspruch besteht werden die Kosten des Druckjobs normal berechnet
+.   Sobald die UNIdruckerei die Abholung und Bezahlung des Druckjobs bestätigt wird der erbrachte Umsatz dem Umsatzcounter des Kundenkontos gutgeschrieben
 
 === Alternative Abläufe
-*   Wenn beim Standartablauf vor Schritt 5 der Druckauftrag oder Druckjob storniert wird, so bricht der Standartablauf ab
-*   Wenn beim Standartablauf vor Schritt 5 der Druckauftrag oder Druckjob storniert wird, so werden die gutgeschriebenen Seiten wieder vom Kundenkonto subtrahiert.
-*   Wenn der Gedruckte Druckjob nicht abgeholt wird kann die Rabattstufe vom Admin zurückgesetzt oder die Seiten subtrahiert werden
-
- 
-
-
+*   Wenn im Schritt 3. ein Anspruch besteht werden die Kosten mit dem Rabattfaktor verrechnet. Eine weitere Speicherung des erbrachten Umsatzes findet nicht statt.
 
 === Wesentliche Szenarios
 
-==== Nutzer A gibt einen Druckauftrag von 21 Seiten in Auftrag. 
-*   Der Druckjob wird erstellt und die Kosten werden standartmäßig mit dem Faktor 1 multipliziert. Die Seitenanzahl wird dem Seitenzahlcounter des Kundenkontos A gutgeschrien. Nutzer A hat nun 21 Seiten gedruckt und bekommt für seinen nächsten Druckjob den Rabattfaktor 0,95.
+==== Nutzer A gibt einen Druckauftrag mit einem Umsatz von 5€ in Auftrag. 
+*   Der Druckjob wird erstellt und die Kosten werden standartmäßig berechnet. Die Abholung wird von der UNIdruckerei bestätigt. Der erbrachte Umsatz wird dem Kundenkonto von Nutzer A gutgeschrieben. Der Umsatzcounter von Nutzer A bleibt unter der Grenze von 25€. Der Rabatt wird für Nutzer A nicht freigeschalten.  
 
-==== Nutzer B gibt einen Druckauftrag von 201 Seiten in Auftrag. 
-*   Der Druckjob wird erstellt und die Kosten werden standartmäßig mit dem Faktor 1 multipliziert. Die Seitenanzahl wird dem Kundenkonto gutgeschrien. Nutzer B storniert den Druckjob. Das System subtrahiert die Seitenanzahl vom Seitenzahlcounter des Kundenkontos B. Das Kundenkonto von Nutzer B hat wieder 0 Seiten gedruckt
+==== Nutzer B gibt einen Druckauftrag mit einem Umsatz von 5€ in Auftrag.  
+*   Der Druckjob wird erstellt und die Kosten werden standartmäßig berechnet. Die Abholung wird von der UNIdruckerei bestätigt. Der erbrachte Umsatz wird dem Kundenkonto von Nutzer B gutgeschrieben. Der Umsatzcounter von Nutzer B überschreitet die Grenze von 25€. Der Rabatt wird für Nutzer B freigeschalten.  
 
-==== Nutzer C gibt einen Druckauftrag von 50 Seiten in Auftrag. 
-*   Der Druckjob wird erstellt und die Kosten werden standartmäßig mit dem Faktor 1 multipliziert. Die Seitenanzahl wird dem Seitenzahlcounter des Kundenkontos C gutgeschrien. Nutzer C holt seine gedruckten Seiten nicht innerhalb von X Tagen ab. Der Admin setzt den Seitenzahlcounter des Kundenkontos C zurück.
+==== Nutzer C gibt einen Druckauftrag mit einem Umsatz von 5€ in Auftrag.  
+*   Der Druckjob wird erstellt und die Kosten werden standartmäßig berechnet. Die Abholung wird von der UNIdruckerei nicht bestätigt. Der erbrachte Umsatz wird dem Kundenkonto von Nutzer C nicht gutgeschrieben. 
+
+==== Nutzer D gibt einen Druckauftrag mit einem Umsatz von 5€ in Auftrag. 
+*   Nutzer D hat bereits über 25€ Umsatz erbracht. Der Druckjob wird erstellt und die Kosten werden unter beachtung des Rabattes in höhe von 10% berechnet. Eine weitere Speicherung des erbrachten Umsatzes findet nicht statt.
 
 
 === Nachbedingungen
-*   Der Seitenzahlcounter des entsprechenden Kundenkontos wurde um die Anzahl der gedruckten Seiten erhöht
-*   Der Rabatt sowie der Rabattfaktor wurden dem Seitenzahlcounter entsprechend ausgewählt
+*   Der Umsatzcounter des entsprechenden Kundenkontos wurde um den erbrachten Umsatz erhöht
+*   Der Rabatt wird entsprechend des Umsatzcounters gegeben oder nicht gegeben
