@@ -1,4 +1,4 @@
-= Test Cases: {project-name}
+= Test Cases: {OPAL/Druckauftrag}
 Vorname Nachname <email@domain.org>; Vorname2 Nachname2 <email2@domain.org>; Vorname3 Nachname3 <email3@domain.org>
 {localdatetime}
 include::../_includes/default-attributes.inc.adoc[]
@@ -7,8 +7,202 @@ include::../_includes/default-attributes.inc.adoc[]
 
 == Allgemeine Informationen
 
+Die folgenden Test Cases stellen mögliche Szenarien d, bei denen es in der Benutzung zu Problemen kommen kann. Beschrieben wird die allgemein vorgesehene Vorgehensweise bei jedem Test. Der Test Log folgt, sobald getestet wird.
+
 == Test Cases
 
-=== Test Case 01
+=== Test Case 01 Kundenkonto
 
-=== Test Case 02
+==== Beschreibung
+Der Nutzer soll über sein Kundenkonto den Stand seines Druckauftrags einsehen können. Bei der erstmaligen Generierung eines Auftrags soll automatisch ein Kundenkonto erstellt und eine E-Mail mit Zugangsinformationen versandt werden.
+
+==== Vorbedingungen
+-	Nutzer ist im OPAL System angemeldet
+-	Webanwendung ist aktiv
+-	Skripte zur automatischen Verarbeitung der Aufträge sind aktiv
+
+==== Benötigte Daten
+-	Anmeldedaten OPAL
+
+==== Handlungen
+-	Schritt 1:	Datei x (beliebige) zum Druck freigeben
+-	Schritt 2:	Überprüfen, ob für die s-Nummer schon ein Kundenkonto vorhanden ist
+-	Schritt 3:	Falls kein Kundenkonto vorhanden ist, dann Kundenkonto anlegen
+-	Schritt 4:	In der Datenbank überprüfen, ob Druckauftrag eingegangen ist
+-	Schritt 5:	Überprüfen, ob E-Mail mit richtigen Informationen gesendet wurde
+-	Schritt 6: 	Bearbeitungsstand verändern
+-	Schritt 7:	Überprüfen, ob der veränderte Status auch angezeigt wird
+
+==== Erwartete Reaktionen
+-	Das System legt für Erstnutzer ein neues Kundenkonto an
+-	Das System registriert den ersten Druckauftrag erfolgreich
+-	Es wird erfolgreich eine E-Mail gesendet
+-	Der Status des Auftrages wird erfolgreich und richtig angezeigt
+
+==== Nachbedingungen
+-	Kundenkonto ist angelegt
+-	E-Mail ist angekommen
+-	Nutzer kann jederzeit den Status seines Auftrags einsehen
+
+=== Test Case 02 Rabattzuteilung
+
+==== Beschreibung
+Für Nutzer, die viel Drucken soll ein Rabatt generiert werden. Dieser wird vorher festgelegt und einmalig an einen Nutzer vergeben. Das System muss in der Lage sein selbstständig den Rabatt zuzuteilen, sollte ein Nutzer die Voraussetzungen erfüllt haben. Einem Nutzer, den das nicht betrifft, darf auch kein Rabatt gegeben werden.
+
+==== Vorbedingungen
+-	Nutzer besitz ein Kundenkonto
+-	Nutzer erfüllt Bedingungen um Rabatt zugeteilt zu bekommen
+-	Rabatt wurde vorher im System festgelegt
+
+==== Benötigte Daten
+-	Nutzerdaten
+-	Rabattdaten
+
+==== Handlungen
+-	Schritt 01:	Nutzer erreicht Voraussetzungen der Rabattzuteilung
+-	Schritt 02:	Rabatt wird vom System automatisch vergeben
+-	Schritt 03:	Überprüfen in der Datenbank, ob Rabatt zugeteilt wurde
+-	Schritt 04:	Generierung eines Druckauftrags
+-	Schritt 05:	Überprüfung, ob Rabatt auf den Druckauftrag angewendet wird
+
+==== Erwartete Reaktionen
+-	Erfolgreiche Zuteilung des Rabatts
+-	Erfolgreiche Abspeicherung dessen in der Datenbank
+
+==== Nachbedingungen
+-	Nutzer erhält zukünftig auf jeden weiteren Druckauftrag Rabatt
+-	Rabatt kann nur noch durch Nutzersperrung durch den Administrator nichtig werden
+
+=== Test Case 03 Stornierung
+
+==== Beschreibung
+Falls der Nutzer einen Druckauftrag generiert, den er nicht mehr benötigt, soll er die Möglichkeit haben, diesen Stornieren zu können, ohne das Kosten anfallen.
+Falls die UNI-Druckerei einen Druckauftrag stornieren möchte, muss der Nutzer informiert werden und der Auftrag darf bezüglich des Rabatts nicht einbezogen werden.
+
+==== Vorbedingungen
+-	Nutzer besitzt Kundenkonto
+-	Ein unerwünschter Druckauftrag wurde generiert
+-	Nutzer/UNI-Druckerei wollen diesen Stornieren
+
+==== Benötigte Daten
+-	Nutzerdaten
+-	Druckauftragsdaten
+
+==== Handlungen
+-	Schritt 01:	Datei x zum Drucken freigeben
+-	Schritt 02:	als Nutzer über das Nutzerkonto den Auftrag stornieren
+-	Schritt 03:	in der Datenbank überprüfen, ob der Auftrag gelöscht wurde
+-	Schritt 04:	Im Nutzerkonto überprüfen, ob der Auftrag im Statusfeld als storniert angezeigt wird
+-	Schritt 05:	Datei x erneut zum Drucken freigeben
+-	Schritt 06:	Auftrag als Akteur UNI-Druckerei stornieren (direkt im System)
+-	Schritt 07:	überprüfen, ob sich der Auftrag weiterhin in der Datenbank befindet
+-	Schritt 07:	Überprüfen, ob der Auftrag im Konto des Nutzers als storniert angezeigt wird
+
+==== Erwartete Reaktionen
+-	Druckauftrag kann sowohl vom Nutzer als auch von der UNI-Druckerei ohne Probleme storniert werden
+-	In der Statusanzeige des Nutzerkontos wird der Auftrag als storniert angezeigt
+
+==== Nachbedingungen
+-	Druckauftrag unwiderruflich aus der Datenbank gelöscht
+-	Status für weitere Aufträge wieder richtig angezeigt
+
+=== Test Case 04 Druckauftrag sofort generieren
+
+==== Beschreibung
+Für zeit näheres Abholen soll der Druckauftrag sich sofort generieren lassen. Dazu muss er zeitnah nach der Generierung in einen Druckjob umgewandelt werden. Um den Druckauftrag einem Kunden zuordnen zu können, wir ein Deckblatt mit Namen, Datum, Anzahl der Seiten etc. erstellt.
+
+==== Vorbedingungen
+-	Alle Informationen für das Deckblatt sind verfügbar
+-	Das System kann eine Verbindung zur Datenbank herstellen
+
+==== Benötigte Daten
+-	Datum
+-	Dateiname (zu druckende Datei)
+-	Dateigröße (zu druckende Datei)
+-	Kundenname
+-	Preis für Kunde
+-	Anzahl der Seiten
+-	Zugangsdaten zur Datenbank
+
+==== Handlungen
+-	Schritt 01:	Datei x zum Drucken freigeben
+-	Schritt 02:	In den Druckeinstellungen festlegen, dass die Datei sofort gedruckt werden soll
+-	Schritt 03:	Überprüfen, ob der Druckauftrag in einen Druckjob umgewandelt wird.
+-	Schritt 04:	Druckjob drucken
+-	Schritt 05: 	Überprüfen, ob die auf dem Deckblatt enthaltenen Informationen stimmen
+
+==== Erwartete Reaktionen
+-	Druckauftrag wird erfolgreich zum Druckjob umgewandelt
+-	Druckjob wird erfolgreich gedruckt
+
+==== Nachbedingungen
+-	Deckblatt enthält korrekte Informationen
+-	Druckjob enthält Datei, die zu drucken war und Deckblatt
+
+=== Test Case 05 Drucken Farben oder Graustufen
+
+==== Beschreibung
+Der Nutzer erhält die Möglichkeit, eine beliebige Datei in Farbe oder in Graustufen drucken zu können. Hier muss getestet werden, dass es keine Fehler in der Übertragung gibt.
+
+==== Vorbedingungen
+-	Nutzer generiert Druckauftrag
+-	Nutzer stellt Farbe oder Graustufen ein
+
+==== Benötigte Daten
+-	Nutzerdaten
+-	Druckdaten
+
+==== Handlungen
+-	Schritt 01: 	beliebige Datei x wird zum Drucken ausgewählt
+-	Schritt 02:	vor Generierung des Auftrags wird z.B. Farbe eingestellt
+-	Schritt 03:	In der Datenbank überprüfen, ob der Druckauftrag eingegangen ist
+-	Schritt 04:	Überprüfen, ob die Eigenschaft Farbe auf Farbe gestellt ist
+
+==== Erwartete Reaktionen
+-	Eigenschaft Farbe ist auf Farbe gestellt
+-	Druckauftrag wird weiter normal bearbeitet
+
+==== Nachbedingungen
+-	Gedruckte Datei ist farbig
+-	Es gibt keine Probleme beim Deckblatt und der Zusammenführung mit anderen Druckaufträgen
+
+=== Test Case 06 Drucken anderes Dateiformat
+
+==== Beschreibung
+Da PDF’s nicht immer das vorgegebene Dateiformat sind, soll dem Nutzer ermöglicht werden auch andere Dateiformate drucken zu können. Hier muss darauf geachtet werden, dass die Zusammenführung dieser Formate mit den restlichen PDF’s gewährleistet ist.
+
+==== Vorbedingungen
+
+==== Benötigte Daten
+
+==== Handlungen
+
+==== Erwartete Reaktionen
+
+==== Nachbedingungen
+
+=== Test Case 07 Druck durch E-Mail
+==== Beschreibung
+Um nicht nur über OPAL Dateien drucken zu können soll das Drucken über E-Mail ermöglicht werden. Die Daten, die per E-Mail gedruckt werden sollen, dabei gleich behandelt werden wie alle anderen. Getestet werden muss, dass die Dateien ohne Probleme in den schon vorgegebenen Kreislauf eingearbeitet werden.
+
+==== Vorbedingungen
+-	E-Mail-Verbindung mit dem System
+-	System erkennt E-Mail und darin enthaltene Datei(en)
+
+==== Benötigte Daten
+-	Nutzerdaten
+-	Druckdaten
+
+==== Handlungen
+-	Schritt 01:	E-Mail mit Datei x senden
+-	Schritt 02: 	In Datenbank überprüfen, ob Druckauftrag eingegangen ist
+-	Schritt 03:	In Nutzerkonto überprüfen, ob der Status des Druckauftrags einsehbar ist
+-	Schritt 04:	Druckauftrag mit weiterem zu Druckjob zusammenfassen
+
+==== Erwartete Reaktionen
+-	Datei x in Datenbank als Druckauftrag
+-	Druckjob erfolgreich generiert
+
+==== Nachbedingungen
+-	Deckblatt generiert
+-	Es können weitere Druckaufträge empfangen werden
